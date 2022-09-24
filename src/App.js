@@ -1,20 +1,15 @@
-import logo from './wheel.png'; 
-import './App.css';
+
+import './styles/App.css';
 import TopNavBar from './components/NavBar';
+import Banner from './pages/banner';
 
 function App() {
-  return ( 
+return ( 
 <>
 <TopNavBar />
-  <div className="App">
-    <header className="App-header"> 
-      <p className='title'> CARDANO RACERS </p> 
-      <img src={logo} className="App-logo" alt="logo" /> 
-      <p> Coming soon! </p> 
-    </header> 
-  </div> 
-  </>
-  ); 
-  }; 
+<Banner />
+</>
+); 
+}; 
 
 export default App;
