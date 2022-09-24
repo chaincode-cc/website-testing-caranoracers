@@ -1,46 +1,13 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-  animation: App-logo-spin infinite 20s linear;
-}
-.main-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
+.main-wrapper {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   font-size: calc(10px + 2vmin);
   color: white;
+  font-family: 'Monofur NF', 'Verdana', 'MyFont';
 }
 
-.App-link {
-  color: #61dafb;
-}
 
-.f1font{
-  font-family: 'MyFont';
-  font-size: 100%;
-}
-@font-face {
-  font-family: 'MyFont';
-  src: local('MyFont'), url(../assets/fonts/Formula1-Bold_web_0.ttf) format('opentype');
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}

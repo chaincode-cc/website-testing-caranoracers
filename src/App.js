@@ -1,14 +1,16 @@
 
 import './styles/App.css';
-import TopNavBar from './components/NavBar';
-import Banner from './pages/banner';
+
+import Banner from './components/banner';
+import Intro from './pages/intro';
 
 function App() {
 return ( 
-<>
-<TopNavBar />
+<div className="main-wrapper"> 
 <Banner />
-</>
+<Intro />
+
+</div> 
 ); 
 }; 
 
