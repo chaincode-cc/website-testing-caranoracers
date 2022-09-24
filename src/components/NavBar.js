@@ -1,26 +1,34 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+/* eslint-disable jsx-a11y/anchor-is-valid */
 
-function ColorSchemesExample() {
+function TopNavBar() {
   return (
     <>
-      <Navbar bg="dark" variant="dark"  sticky="top">
-        <Container>
-          <Navbar.Brand href="#home">Cardano Racers</Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">HOME</Nav.Link>
-            <Nav.Link href="#howtoplay">HOW TO PLAY</Nav.Link>
-            <Nav.Link href="#nft">NFTs</Nav.Link>
-            <Nav.Link href="#about">ABOUT US</Nav.Link>
-            <Nav.Link href="#contact">CONTACT</Nav.Link>
-
-          </Nav>
-        </Container>
-      </Navbar>
-     
+    <nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Cardano Racers</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">HOME</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">HOW TO PLAY</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">NFTS</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled">CONTACT US</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
     </>
   );
 }
 
-export default ColorSchemesExample;
+export default TopNavBar;
