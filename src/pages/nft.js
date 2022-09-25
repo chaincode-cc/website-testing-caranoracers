@@ -7,7 +7,7 @@ const NFTS = () => {
         <>
         <span class="anchor" id='nfts'></span>
         <section  className="d-flex flex-column carousel-wrapper">
-          <h3>NFTs</h3>
+          <h3 className="fontAutoSized">NFTs</h3>
         <div>
         <div id="carouselCars" class="carousel carouselCars" data-bs-ride="true">
   <div class="carousel-indicators">
@@ -16,7 +16,7 @@ const NFTS = () => {
     <button type="button" data-bs-target="#carouselCars" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
-          <p>CARS</p>
+          <p className="fontAutoSized">CARS</p>
     <div class="carousel-item active">
       <img src={wheel} class="d-flex " alt="..." />
     </div>
@@ -45,7 +45,7 @@ const NFTS = () => {
     <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="2" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
-<p>DRIVERS</p>
+<p className="fontAutoSized">DRIVERS</p>
     <div class="carousel-item active">
       <img src={wheel} class="d-flex " alt="123" />
     </div>
