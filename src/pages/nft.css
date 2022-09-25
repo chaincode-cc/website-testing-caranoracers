@@ -1,0 +1,15 @@
+.carousel-item img {
+    width: 15vw;
+    margin: 2vh 3vw;
+    /* border: red 1px solid; */
+    padding: 0 1vh;
+}
+
+.carousel-inner{
+    padding: 30px;
+    /* border: red 1px solid; */
+}
+
+.carousel-wrapper{
+    text-align: center;
+}
