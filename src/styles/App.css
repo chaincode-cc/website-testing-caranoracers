@@ -10,4 +10,13 @@
   font-family: 'Monofur NF', 'Verdana', 'MyFont';
 }
 
+.anchor {
+  display: block;
+  height: 75px;
+  margin-top: -75px;
+  visibility: hidden;
+}
 
+section{
+  margin:5%;
+}

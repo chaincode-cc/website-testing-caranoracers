@@ -12,16 +12,16 @@ function TopNavBar() {
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ps-1">
         <li class="nav-item">
-          <a class="nav-link f1font" aria-current="page" href="#">HOME</a>
+          <a class="nav-link f1font" aria-current="page" href="#intro">HOME</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link f1font" href="#">HOW TO PLAY</a>
+          <a class="nav-link f1font" href="#howtoplay">HOW TO PLAY</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link f1font" href="#">NFTS</a>
+          <a class="nav-link f1font" href="#nfts">NFTS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link f1font ">CONTACT US</a>
+          <a class="nav-link f1font " href="#contact">CONTACT US</a>
         </li>
       </ul>
     </div>

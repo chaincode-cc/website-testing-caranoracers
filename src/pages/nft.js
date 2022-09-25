@@ -5,9 +5,11 @@ import './nft.css'
 const NFTS = () => {
     return(
         <>
-        <div className="d-flex flex-column carousel-wrapper">
-        <section>
-        <div id="carouselCars" class="carousel carousel-dark carouselCars" data-bs-ride="true">
+        <span class="anchor" id='nfts'></span>
+        <section  className="d-flex flex-column carousel-wrapper">
+          <h3>NFTs</h3>
+        <div>
+        <div id="carouselCars" class="carousel carouselCars" data-bs-ride="true">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselCars" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselCars" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -34,9 +36,9 @@ const NFTS = () => {
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-</section>
-<section>
-        <div id="carouselExampleIndicators1" class="carousel carousel-dark carouselExampleIndicators1 " data-bs-ride="true">
+</div>
+<div>
+        <div id="carouselExampleIndicators1" class="carousel carouselExampleIndicators1 " data-bs-ride="true">
   <div class="carousel-indicators">
     <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -63,8 +65,8 @@ const NFTS = () => {
     <span class="visually-hidden">Next</span>
   </button>
 </div>
-</section>
 </div>
+</section>
   </>
     )
 }
