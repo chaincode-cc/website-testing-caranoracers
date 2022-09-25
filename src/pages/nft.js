@@ -1,73 +1,43 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
+
 import React from "react";
-import wheel from '../assets/images/wheel.png'
 import './nft.css'
 
 const NFTS = () => {
     return(
         <>
-        <span class="anchor" id='nfts'></span>
-        <section  className="d-flex flex-column carousel-wrapper">
-          <h3 className="fontAutoSized">NFTs</h3>
-        <div>
-        <div id="carouselCars" class="carousel carouselCars" data-bs-ride="true">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselCars" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselCars" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselCars" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-          <p className="fontAutoSized">CARS</p>
-    <div class="carousel-item active">
-      <img src={wheel} class="d-flex " alt="..." />
-    </div>
-    <div class="carousel-item">
-      <img src={wheel} class="d-flex " alt="..." />
-    </div>
-    <div class="carousel-item">
-      <img src={wheel} class="d-flex " alt="..." />
+  <div class="d-flex align-content-around justify-content-around flex-wrap">
+  
+    <div class="card m-2">
+      <div class="card-body bg-secondary">
+        <h5 class="card-title fontAutoSized">Special title treatment</h5>
+        <p class="card-text fontAutoSized">IMG</p>
+        <a href="#" class="btn btn-primary fontAutoSized">Go somewhere</a>
+      
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselCars" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselCars" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-</div>
-<div>
-        <div id="carouselExampleIndicators1" class="carousel carouselExampleIndicators1 " data-bs-ride="true">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  
+    <div class="card">
+      <div class="card-body bg-secondary">
+        <h5 class="card-title fontAutoSized">Special title treatment</h5>
+        <p class="card-text fontAutoSized">IMG</p>
+        <a href="#" class="btn btn-primary fontAutoSized">Go somewhere</a>
+      </div>
+    
   </div>
-  <div class="carousel-inner">
-<p className="fontAutoSized">DRIVERS</p>
-    <div class="carousel-item active">
-      <img src={wheel} class="d-flex " alt="123" />
+  
+    <div class="card">
+      <div class="card-body bg-secondary">
+        <h5 class="card-title fontAutoSized">Special title treatment</h5>
+        <p class="card-text fontAutoSized">IMG</p>
+        <a href="#" class="btn btn-primary fontAutoSized">Go somewhere</a>
+      </div>
     </div>
-    <div class="carousel-item">
-      <img src={wheel} class="d-flex " alt="123" />
-    </div>
-    <div class="carousel-item">
-      <img src={wheel} class="d-flex " alt="123" />
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators1" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-</div>
-</section>
-  </>
+  
+</div>   
+
+    </>
     )
 }
 
