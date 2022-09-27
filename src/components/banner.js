@@ -11,11 +11,13 @@ import vid2 from '../assets/videos/cool.mp4'
 const Banner = () => {
     return(
         <>
-  <div>
+  <div >
   <img src={logo1} alt='some' className="main-logo" />
+  <button className="btn btn-secondary buy-nft">BUY YOUR NFT</button>
 <video src={vid2} muted loop autoPlay className="banner-video">
   Your browser does not support the video tag.
 </video>
+
 </div>
       
       {/* <div className="main-logo" > 

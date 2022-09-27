@@ -14,7 +14,11 @@
     z-index: -100;
 }
 
-
+.buy-nft{
+    position:absolute;
+    top: 72%;
+    left: 50%;
+}
 @media (max-width: 1200px) {
     .main-logo{
         width:calc(70px + 2vmin);
