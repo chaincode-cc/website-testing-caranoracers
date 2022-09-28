@@ -1,28 +1,25 @@
-.carousel-item img {
-    width: 15vw;
-    margin: 2vh 3vw;
-    /* border: red 1px solid; */
-    padding: 0 1vh;
-}
-
-.carousel-inner{
-    padding: 30px;
-    /* border: red 1px solid; */
-}
-
-.carousel-wrapper{
-    text-align: center;
-}
-
 .card{
     text-align: center;
-    width: 15%;
+    width: 27%;
     margin:2%;
 }
 
+.card *{
+    font-size: calc(1px + 2vmin);
+}
+
+.nft1{
+        width: 100%; 
+        height: 100%;
+}
+
 @media (max-width: 1200px) {
-    .card {
-        width: 70%;
+
+    .card a{
+        margin: 6%;
+        width: 50%;
+        --bs-btn-font-size: 0;
+
     }
     
 }

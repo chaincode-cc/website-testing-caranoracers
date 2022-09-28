@@ -25,6 +25,9 @@ code {
 .fontAutoSized{
   font-size: calc(10px + 2vmin);
 }
+.fontAutoSizedSmall{
+  font-size: calc(10px + 2vmin);
+}
 @font-face {
   font-family: 'MyFont';
   src: local('MyFont'), url(../assets/fonts/Formula1-Bold_web_0.ttf) format('opentype');

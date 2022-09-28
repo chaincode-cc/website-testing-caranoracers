@@ -3,36 +3,55 @@
 
 import React from "react";
 import './nft.css'
+import nft1 from '../assets/videos/Car1.mp4'
+
+const NFTTitles = {
+  Cars:{  
+    one:"Normal Car",
+    two:"Cool Car",
+    three:"Crazy Car",
+  },
+  Racer:{  
+      one:"Normal Racer",
+      two:"Cool Car",
+      three:"Crazy Car",
+  }
+}
 
 const NFTS = () => {
     return(
         <>
   <div class="d-flex align-content-around justify-content-around flex-wrap">
   
-    <div class="card">
+    <div class="card bg-secondary d-flex justify-content-center align-items-center">
       <div class="card-body bg-secondary">
-        <h5 class="card-title fontAutoSized">Special title treatment</h5>
-        <p class="card-text fontAutoSized">IMG</p>
-        <a href="#" class="btn btn-primary fontAutoSized">Go somewhere</a>
-      
-    </div>
-  </div>
-  
-    <div class="card">
-      <div class="card-body bg-secondary">
-        <h5 class="card-title fontAutoSized">Special title treatment</h5>
-        <p class="card-text fontAutoSized">IMG</p>
-        <a href="#" class="btn btn-primary fontAutoSized">Go somewhere</a>
+        <h5 class="card-title fontAutoSized">{NFTTitles.Cars.one}</h5>
+        <video src={nft1} muted loop autoPlay className="nft1">
+          Your browser does not support the video tag.
+        </video>
       </div>
+        <a href="#" class="btn btn-primary fontAutoSized"><span>Buy</span></a>
+    </div>
+  
+    <div class="card bg-secondary d-flex justify-content-center align-items-center">
+      <div class="card-body bg-secondary">
+        <h5 class="card-title fontAutoSized">{NFTTitles.Cars.two}</h5>
+        <video src={nft1} muted loop autoPlay className="nft1">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+        <a href="#" class="btn btn-primary fontAutoSized"><span>Buy</span></a>
     
   </div>
   
-    <div class="card">
+    <div class="card bg-secondary d-flex justify-content-center align-items-center">
       <div class="card-body bg-secondary">
-        <h5 class="card-title fontAutoSized">Special title treatment</h5>
-        <p class="card-text fontAutoSized">IMG</p>
-        <a href="#" class="btn btn-primary fontAutoSized">Go somewhere</a>
+        <h5 class="card-title fontAutoSized">{NFTTitles.Cars.three}</h5>
+        <video src={nft1} muted loop autoPlay className="nft1">
+          Your browser does not support the video tag.
+        </video>
       </div>
+        <a href="#" class="btn btn-primary fontAutoSized"><span>Buy</span></a>
     </div>
   
 </div>   
