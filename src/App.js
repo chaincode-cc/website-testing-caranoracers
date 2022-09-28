@@ -13,9 +13,9 @@ function App() {
 return ( 
 <div className="main-wrapper"> 
 <Banner />
+<NFTS />
 <Intro />
 <HowTo />
-<NFTS />
 <Contact />
 <FollowUs />
 </div> 
