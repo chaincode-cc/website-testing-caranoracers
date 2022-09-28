@@ -104,6 +104,12 @@ const NFTS = () => {
   </div>
 
 </div>   
+<button type="button" class="btn mt-3 btn-secondary"
+        data-bs-toggle="tooltip" data-bs-placement="top"
+        data-bs-custom-class="custom-tooltip"
+        data-bs-title="This top tooltip is themed via CSS variables.">
+  WHOLE COLLECTION
+</button>
     </div>
     )
 }
