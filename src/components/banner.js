@@ -1,8 +1,7 @@
-/* eslint-disable react/style-prop-object */
 import React from "react";
 import './banner.css'
 import logo1 from '../assets/images/10-01.png'
-import vid1 from '../assets/videos/cool.gif'
+// import vid1 from '../assets/videos/cool.gif'
 import vid2 from '../assets/videos/cool.mp4'
 
 
