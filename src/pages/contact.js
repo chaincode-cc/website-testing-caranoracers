@@ -4,7 +4,7 @@ import React from "react";
 const Contact = () => {
     return(
         <>
-    <span class="anchor"  id='contact'></span>
+    <span className="anchor"  id='contact'></span>
     <section>
     <h2 className="fontAutoSized text-center" >Contact Us</h2>
     <p className="fontAutoSized m-4">Here is where we talk how to contact us, the team the project.</p>
