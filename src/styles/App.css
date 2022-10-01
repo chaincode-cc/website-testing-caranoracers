@@ -19,3 +19,17 @@
 section{
   margin:5%;
 }
+
+.modal-dialog{
+  max-width: 300px;
+}
+
+.garage{
+  margin-left: 80px;
+}
+
+@media (max-width: 1200px) {
+  .garage{
+    margin-left: 0;
+  }
+}
