@@ -33,7 +33,7 @@ section{
   }
 
   .modal{
-    margin-left: 8%;
+    margin-left: calc(10px + 30px);
   }
   .modal-dialog{
     max-width: 300px;
