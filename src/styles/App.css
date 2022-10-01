@@ -20,16 +20,22 @@ section{
   margin:5%;
 }
 
-.modal-dialog{
-  max-width: 300px;
-}
 
-.garage{
+
+#garage {
   margin-left: 80px;
+  font-family: 'MyFont';
 }
 
 @media (max-width: 1200px) {
-  .garage{
+  #garage{
     margin-left: 0;
+  }
+
+  .modal{
+    margin-left: 10%;
+  }
+  .modal-dialog{
+    max-width: 300px;
   }
 }

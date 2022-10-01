@@ -29,7 +29,7 @@ function setToggler () {
           <a className="nav-link f1font" onClick={setToggler} href="#contact">CONTACT US</a>
         </li>
         <li className="nav-item">
-          <button className="nav-link garage btn btn-secondary f1font" data-bs-toggle="modal" data-bs-target="#exampleModal">GARAGE</button>
+          <button className="f1font btn btn-secondary" id='garage' data-bs-toggle="modal" data-bs-target="#exampleModal">GARAGE</button>
         </li>
       </ul>
     </div>
