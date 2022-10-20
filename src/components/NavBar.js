@@ -16,15 +16,17 @@ function TopNavBar() {
       <ul className="navbar-nav ps-1">
         <li className="nav-item">
           <a className="nav-link f1font"
-        type="button"
+        role="button"
         data-bs-toggle="collapse"
+        aria-controls="navbarNav"
+        aria-expanded="false"
         data-bs-target="#navbarNav"
-        aria-expanded="false" aria-current="page" href="#">HOME</a>
+        href="#">HOME</a>
         </li>
         <li className="nav-item">
-          <a   className="nav-link f1font"
+          <a className="nav-link f1font"
         type="button"
-        data-bs-toggle="collapse"
+        data-bs-toggle="collapsed"
         data-bs-target="#navbarNav"
         aria-expanded="false"
         href="#howtoplay">HOW TO PLAY</a>
