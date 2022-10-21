@@ -15,7 +15,7 @@ const ExpiredNotice = () => {
 const ShowCounter = ({ days, hours, minutes, seconds }) => {
   return (
     <div className="show-counter text-center mt-3">
-    <h2>Buy your NFTs NOW!</h2>
+    <h2 id='nfts'>Buy your NFTs NOW!</h2>
       <a
         href="https://google.com"
         target="_blank"

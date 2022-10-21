@@ -51,7 +51,7 @@ const NFTS = () => {
     else return {backgroundColor: "#3498db"}
   }
     return(
-        <div className="mt-4 text-center">
+        <div className="mt-4 text-center" >
   
   {/* CARS */}
   
