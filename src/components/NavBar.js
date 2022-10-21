@@ -1,8 +1,10 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-
 function TopNavBar() {
-
-
+  
+  
+function collapseItem () {
+  console.log("HII")
+  document.getElementById("navbarNav").className = "collapse navbar-collapse"
+}
 
   return (
     <>
@@ -15,36 +17,17 @@ function TopNavBar() {
     <div className="collapse navbar-collapse" id="navbarNav">
       <ul className="navbar-nav ps-1">
         <li className="nav-item">
-          <a className="nav-link f1font"
-        role="button"
-        data-bs-toggle="collapse"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        data-bs-target="#navbarNav"
-        href="#">HOME</a>
+          <a className="nav-link f1font" onClick={collapseItem} href="#top">HOME</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link f1font"
-        type="button"
-        data-bs-toggle="collapsed"
-        data-bs-target="#navbarNav"
-        aria-expanded="false"
-        href="#howtoplay">HOW TO PLAY</a>
+          <a className="nav-link f1font" onClick={collapseItem} href="#howtoplay" >HOW TO PLAY</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link f1font"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-expanded="false" href="#nfts">NFTS</a>
+          <a className="nav-link f1font" onClick={collapseItem} href="#nfts">NFTS</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link f1font"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-expanded="false" href="#contact">CONTACT US</a>
-        </li>
+          <a className="nav-link f1font" onClick={collapseItem} href="#contact">CONTACT US</a>
+        </li>   
         <li className="nav-item">
           <button className="f1font btn btn-secondary" id='garage' data-bs-toggle="modal" data-bs-target="#exampleModal">GARAGE</button>
         </li>

@@ -1,6 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-
-
 import React from "react";
 import './nft.css'
 import nft1 from '../assets/videos/Car1.mp4'
