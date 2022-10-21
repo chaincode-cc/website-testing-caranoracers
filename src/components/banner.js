@@ -1,8 +1,7 @@
 import React from "react";
 import './banner.css'
-import logo1 from '../assets/images/10-01.png'
 // import vid1 from '../assets/videos/cool.gif'
-import vid2 from '../assets/videos/cool.mp4'
+import vid2 from '../assets/videos/banner.mp4'
 
 
 
@@ -11,8 +10,7 @@ const Banner = () => {
     return(
         <>
   <div id='top'>
-  <img src={logo1} alt='some' className="main-logo" />
-<video src={vid2} muted loop autoPlay className="banner-video">
+<video src={vid2} muted autoPlay className="banner-video">
   Your browser does not support the video tag.
 </video>
 
