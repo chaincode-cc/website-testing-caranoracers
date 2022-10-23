@@ -2,6 +2,14 @@
 import './styles/App.css';
 import 'boxicons'
 
+import React from 'react';
+import {
+    Route,
+    Routes,
+    HashRouter,
+    BrowserRouter
+  } from 'react-router-dom';
+
 import Banner from './components/banner';
 import Intro from './pages/intro';
 import NFTS from './pages/nft';
@@ -17,7 +25,8 @@ const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
 
 function App() {
 return ( 
-<div className="main-wrapper"> 
+<BrowserRouter basename="/"> 
+<div className="main-wrapper">
 <Banner />
 <CountDown targetDate={dateTimeAfterThreeDays} />
 <NFTS />
@@ -25,8 +34,9 @@ return (
 <HowTo />
 <Contact />
 <FollowUs />
-
 </div> 
+
+</BrowserRouter>
 ); 
 }; 
 
