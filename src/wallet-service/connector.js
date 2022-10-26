@@ -42,8 +42,8 @@ import {
     hash_plutus_data,
     StakeCredential
 } from "@emurgo/cardano-serialization-lib-asmjs"
+import css from './connector.module.css'
 let Buffer = require('buffer/').Buffer
-
 
 export default class WalletConnector extends React.Component
 {
@@ -1150,45 +1150,35 @@ export default class WalletConnector extends React.Component
 
 
 
-                <h1>Boilerplate DApp connector to Wallet</h1>
+                <h1> Please connect your wallet first.</h1>
                 <div style={{paddingTop: "10px"}}>
                     <div style={{marginBottom: 15}}>Select wallet:</div>
-                    <form
-                        
-                        selectedValue={this.state.whichWalletSelected}
-                        inline={true}
-                        className="wallets-wrapper"
-                    >
-                        
                         { this.state.wallets.map(key =>
-                        <> 
-                         <img src={window.cardano[key].icon} width={24} height={24} alt={key}/>
-                         <input
-                        type="button"
-                            key={key}
-                            onClick={this.handleWalletSelect}
-                            className="wallet-label"
+                        <div className={css.walletPretty}>
+                            <button
+                            type="button"
+                                key={key}
+                                selectedValue={this.state.whichWalletSelected}
+                                onClick={this.handleWalletSelect}
                             value={key}
-                            checked
-                            >                                
-                        </input>
-                            <label>{window.cardano[key].name} ({key})</label>
-                           
-                           
-                            </>
+                            className={css.button}
+                            > 
+                            <img src={window.cardano[key].icon} alt={key}/>  
+                            <span>{key.toUpperCase()}</span>                          
+                        </button>
+                            </div>
                         )}
-                    </form>
                 </div>
 
 
 
-                <button style={{padding: "20px"}} onClick={this.refreshData}>Refresh</button>
+                {/* <button style={{padding: "20px"}} onClick={this.refreshData}>Refresh</button>
 
                 <p style={{paddingTop: "20px"}}><span style={{fontWeight: "bold"}}>Wallet Found: </span>{`${this.state.walletFound}`}</p>
                 <p><span style={{fontWeight: "bold"}}>Wallet Connected: </span>{`${this.state.walletIsEnabled}`}</p>
                 <p><span style={{fontWeight: "bold"}}>Wallet API version: </span>{this.state.walletAPIVersion}</p>
-                <p><span style={{fontWeight: "bold"}}>Wallet name: </span>{this.state.walletName}</p>
-
+                <p><span style={{fontWeight: "bold"}}>Wallet name: </span>{this.state.walletName}</p> */}
+{/* 
                 <p><span style={{fontWeight: "bold"}}>Network Id (0 = testnet; 1 = mainnet): </span>{this.state.networkId}</p>
                 <p style={{paddingTop: "20px"}}><span style={{fontWeight: "bold"}}>UTXOs: (UTXO #txid = ADA amount + AssetAmount + policyId.AssetName + ...): </span>{this.state.Utxos?.map(x => <li style={{fontSize: "10px"}} key={`${x.str}${x.multiAssetStr}`}>{`${x.str}${x.multiAssetStr}`}</li>)}</p>
                 <p style={{paddingTop: "20px"}}><span style={{fontWeight: "bold"}}>Balance: </span>{this.state.balance}</p>
@@ -1198,12 +1188,12 @@ export default class WalletConnector extends React.Component
                 <hr style={{marginTop: "40px", marginBottom: "40px"}}/>
 
                 
-                <hr style={{marginTop: "40px", marginBottom: "40px"}}/>
+                <hr style={{marginTop: "40px", marginBottom: "40px"}}/> */}
 
                 {/*<p>{`Unsigned txBodyCborHex: ${this.state.txBodyCborHex_unsigned}`}</p>*/}
                 {/*<p>{`Signed txBodyCborHex: ${this.state.txBodyCborHex_signed}`}</p>*/}
-                <p>{`Submitted Tx Hash: ${this.state.submittedTxHash}`}</p>
-                <p>{this.state.submittedTxHash ? 'check your wallet !' : ''}</p>
+                {/* <p>{`Submitted Tx Hash: ${this.state.submittedTxHash}`}</p>
+                <p>{this.state.submittedTxHash ? 'check your wallet !' : ''}</p> */}
 
 
 

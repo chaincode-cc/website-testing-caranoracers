@@ -37,7 +37,7 @@ return (
             <FollowUs />
             </div> 
         } />  
-         <Route path="/garage" element={<WalletConnector />} />
+      <Route path="/garage" element={<WalletConnector />} />
     </Routes>
 </Router>    
 ); 
