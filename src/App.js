@@ -1,14 +1,12 @@
 
 import './styles/App.css';
-import 'boxicons'
 
 import React from 'react';
 import {
+    BrowserRouter as Router,
     Route,
-    Routes,
-    HashRouter,
-    BrowserRouter
-  } from 'react-router-dom';
+    Routes
+  } from "react-router-dom";
 
 import Banner from './components/banner';
 import Intro from './pages/intro';
@@ -17,6 +15,7 @@ import HowTo from './pages/howto';
 import Contact from './pages/contact';
 import FollowUs from './pages/followus';
 import CountDown from './components/countdown';
+import WalletConnector from './wallet-service/connector';
 
 const THREE_DAYS_IN_MS = 3 * 24 * 60 * 60 * 1000;
 const NOW_IN_MS = new Date().getTime();
@@ -25,19 +24,24 @@ const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
 
 function App() {
 return ( 
-<BrowserRouter basename="/"> 
-<div className="main-wrapper">
-<Banner />
-<CountDown targetDate={dateTimeAfterThreeDays} />
-<NFTS />
-<Intro />
-<HowTo />
-<Contact />
-<FollowUs />
-</div> 
-
-</BrowserRouter>
+<Router> 
+    <Routes>
+        <Route path="/" element={
+            <div className="main-wrapper">
+            <Banner />
+            <CountDown targetDate={dateTimeAfterThreeDays} />
+            <NFTS />
+            <Intro />
+            <HowTo />
+            <Contact />
+            <FollowUs />
+            </div> 
+        } />  
+         <Route path="/garage" element={<WalletConnector />} />
+    </Routes>
+</Router>    
 ); 
 }; 
 
 export default App;
+
