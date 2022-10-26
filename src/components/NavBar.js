@@ -34,7 +34,7 @@ function collapseItem () {
           <a className="nav-link f1font" onClick={collapseItem} href="/#contact">CONTACT US</a>
         </li>   
         <li className="nav-item">
-          <button className="f1font btn btn-secondary" id='garage' data-bs-toggle="modal" data-bs-target="#exampleModal">GARAGE</button>
+          <button className="f1font btn btn-secondary" onClick={collapseItem} id='garage' data-bs-toggle="modal" data-bs-target="#exampleModal">GARAGE</button>
         </li>
       </ul>
     </div>
