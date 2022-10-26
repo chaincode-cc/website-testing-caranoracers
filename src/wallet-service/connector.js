@@ -1153,22 +1153,31 @@ export default class WalletConnector extends React.Component
                 <h1>Boilerplate DApp connector to Wallet</h1>
                 <div style={{paddingTop: "10px"}}>
                     <div style={{marginBottom: 15}}>Select wallet:</div>
-                    <RadioGroup
-                        onChange={this.handleWalletSelect}
+                    <form
+                        
                         selectedValue={this.state.whichWalletSelected}
                         inline={true}
                         className="wallets-wrapper"
                     >
+                        
                         { this.state.wallets.map(key =>
-                            <Radio
-                                key={key}
-                                className="wallet-label"
-                                value={key}>
-                                <img src={window.cardano[key].icon} width={24} height={24} alt={key}/>
-                                {window.cardano[key].name} ({key})
-                            </Radio>
+                        <> 
+                         <img src={window.cardano[key].icon} width={24} height={24} alt={key}/>
+                         <input
+                        type="button"
+                            key={key}
+                            onClick={this.handleWalletSelect}
+                            className="wallet-label"
+                            value={key}
+                            checked
+                            >                                
+                        </input>
+                            <label>{window.cardano[key].name} ({key})</label>
+                           
+                           
+                            </>
                         )}
-                    </RadioGroup>
+                    </form>
                 </div>
 
 
