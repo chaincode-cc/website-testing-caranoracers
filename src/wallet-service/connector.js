@@ -1,5 +1,4 @@
 import React from 'react'
-import { RadioGroup, Radio } from "@blueprintjs/core";
 import {
     Address,
     BaseAddress,
@@ -187,7 +186,7 @@ export default class WalletConnector extends React.Component
         // const cbor = Buffer.from(cborhex, "hex");
         // const blake2bhash = blake.blake2b(cbor, 0, 28);
 
-        const script = PlutusScript.from_bytes(Buffer.from(this.state.plutusScriptCborHex, "hex"))
+        // const script = PlutusScript.from_bytes(Buffer.from(this.state.plutusScriptCborHex, "hex"))
         // const blake2bhash = blake.blake2b(script.to_bytes(), 0, 28);
         const blake2bhash = "67f33146617a5e61936081db3b2117cbf59bd2123748f58ac9678656";
         const scripthash = ScriptHash.from_bytes(Buffer.from(blake2bhash,"hex"));
