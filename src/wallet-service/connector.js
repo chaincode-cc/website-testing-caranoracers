@@ -1,13 +1,9 @@
 import React from 'react'
 import {
     Address,
-    BaseAddress,
     MultiAsset,
     Assets,
     ScriptHash,
-    Costmdls,
-    Language,
-    CostModel,
     AssetName,
     TransactionUnspentOutput,
     TransactionUnspentOutputs,
@@ -18,28 +14,8 @@ import {
     TransactionOutputBuilder,
     LinearFee,
     BigNum,
-    BigInt,
-    TransactionHash,
-    TransactionInputs,
-    TransactionInput,
     TransactionWitnessSet,
     Transaction,
-    PlutusData,
-    PlutusScripts,
-    PlutusScript,
-    PlutusList,
-    Redeemers,
-    Redeemer,
-    RedeemerTag,
-    Ed25519KeyHashes,
-    ConstrPlutusData,
-    ExUnits,
-    Int,
-    NetworkInfo,
-    EnterpriseAddress,
-    hash_script_data,
-    hash_plutus_data,
-    StakeCredential
 } from "@emurgo/cardano-serialization-lib-asmjs"
 import css from './connector.module.css'
 let Buffer = require('buffer/').Buffer
