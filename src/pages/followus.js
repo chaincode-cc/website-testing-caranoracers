@@ -1,5 +1,5 @@
 import React from "react";
-import './followus.css'
+import '../styles/followus.css'
 import youtube from '../assets/images/youtube-logo.png'
 import discord from '../assets/images/discord.png'
 import telegram from '../assets/images/telegram.png'

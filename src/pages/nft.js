@@ -1,5 +1,5 @@
 import React from "react";
-import './nft.css'
+import '../styles/nft.css'
 import nft1 from '../assets/videos/Car1.mp4'
 import nft2 from '../assets/videos/Racer1.MP4'
 

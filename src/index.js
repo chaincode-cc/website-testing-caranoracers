@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import 'bootstrap/dist/js/bootstrap.min.js';
-import TopNavBar from './components/NavBar';
+import TopNavBar from './components/navBar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

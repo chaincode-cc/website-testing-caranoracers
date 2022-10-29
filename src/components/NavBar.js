@@ -4,13 +4,13 @@ function TopNavBar() {
   
   
 function collapseItem () {
-  console.log("HII")
   document.getElementById("navbarNav").className = "collapse navbar-collapse"
 }
 
+
   return (
     <>
-    <nav className="navbar sticky-top navbar-dark bg-dark">
+    <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
   <div className="container-fluid" >
     <button className="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span className="navbar-toggler-icon"></span>

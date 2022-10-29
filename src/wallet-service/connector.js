@@ -41,7 +41,7 @@ import {
     hash_plutus_data,
     StakeCredential
 } from "@emurgo/cardano-serialization-lib-asmjs"
-import css from './connector.module.css'
+import css from '../styles/connector.module.css'
 let Buffer = require('buffer/').Buffer
 
 export default class WalletConnector extends React.Component
@@ -144,7 +144,7 @@ export default class WalletConnector extends React.Component
                 wallets.push(key);
             }
         }
-        if (wallets.length === 0 && count < 3) {
+        if (wallets.length === 0 && count < 5) {
             setTimeout(() => {
                 this.pollWallets(count + 1);
             }, 1000);
@@ -153,8 +153,6 @@ export default class WalletConnector extends React.Component
         this.setState({
             wallets,
             whichWalletSelected: wallets[0]
-        }, () => {
-            this.refreshData()
         });
     }
 
@@ -1137,8 +1135,10 @@ export default class WalletConnector extends React.Component
 
 
     async componentDidMount() {
-        this.pollWallets();
-        await this.refreshData();
+        setTimeout(() => {
+            this.pollWallets();
+        }, 1000);
+        this.refreshData()
     }
 
     render()

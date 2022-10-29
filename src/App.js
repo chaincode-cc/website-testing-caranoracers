@@ -27,15 +27,17 @@ return (
 <Router> 
     <Routes>
         <Route path="/" element={
-            <div className="main-wrapper">
-            <Banner />
+              <>
+          <Banner />
+          <div className="main-wrapper">
             <CountDown targetDate={dateTimeAfterThreeDays} />
             <NFTS />
             <Intro />
             <HowTo />
             <Contact />
             <FollowUs />
-            </div> 
+            </div>
+            </> 
         } />  
       <Route path="/garage" element={<WalletConnector />} />
     </Routes>

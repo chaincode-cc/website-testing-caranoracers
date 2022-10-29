@@ -1,0 +1,18 @@
+.banner{
+    display: flex;
+    justify-content: center;
+    background-color: black;
+
+}
+
+.banner-video{ 
+    background-color: black;
+
+}
+
+@media (max-width: 1200px) {
+    .banner-video{ 
+        background-color: black;
+        width: 100%;
+    }
+}
