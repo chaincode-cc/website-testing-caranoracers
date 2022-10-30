@@ -35,15 +35,12 @@ import {
     ConstrPlutusData,
     ExUnits,
     Int,
-    NetworkInfo,
-    EnterpriseAddress,
     hash_script_data,
     hash_plutus_data,
-    StakeCredential
 } from "@emurgo/cardano-serialization-lib-asmjs"
 import css from '../styles/connector.module.css'
-let Buffer = require('buffer/').Buffer
 
+let Buffer = require('buffer/').Buffer
 export default class WalletConnector extends React.Component
 {
     constructor(props)
@@ -56,6 +53,8 @@ export default class WalletConnector extends React.Component
             walletFound: false,
             walletIsEnabled: false,
             walletName: undefined,
+            usedWalletName: undefined,
+            localWalletFound: undefined,
             walletIcon: undefined,
             walletAPIVersion: undefined,
             wallets: [],
@@ -73,18 +72,18 @@ export default class WalletConnector extends React.Component
             txBodyCborHex_signed: "",
             submittedTxHash: "",
 
-            addressBech32SendADA: "addr_test1qrt7j04dtk4hfjq036r2nfewt59q8zpa69ax88utyr6es2ar72l7vd6evxct69wcje5cs25ze4qeshejy828h30zkydsu4yrmm",
-            lovelaceToSend: 3000000,
-            assetNameHex: "4c494645",
-            assetPolicyIdHex: "ae02017105527c6c0c9840397a39cc5ca39fabe5b9998ba70fda5f2f",
-            assetAmountToSend: 5,
-            addressScriptBech32: "addr_test1wpnlxv2xv9a9ucvnvzqakwepzl9ltx7jzgm53av2e9ncv4sysemm8",
-            datumStr: "12345678",
-            plutusScriptCborHex: "4e4d01000033222220051200120011",
+            addressBech32SendADA: "",
+            lovelaceToSend: 0,
+            assetNameHex: "",
+            assetPolicyIdHex: "",
+            assetAmountToSend: 0,
+            addressScriptBech32: "",
+            datumStr: "",
+            plutusScriptCborHex: "",
             transactionIdLocked: "",
             transactionIndxLocked: 0,
-            lovelaceLocked: 3000000,
-            manualFee: 900000,
+            lovelaceLocked: 0,
+            manualFee: 0,
 
         }
 
@@ -140,20 +139,23 @@ export default class WalletConnector extends React.Component
     pollWallets = (count = 0) => {
         const wallets = [];
         for(const key in window.cardano) {
-            if (window.cardano[key].enable && wallets.indexOf(key) === -1) {
+            
+            if (window.cardano[key].enable && wallets.indexOf(key) === -1 && key !== 'ccvault' && key !== 'typhoncip30') {
                 wallets.push(key);
             }
         }
-        if (wallets.length === 0 && count < 5) {
+        if (wallets.length === 0 && count < 10) {
             setTimeout(() => {
                 this.pollWallets(count + 1);
             }, 1000);
             return;
         }
+        
         this.setState({
             wallets,
             whichWalletSelected: wallets[0]
         });
+       
     }
 
     /**
@@ -175,6 +177,21 @@ export default class WalletConnector extends React.Component
             })
     }
 
+    hasLocalWallet = () => {
+        const whichWalletSelected = localStorage.getItem('usedWallet')
+        whichWalletSelected && this.setState({whichWalletSelected},
+            () => {
+                this.refreshData()
+            })
+    }
+
+    getLastUsedWallet = () => {
+        let walletUsed = localStorage.getItem('usedWallet')
+        if (walletUsed){
+            console.log("GOOT IT!")
+        } else { console.log("NAH NOTHING HERE")}
+    }
+
     /**
      * Generate address from the plutus contract cborhex
      */
@@ -186,25 +203,25 @@ export default class WalletConnector extends React.Component
 
         // const script = PlutusScript.from_bytes(Buffer.from(this.state.plutusScriptCborHex, "hex"))
         // const blake2bhash = blake.blake2b(script.to_bytes(), 0, 28);
-        const blake2bhash = "67f33146617a5e61936081db3b2117cbf59bd2123748f58ac9678656";
-        const scripthash = ScriptHash.from_bytes(Buffer.from(blake2bhash,"hex"));
+        // const blake2bhash = "67f33146617a5e61936081db3b2117cbf59bd2123748f58ac9678656";
+        // const scripthash = ScriptHash.from_bytes(Buffer.from(blake2bhash,"hex"));
 
-        const cred = StakeCredential.from_scripthash(scripthash);
-        const networkId = NetworkInfo.testnet().network_id();
-        const baseAddr = EnterpriseAddress.new(networkId, cred);
-        const addr = baseAddr.to_address();
-        const addrBech32 = addr.to_bech32();
+        // const cred = StakeCredential.from_scripthash(scripthash);
+        // const networkId = NetworkInfo.testnet().network_id();
+        // const baseAddr = EnterpriseAddress.new(networkId, cred);
+        // const addr = baseAddr.to_address();
+        // const addrBech32 = addr.to_bech32();
 
         // hash of the address generated from script
-        console.log(Buffer.from(addr.to_bytes(), "utf8").toString("hex"))
+        // console.log(Buffer.from(addr.to_bytes(), "utf8").toString("hex"))
 
-        // hash of the address generated using cardano-cli
-        const ScriptAddress = Address.from_bech32("addr_test1wpnlxv2xv9a9ucvnvzqakwepzl9ltx7jzgm53av2e9ncv4sysemm8");
-        console.log(Buffer.from(ScriptAddress.to_bytes(), "utf8").toString("hex"))
+        // // hash of the address generated using cardano-cli
+        // const ScriptAddress = Address.from_bech32("addr_test1wpnlxv2xv9a9ucvnvzqakwepzl9ltx7jzgm53av2e9ncv4sysemm8");
+        // console.log(Buffer.from(ScriptAddress.to_bytes(), "utf8").toString("hex"))
 
 
-        console.log(ScriptAddress.to_bech32())
-        console.log(addrBech32)
+        // console.log(ScriptAddress.to_bech32())
+        // console.log(addrBech32)
 
     }
 
@@ -218,8 +235,11 @@ export default class WalletConnector extends React.Component
         const walletKey = this.state.whichWalletSelected;
         const walletFound = !!window?.cardano?.[walletKey];
         this.setState({walletFound})
+        console.log(walletKey)
         return walletFound;
     }
+
+ 
 
     /**
      * Checks if a connection has been established with
@@ -281,6 +301,14 @@ export default class WalletConnector extends React.Component
         const walletName = window?.cardano?.[walletKey].name;
         this.setState({walletName})
         return walletName;
+    }
+
+    getUsedWalletName = () => {
+        const walletKey = this.state.whichWalletSelected;
+        const usedWalletName = window?.cardano?.[walletKey].name;
+        this.setState({usedWalletName})
+        localStorage.setItem('usedWallet', usedWalletName)
+        return usedWalletName;
     }
 
     /**
@@ -432,6 +460,7 @@ export default class WalletConnector extends React.Component
             const raw = await this.API.getChangeAddress();
             const changeAddress = Address.from_bytes(Buffer.from(raw, "hex")).to_bech32()
             this.setState({changeAddress})
+            this.getUsedWalletName()
         } catch (err) {
             console.log(err)
         }
@@ -447,7 +476,7 @@ export default class WalletConnector extends React.Component
             const raw = await this.API.getRewardAddresses();
             const rawFirst = raw[0];
             const rewardAddress = Address.from_bytes(Buffer.from(rawFirst, "hex")).to_bech32()
-            // console.log(rewardAddress)
+            console.log(rewardAddress)
             this.setState({rewardAddress})
 
         } catch (err) {
@@ -468,18 +497,20 @@ export default class WalletConnector extends React.Component
             // console.log(rewardAddress)
             this.setState({usedAddress})
 
+
         } catch (err) {
             console.log(err)
         }
     }
 
+   
     /**
      * Refresh all the data from the user's wallet
      * @returns {Promise<void>}
      */
     refreshData = async () => {
         this.generateScriptAddress()
-
+        this.hasLocalWallet()
         try{
             const walletFound = this.checkIfWalletFound();
             if (walletFound) {
@@ -487,6 +518,8 @@ export default class WalletConnector extends React.Component
                 await this.getWalletName();
                 const walletEnabled = await this.enableWallet();
                 if (walletEnabled) {
+                    await this.getUsedWalletName()
+                    await this.getWalletName();
                     await this.getNetworkId();
                     await this.getUtxos();
                     await this.getCollateral();
@@ -612,7 +645,7 @@ export default class WalletConnector extends React.Component
 
         let txVkeyWitnesses = await this.API.signTx(Buffer.from(tx.to_bytes(), "utf8").toString("hex"), true);
 
-        console.log(txVkeyWitnesses)
+        
 
         txVkeyWitnesses = TransactionWitnessSet.from_bytes(Buffer.from(txVkeyWitnesses, "hex"));
 
@@ -625,7 +658,7 @@ export default class WalletConnector extends React.Component
 
 
         const submittedTxHash = await this.API.submitTx(Buffer.from(signedTx.to_bytes(), "utf8").toString("hex"));
-        console.log(submittedTxHash)
+        
         this.setState({submittedTxHash});
 
 
@@ -692,7 +725,7 @@ export default class WalletConnector extends React.Component
         );
 
         const submittedTxHash = await this.API.submitTx(Buffer.from(signedTx.to_bytes(), "utf8").toString("hex"));
-        console.log(submittedTxHash)
+       
         this.setState({submittedTxHash});
 
         // const txBodyCborHex_unsigned = Buffer.from(txBody.to_bytes(), "utf8").toString("hex");
@@ -752,7 +785,7 @@ export default class WalletConnector extends React.Component
         );
 
         const submittedTxHash = await this.API.submitTx(Buffer.from(signedTx.to_bytes(), "utf8").toString("hex"));
-        console.log(submittedTxHash)
+        
         this.setState({submittedTxHash: submittedTxHash, transactionIdLocked: submittedTxHash, lovelaceLocked: this.state.lovelaceToSend});
 
 
@@ -827,7 +860,7 @@ export default class WalletConnector extends React.Component
         );
 
         const submittedTxHash = await this.API.submitTx(Buffer.from(signedTx.to_bytes(), "utf8").toString("hex"));
-        console.log(submittedTxHash)
+        
         this.setState({submittedTxHash: submittedTxHash, transactionIdLocked: submittedTxHash, lovelaceLocked: this.state.lovelaceToSend})
 
     }
@@ -974,7 +1007,6 @@ export default class WalletConnector extends React.Component
         );
 
         const submittedTxHash = await this.API.submitTx(Buffer.from(signedTx.to_bytes(), "utf8").toString("hex"));
-        console.log(submittedTxHash)
         this.setState({submittedTxHash});
 
     }
@@ -1128,7 +1160,7 @@ export default class WalletConnector extends React.Component
         );
 
         const submittedTxHash = await this.API.submitTx(Buffer.from(signedTx.to_bytes(), "utf8").toString("hex"));
-        console.log(submittedTxHash)
+        // console.log(submittedTxHash)
         this.setState({submittedTxHash});
 
     }
@@ -1137,8 +1169,27 @@ export default class WalletConnector extends React.Component
     async componentDidMount() {
         setTimeout(() => {
             this.pollWallets();
+    
         }, 1000);
-        this.refreshData()
+        this.getLastUsedWallet()
+    }
+
+    async clearAll () {
+        localStorage.clear()
+        
+    }
+
+    walletsSuported = ['cardwallet', 'eternl', 'nami', 'flint', 'nufi', 'typhon']
+    
+    sendWebsite = (wallet) => {
+        return(
+        wallet === 'cardwallet' ? 'https://cwallet.finance/'
+        : wallet === 'eternl' ? 'https://linktr.ee/eternlwallet'
+        : wallet === 'nami' ? 'https://namiwallet.io/'
+        : wallet === 'flint' ? 'https://flint-wallet.com/'
+        : wallet === 'nufi' ? 'https://nu.fi/'
+        : wallet === 'typhon' ? 'https://typhonwallet.io/' : "/#"
+        )
     }
 
     render()
@@ -1152,7 +1203,8 @@ export default class WalletConnector extends React.Component
                 <h1> Please connect your wallet first.</h1>
                 <div style={{paddingTop: "10px"}}>
                     <div style={{marginBottom: 15}}>Select wallet:</div>
-                        { this.state.wallets.map(key =>
+
+                        {/* { this.state.wallets.map(key =>
                         <div className={css.walletPretty}>
                             <button
                             type="button"
@@ -1166,30 +1218,65 @@ export default class WalletConnector extends React.Component
                             <span>{key.toUpperCase()}</span>                          
                         </button>
                             </div>
-                        )}
-                </div>
+                        )} */}
+                
+                {!localStorage.getItem('usedWallet') ? this.walletsSuported.map(wallet => {
+                    return ( this.state.wallets.includes(wallet) ? 
+                    <div  key={wallet} className={css.walletPretty}>
+                    <button
+                    type="button"
+                        key={wallet}
+                        selectedvalue={this.state.whichWalletSelected}
+                        onClick={this.handleWalletSelect}
+                    value={wallet}
+                    className={css.button}
+                    > 
+                    <img src={window.cardano[wallet].icon} alt={wallet}/>  
+                    <span>{wallet.toUpperCase()}</span>                          
+                </button>
+                    </div>
 
+                    : <div  key={wallet} className={css.walletPretty}>
+                         <a href={this.sendWebsite(wallet)} target="_blank" className={css.links} rel="noreferrer" alt={wallet}>
+                    <button
+                    type="button"
+                        key={wallet}
+                    className={css.button}
+                    > 
+                   
+                    <img  src={require(`..//assets/wallets/${wallet}.png`)} alt={wallet}/>  
+                    <span>{wallet.toUpperCase()}</span>  
+                </button>
+                    </a>                        
+                    </div>)
 
-
-                {/* <button style={{padding: "20px"}} onClick={this.refreshData}>Refresh</button>
-
+                }) :
+                <>
                 <p style={{paddingTop: "20px"}}><span style={{fontWeight: "bold"}}>Wallet Found: </span>{`${this.state.walletFound}`}</p>
                 <p><span style={{fontWeight: "bold"}}>Wallet Connected: </span>{`${this.state.walletIsEnabled}`}</p>
                 <p><span style={{fontWeight: "bold"}}>Wallet API version: </span>{this.state.walletAPIVersion}</p>
-                <p><span style={{fontWeight: "bold"}}>Wallet name: </span>{this.state.walletName}</p> */}
-{/* 
-                <p><span style={{fontWeight: "bold"}}>Network Id (0 = testnet; 1 = mainnet): </span>{this.state.networkId}</p>
-                <p style={{paddingTop: "20px"}}><span style={{fontWeight: "bold"}}>UTXOs: (UTXO #txid = ADA amount + AssetAmount + policyId.AssetName + ...): </span>{this.state.Utxos?.map(x => <li style={{fontSize: "10px"}} key={`${x.str}${x.multiAssetStr}`}>{`${x.str}${x.multiAssetStr}`}</li>)}</p>
-                <p style={{paddingTop: "20px"}}><span style={{fontWeight: "bold"}}>Balance: </span>{this.state.balance}</p>
+                <p><span style={{fontWeight: "bold"}}>Wallet name: </span>{this.state.walletName}</p>
+
                 <p><span style={{fontWeight: "bold"}}>Change Address: </span>{this.state.changeAddress}</p>
                 <p><span style={{fontWeight: "bold"}}>Staking Address: </span>{this.state.rewardAddress}</p>
                 <p><span style={{fontWeight: "bold"}}>Used Address: </span>{this.state.usedAddress}</p>
+                <p style={{paddingTop: "20px"}}><span style={{fontWeight: "bold"}}>Balance: </span>{this.state.balance}</p>
                 <hr style={{marginTop: "40px", marginBottom: "40px"}}/>
+                </>
+                }
+                </div>
+                <button style={{padding: "20px"}} onClick={this.refreshData}>Refresh</button>
+                <button style={{padding: "20px"}} onClick={this.clearAll}>SHOW ME</button>
+                <button style={{padding: "20px"}} onClick={console.log(this.state.whichWalletSelected)}>SHOW MdsdsdE</button> 
 
-                
-                <hr style={{marginTop: "40px", marginBottom: "40px"}}/> */}
+                  
 
-                {/*<p>{`Unsigned txBodyCborHex: ${this.state.txBodyCborHex_unsigned}`}</p>*/}
+
+               
+
+                {/* <p><span style={{fontWeight: "bold"}}>Network Id (0 = testnet; 1 = mainnet): </span>{this.state.networkId}</p> */}
+                {/* <p style={{paddingTop: "20px"}}><span style={{fontWeight: "bold"}}>UTXOs: (UTXO #txid = ADA amount + AssetAmount + policyId.AssetName + ...): </span>{this.state.Utxos?.map(x => <li style={{fontSize: "10px"}} key={`${x.str}${x.multiAssetStr}`}>{`${x.str}${x.multiAssetStr}`}</li>)}</p> */}
+                {/* <p>{`Unsigned txBodyCborHex: ${this.state.txBodyCborHex_unsigned}`}</p> */}
                 {/*<p>{`Signed txBodyCborHex: ${this.state.txBodyCborHex_signed}`}</p>*/}
                 {/* <p>{`Submitted Tx Hash: ${this.state.submittedTxHash}`}</p>
                 <p>{this.state.submittedTxHash ? 'check your wallet !' : ''}</p> */}
