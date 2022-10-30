@@ -235,7 +235,6 @@ export default class WalletConnector extends React.Component
         const walletKey = this.state.whichWalletSelected;
         const walletFound = !!window?.cardano?.[walletKey];
         this.setState({walletFound})
-        console.log(walletKey)
         return walletFound;
     }
 
@@ -1267,7 +1266,6 @@ export default class WalletConnector extends React.Component
                 </div>
                 <button style={{padding: "20px"}} onClick={this.refreshData}>Refresh</button>
                 <button style={{padding: "20px"}} onClick={this.clearAll}>SHOW ME</button>
-                <button style={{padding: "20px"}} onClick={console.log(this.state.whichWalletSelected)}>SHOW MdsdsdE</button> 
 
                   
 
