@@ -66,7 +66,7 @@ const NFTS = () => {
             Your browser does not support the video tag.
           </video>
         </div>
-          <button className="btn btn-primary m-2 fontAutoSized"><span>Buy</span></button>
+          <button className="btn m-2 fontAutoSized btn-dark "><span>Buy</span></button>
       </div>
     )}
 </div>   
@@ -83,7 +83,7 @@ const NFTS = () => {
             Your browser does not support the video tag.
           </video>
         </div>
-          <button href="#" className="btn btn-primary m-2 fontAutoSized"><span>Buy</span></button>
+          <button href="#" className="btn btn-dark m-2  fontAutoSized"><span>Buy</span></button>
       </div>
     )}
 </div>  
