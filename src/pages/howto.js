@@ -7,7 +7,7 @@ const HowTo = () => {
     <span className="anchor" id='howtoplay'></span>
     <section>
     <h2 className="fontAutoSized text-center" >How to play Cardano Racers?</h2>
-    <p className="fontAutoSized m-4">Here is where we talk about how poeple will play the game.</p>
+    <p className="fontAutoSized m-4">Here is where we talk about how people will play the game.</p>
     </section>    
     </>
     )
