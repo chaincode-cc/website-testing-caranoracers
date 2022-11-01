@@ -6,3 +6,12 @@
     width: 100%;
 }
 
+.links{
+    width: 20vw;
+}
+
+@media (max-width: 1200px) {
+    .links{
+        width: 60vw;
+    }
+}

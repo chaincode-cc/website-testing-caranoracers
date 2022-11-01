@@ -51,12 +51,12 @@ const NFTS = () => {
     else return {backgroundColor: "#3498db"}
   }
     return(
-        <div className="mt-4 text-center" >
+        <div className="mt-4 text-center card-container " >
   
   {/* CARS */}
   
   <h3>CARS</h3>
-  <div className="d-flex align-content-around justify-content-around flex-wrap">
+  <div className="d-flex align-content-around  justify-content-around flex-wrap">
       {cars.map((car,y) =>
         <div key={y} className="card bg-secondary d-flex justify-content-center align-items-center">
         <div className="card-body bg-secondary">
@@ -66,7 +66,7 @@ const NFTS = () => {
             Your browser does not support the video tag.
           </video>
         </div>
-          <button className="btn btn-primary fontAutoSized"><span>Buy</span></button>
+          <button className="btn btn-primary m-2 fontAutoSized"><span>Buy</span></button>
       </div>
     )}
 </div>   
@@ -83,7 +83,7 @@ const NFTS = () => {
             Your browser does not support the video tag.
           </video>
         </div>
-          <button href="#" className="btn btn-primary fontAutoSized"><span>Buy</span></button>
+          <button href="#" className="btn btn-primary m-2 fontAutoSized"><span>Buy</span></button>
       </div>
     )}
 </div>  

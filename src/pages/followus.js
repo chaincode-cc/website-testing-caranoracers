@@ -15,7 +15,7 @@ const FollowUs = () => {
         <>
     <section className="text-center">
     <h3 className=" fontAutoSized">Follow us</h3>
-    <div className="d-flex ms-5 me-5 justify-content-center">
+    <div className="d-flex ms-5 me-5 links justify-content-center">
 <a target='_blank' className="social-media" href='nothingget'><img src={youtube} alt='youtube' /></a>
 <a target='_blank' className="social-media" href='nothingget'><img src={discord} alt='discord' /></a>
 <a target='_blank' className="social-media" href='nothingget'><img src={telegram} alt='telegram' /></a>
