@@ -54,7 +54,53 @@ const NFTS = () => {
         <div className="mt-4 text-center card-container " >
   
   {/* CARS */}
-  
+
+  <div id="carouselExampleControlsNoTouching" className="carousel slide" data-bs-touch="true"> 
+{cars.map( (car ,index) =>
+      <><div className="carousel-indicators">
+
+    <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to={index === 0 && index} className="active" aria-current="true" aria-label={`Slide ${index}`}></button>
+    <button type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide-to={index > 0 && index} aria-current="true" aria-label={`Slide ${index}`}></button>
+  </div><div className="carousel-inner">
+
+      {index === 0 ? <div className="carousel-item active">
+        <div key={index} className="card bg-secondary d-flex justify-content-center align-items-center">
+          <div className="card-body bg-secondary">
+            <div className="ribbon ribbon-top-right"><span style={styling(car.ribon)}>{car.ribon}</span></div>
+            <h5 className="card-title fontAutoSized">{car.title}</h5>{index}
+            <video src={car.image} muted loop autoPlay className="nft1">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+          <button className="btn m-2 fontAutoSized btn-dark "><span>Buy</span></button>
+        </div>
+      </div> :
+        <div className="carousel-item">
+          <div key={index} className="card bg-secondary d-flex justify-content-center align-items-center">
+            <div className="card-body bg-secondary">
+              <div className="ribbon ribbon-top-right"><span style={styling(car.ribon)}>{car.ribon}</span></div>
+              <h5 className="card-title fontAutoSized">{car.title}</h5>{index}
+              <video src={car.image} muted loop autoPlay className="nft1">
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <button className="btn m-2 fontAutoSized btn-dark "><span>Buy</span></button>
+          </div>
+        </div>}
+    </div><button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span className="visually-hidden">Previous</span>
+    </button><button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+      <span className="carousel-control-next-icon" aria-hidden="true"></span>
+      <span className="visually-hidden">Next</span>
+    </button></>
+        )}
+        </div> 
+
+
+
+
+
   <h3>CARS</h3>
   <div className="d-flex align-content-around  justify-content-around flex-wrap">
       {cars.map((car,y) =>
@@ -89,7 +135,6 @@ const NFTS = () => {
 </div>  
 <button type="button" className="btn mt-3 btn-secondary"
         data-bs-toggle="tooltip" data-bs-placement="top"
-        data-bs-custom-class="custom-tooltip"
         data-bs-title="This top tooltip is themed via CSS variables.">
   WHOLE COLLECTION
 </button>

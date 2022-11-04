@@ -10,7 +10,7 @@ import {
 
 import Banner from './components/banner';
 import Intro from './pages/intro';
-import NFTS from './pages/nft';
+import NFTS from './nfts/nft';
 import HowTo from './pages/howto';
 import Contact from './pages/contact';
 import FollowUs from './pages/followus';
