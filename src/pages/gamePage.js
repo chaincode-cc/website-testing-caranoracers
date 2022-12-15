@@ -1,47 +1,71 @@
-import React, {useState} from 'react';
-import { setInvironment, setDriversAndCars } from '../Game/game';
+import React, {useEffect, useState} from 'react';
+import { setInvironment, randomFloorMath } from '../Game/game';
+
 const GamePage = () => {
 	const [playersNum, setPlayersNum] = useState(0);
-	const [racersNum, setRacersNum] = useState({});
-	
-	
-	function startGame () {
-		
-		setRacersNum(setInvironment());
-		setDriversAndCars();
-	}
+	const [mapStats, setMap] = useState({});
+	let driverStats= [];
+	let carStats = [];
 
+
+	
+	useEffect(()=>{
+		setMap(setInvironment());
+	},[]);
+	
 	const handlePlayerNumInput = event => {
 		setPlayersNum(event.target.value);
 	};
 
-	console.log('RESUTS',playersNum );
-	console.log('RESUTS',racersNum );
+	const settingDrivers = () =>{
+		for (let i = 1; i <= playersNum; i++)
+		{ 
+			let newCar = {
+				Name: i,
+				MaximumSpeed: randomFloorMath(1,10000),
+				Acceleration: randomFloorMath(1,10000),
+				Cornering: randomFloorMath(1,10000),
+				Aerodynamics: randomFloorMath(1,10000),
+			};
+			carStats.push(newCar);
+			let newDriver = {
+				Name: i,
+				Experience: randomFloorMath(1,10000),
+				Aggressiveness: randomFloorMath(1,10000),
+				Reflexes: randomFloorMath(1,10000),
+				Luck: randomFloorMath(1,10000),
+			};
+			driverStats.push(newDriver);
+		}
+		console.log('DRIVERS', driverStats);
+		console.log('CARS', carStats);
 
+	};
+	
+
+
+	
 
 	
 	return (
 		<>
 			<section className='d-flex justify-content-center align-items-center flex-column'>
-				{racersNum.raceMap && (<>
-					<p>Weather: {racersNum.RaceWeather}</p>
-					<p>Straigthaways: {racersNum.raceMap.straigthaways}</p>
-					<p>Turns: {racersNum.raceMap.turns}</p>
-					<p>Lap length: {racersNum.raceMap.lapLength.toFixed(2)} km</p>
+				{mapStats.raceMap && (<>
+					<h2>Racing circuit</h2>
+					<p>Weather: {mapStats.RaceWeather}</p>
+					<p>Straigthaways: {mapStats.raceMap.straigthaways}</p>
+					<p>Turns: {mapStats.raceMap.turns}</p>
+					<p>Lap length: {mapStats.raceMap.lapLength.toFixed(2)} km</p>
 
 				</>
 				)}
-				
-
-
-				<button className='btn btn-danger w-25 m-4' onClick={startGame}>SET MAP</button>
 				<div className="input-group input-group-sm ">
-					
 					<div className="input-group-prepend">
 						<span className="input-group-text" id="inputGroup-sizing-sm">Number of players</span>
 					</div>
 					<input type="number" onChange={handlePlayerNumInput} className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
 				</div>
+				<button className='btn btn-danger w-25 m-4' onClick={settingDrivers}>SET DRIVERS</button>
 				
 			</section>
 		</>
