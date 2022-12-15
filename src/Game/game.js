@@ -1,20 +1,20 @@
 //Services
-const randomRoundMath = (min, max) => {
+export const randomRoundMath = (min, max) => {
 	return Math.round(Math.random() * (max * 100) + min * 100) / 100;
 };
-const randomFloorMath = (min, max) => {
+export const randomFloorMath = (min, max) => {
 	return Math.floor(Math.random() * max + min);
 };
-const toOneDecimal = (num) => {return 1+(num/10000);};
-const byTenThousand = (num) => {return (num/10000);};
-const byThousand = (num) => {return (num/1000);};
+export const toOneDecimal = (num) => {return 1+(num/10000);};
+export const byTenThousand = (num) => {return (num/10000);};
+export const byThousand = (num) => {return (num/1000);};
 
 
 // STEP 1 => Environment
 const weatherArr = ['Sunny', 'Windy', 'Rainy', 'Snowy', 'Icy'];
 const luckArr = [0, 1, 2, 3, 4];
 
-function setRaceMap() {
+export function setRaceMap() {
 	let turnsAndStraigthaways = randomFloorMath(2, 8);
 	let settingLenghts = (type, num) => {
 		if (type === 'turn') {
@@ -51,7 +51,7 @@ function setRaceMap() {
 	};
 }
 
-function setInvironment() {
+export function setInvironment() {
 	return {
 		RaceWeather: weatherArr[randomFloorMath(0, weatherArr.length)],
 		RaceLuck: luckArr[randomFloorMath(0, luckArr.length)],
@@ -65,9 +65,9 @@ let raceEnvironment = setInvironment();
 console.log('ENVIROMENT==>',raceEnvironment);
 
 // STEP 2 => Drivers and Cars
-let driversCount = {};
-let carsCount = {};
-function setDriversAndCars(type, num) {
+export let driversCount = {};
+export let carsCount = {};
+export function setDriversAndCars(type, num) {
 	for (let i = 1; i <= num; i++) {
 		if (type == 'cars'){
 			carsCount[i] = {
@@ -97,17 +97,17 @@ console.log('DRIVERS==>',driversCount,'CARS==>',carsCount);
 
 const { RaceWeather, raceMap, lapTime } = raceEnvironment;
 
-let weatherMultiplier = (weatherArr.indexOf(RaceWeather) +1 );
-let straightawayVar = (Object.values(raceMap.straightawayLengths).reduce((total, value) => total + value, 0) * raceMap.straigthaways)/10000;
-let turnVar = (Object.values(raceMap.turnLengths).reduce((total, value) => total + value, 0) * raceMap.turns)/10000;
-let AvegSpeed = raceMap.lapLength / lapTime;
+export let weatherMultiplier = (weatherArr.indexOf(RaceWeather) +1 );
+export let straightawayVar = (Object.values(raceMap.straightawayLengths).reduce((total, value) => total + value, 0) * raceMap.straigthaways)/10000;
+export let turnVar = (Object.values(raceMap.turnLengths).reduce((total, value) => total + value, 0) * raceMap.turns)/10000;
+export let AvegSpeed = raceMap.lapLength / lapTime;
 
 const driver1 = Object.values(driversCount)[0];
 const driver2 = Object.values(driversCount)[1];
 const car1 = Object.values(carsCount)[0];
 const car2 = Object.values(carsCount)[1];
 
-function combineDriCarAttr (driver, car){
+export function combineDriCarAttr (driver, car){
 	return{
 		ExpAcc: toOneDecimal(driver.Experience) * byTenThousand(car.Acceleration),
 		AggAcc: toOneDecimal(driver.Aggressiveness) * byTenThousand(car.Acceleration),
@@ -118,7 +118,7 @@ function combineDriCarAttr (driver, car){
 	};
 }
 
-function setPlayer (driver, car) {
+export function setPlayer (driver, car) {
 	let player = combineDriCarAttr(driver,car);
 	let accTotal = byThousand(player.ExpAcc + player.AggAcc + player.RefAcc + straightawayVar + turnVar + ((driver.Luck/100000000)*raceEnvironment.RaceLuck)) / weatherMultiplier;
 	let corTotal = byThousand(player.ExpCor+  player.AggCor + player.RefCor + turnVar + ((driver.Luck/100000000)*raceEnvironment.RaceLuck)) / weatherMultiplier;
