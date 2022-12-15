@@ -1,17 +1,17 @@
 .social-media {
-    margin: 5%;
-    }
-
-.social-media img{
-    width: 100%;
+  margin: 5%;
 }
 
-.links{
-    width: 20vw;
+.social-media img {
+  width: 100%;
+}
+
+.links {
+  width: 20vw;
 }
 
 @media (max-width: 1200px) {
-    .links{
-        width: 60vw;
-    }
+  .links {
+    width: 60vw;
+  }
 }

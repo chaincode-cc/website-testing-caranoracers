@@ -1,37 +1,39 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, TitilliumWeb, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, TitilliumWeb, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, TitilliumWeb, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, TitilliumWeb, Monaco, Consolas, "Courier New",
     monospace;
 }
 
-.f1font{
-  font-family: 'MyFont';
+.f1font {
+  font-family: "MyFont";
   font-size: calc(10px + 2vmin);
 }
 
-.f1fonttext{
-  font-family: 'TitilliumWeb';
+.f1fonttext {
+  font-family: "TitilliumWeb";
   font-size: calc(10px + 2vmin);
 }
 
-.fontAutoSized{
+.fontAutoSized {
   font-size: calc(10px + 2vmin);
 }
 
 @font-face {
-  font-family: 'MyFont';
-  src: local('MyFont'), url(../assets/fonts/Formula1-Bold_web_0.ttf) format('opentype');
+  font-family: "MyFont";
+  src: local("MyFont"),
+    url(../assets/fonts/Formula1-Bold_web_0.ttf) format("opentype");
 }
 
 @font-face {
-  font-family: 'TitilliumWeb';
-  src: local('MyFont'), url(../assets/fonts/TitilliumWeb-Regular.ttf) format('opentype');
+  font-family: "TitilliumWeb";
+  src: local("MyFont"),
+    url(../assets/fonts/TitilliumWeb-Regular.ttf) format("opentype");
 }

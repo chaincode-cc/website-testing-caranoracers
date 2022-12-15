@@ -16,26 +16,24 @@
   visibility: hidden;
 }
 
-section{
-  margin:5%;
+section {
+  margin: 5%;
 }
-
-
 
 #garage {
   margin-left: 80px;
-  font-family: 'MyFont';
+  font-family: "MyFont";
 }
 
 @media (max-width: 1200px) {
-  #garage{
+  #garage {
     margin-left: 0;
   }
 
-  .modal{
+  .modal {
     margin: 0 6%;
   }
-  .modal-dialog{
+  .modal-dialog {
     max-width: 85%;
   }
 }
