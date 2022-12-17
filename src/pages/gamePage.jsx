@@ -11,6 +11,7 @@ const GamePage = () => {
 	const [driverStats, setDriverStats] = useState({});
 	const [cobAttrs, setCombAtt] = useState({});
 	const [winnerTable, setWinners] = useState({});
+	const [racerpos, setRacerPos] = useState({});
 
 
 	function settingUpAll (){
@@ -22,6 +23,7 @@ const GamePage = () => {
 		setCombAtt({});
 		setWinners({});
 	}
+
 	useEffect(()=>{
 		settingUpAll();
 	},[]);
@@ -33,6 +35,12 @@ const GamePage = () => {
 		});
 		setWinners(list);
 	},[cobAttrs]);
+
+	useEffect(()=>{
+		let list = Object.values(winnerTable);
+		var index = list.findIndex(item => item.Name === Number(playerSelected));
+		setRacerPos(index+1);
+	},[winnerTable]);
 	
 	const handlePlayerNumInput = event => {
 		setPlayersInput(event.target.value);
@@ -73,9 +81,7 @@ const GamePage = () => {
 		e.preventDefault();
 		setPlayerSelected(playerSelect);
 	};
-	function getObjKey(obj, value) {
-		return Object.keys(obj).find(key => obj[key].Name === value);
-	}
+
 	const setRace = (e) =>{
 		e.preventDefault();
 		let combineDriCarAttrs= [];
@@ -89,8 +95,6 @@ const GamePage = () => {
 	};
 
 	console.log('WINER', winnerTable);
-	console.log('YOUR WINNER', getObjKey(winnerTable, playerSelected));
-	
 
 	
 
@@ -211,6 +215,7 @@ const GamePage = () => {
 									</tbody>
 								</table>
 								<h3 className='mt-3'>{playerSelected > 0 ? `You selected racer: ${playerSelected}`  : <></>}</h3>
+								{winnerTable.length > 0 && `Your racer got on the ${racerpos} position`}
 								{playerSelected > 0 ? <>
 									{winnerTable.length > 0 ? <>
 										<h2 className='mt-3'>RESULTS:</h2>
@@ -228,7 +233,7 @@ const GamePage = () => {
 													<tr key={x.Name}> 
 														<th></th>
 														<th>{x.Name}</th>
-														<th>{x.LapTime.toFixed(2)} s</th>
+														<th>{x.LapTime.toFixed(4)}s</th>
 														<th>Position {i+1}</th>
 													</tr>												
 												)}	
