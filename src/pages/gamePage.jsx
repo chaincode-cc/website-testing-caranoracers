@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { setInvironment, randomFloorMath } from '../Game/game';
+import { setInvironment, randomFloorMath, combineDriCarAttr, startRace} from '../Game/game';
 
 const GamePage = () => {
 	const [playersInput, setPlayersInput] = useState(0);
@@ -7,7 +7,7 @@ const GamePage = () => {
 	const [mapStats, setMap] = useState({});
 	const [carStats, setCarStats] = useState({});
 	const [driverStats, setDriverStats] = useState({});
-
+	const [raceStats, setRaceStats] = useState({});
 
 
 	useEffect(()=>{
@@ -48,7 +48,20 @@ const GamePage = () => {
 		setDriverStats(driverStats);
 		setCarStats(carStats);
 	};
+	
 	console.log('MAP', mapStats);
+	console.log('RACE',raceStats);
+
+
+	const setRace = () =>{
+
+		
+		combineDriCarAttr(driverStats[0],carStats[0]);
+		setRaceStats(startRace(driverStats[0],carStats[0]));
+	
+	};
+	console.log('RACE',setRace);
+
 	
 
 	
@@ -69,50 +82,124 @@ const GamePage = () => {
 							<div className="input-group-prepend">
 								<span className="input-group-text" id="inputGroup-sizing-sm">Number of players</span>
 							</div>
-							<input type="number" min="0" placeholder={'0'}onChange={handlePlayerNumInput} className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
+							<input type="number" min="2" placeholder='Min of 2...' onChange={handlePlayerNumInput} className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
 						</div>
-						<button className='btn btn-danger mt-2'>{driverStats.length > 0 ? 'SET NEW PLAYERS': 'SET PLAYERS'}</button>
+						<button className='btn btn-secondary mt-2'>{driverStats.length > 0 ? 'SET NEW PLAYERS': 'SET PLAYERS'}</button>
 					</form>
 					<div>
 						
 						{driverStats.length > 0 &&
-						<>
-							<h3>Number of players: {driverStats.length > 0 && playersNum}</h3>
-							<h4>RACERS</h4>
-							<table>
-								<tr>
-									<th>Racer #</th>
-									<th>Experience</th>
-									<th>Aggressiveness</th>
-									<th>Reflexes</th>
-									<th>Luck</th>
-								</tr>
-								{Object.values(driverStats).map(x => <tr key={driverStats.Name}>
-									<td>{x.Name}</td>
-									<td>{x.Experience}</td>
-									<td>{x.Aggressiveness}</td>
-									<td>{x.Reflexes}</td>
-									<td>{x.Luck}</td>
-								</tr>)}
-							</table>
+							<>
+								<h3>Number of players: {driverStats.length > 0 && playersNum}</h3>
+								<table >
+									<thead >
+										<tr>
+											<th></th>
+											{Object.values(driverStats).map(x => 
+												<th key={x.Name}>Racer #</th>
+											)}										
+										</tr>
+									</thead>
+									<thead>
+										<tr>
+											<th>Racing Skills</th>
+											{Object.values(driverStats).map(x => 
+												<th key={driverStats.Name}>{x.Name}</th>
+											)}
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td >Experience</td>
+											{Object.values(driverStats).map(x => 
+												<td key={driverStats.Name}>{x.Experience}
+												</td>
+											)}
+										</tr>
+										<tr>
+											<td>Aggressiveness</td>
+											{Object.values(driverStats).map(x => 
+												<td key={driverStats.Name}>{x.Aggressiveness}
+												</td>
+											)}
+										</tr>
+										<tr>
+											<td>Reflexes</td>
+											{Object.values(driverStats).map(x => 
+												<td key={driverStats.Name}>{x.Reflexes}
+												</td>
+											)}
+										</tr>
+										<tr>
+											<td>Luck</td>
+											{Object.values(driverStats).map(x => 
+												<td key={driverStats.Name}>{x.Luck}
+												</td>
+											)}
+										</tr>
+									</tbody>
+								
+									<thead>
+										<tr>
+											<th>Car Attributes</th>
+											<th></th>
+											<th></th>
+
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td style={{paddingRight:'20px'}}>MaximumSpeed</td>
+											{Object.values(carStats).map(x => 
+												<td key={carStats.Name}>{x.MaximumSpeed}
+												</td>
+											)}
+										</tr>
+										<tr>
+											<td>Acceleration</td>
+											{Object.values(carStats).map(x => 
+												<td key={carStats.Name}>{x.Acceleration}
+												</td>
+											)}
+										</tr>
+										<tr>
+											<td>Cornering</td>
+											{Object.values(carStats).map(x => 
+												<td key={carStats.Name}>{x.Cornering}
+												</td>
+											)}
+										</tr>
+										<tr>
+											<td>Aerodynamics</td>
+											{Object.values(carStats).map(x => 
+												<td key={carStats.Name}>{x.Aerodynamics}
+												</td>
+											)}
+										</tr>
+									</tbody>
+								</table>
+
+								<form className=" mt-3">
+									<div className="input-group mb-3">
+										<div className="input-group-prepend">
+											<label className="input-group-text" htmlFor="inputGroupSelect01">Select your Racer</label>
+										</div>
+										<select className="custom-select" id="inputGroupSelect01">
+											<option selected>Racer #</option>
+											{Object.values(carStats).map(x => 
+												<option key={x.Name} value={x.Name}>{x.Name}</option>
+											)}
+										</select>
+										<button>Select</button>
+									</div>
+								</form>
+							</>
+							
+						}
 						
-							<h4>CARS</h4>
-							<table>
-								<tr>
-									<th>Racer #</th>
-									<th>MaximumSpeed</th>
-									<th>Acceleration</th>
-									<th>Cornering</th>
-									<th>Aerodynamics</th>
-								</tr>
-								{Object.values(carStats).map(x => <tr key={carStats.Name}>
-									<td>{x.Name}</td>
-									<td>{x.MaximumSpeed}</td>
-									<td>{x.Acceleration}</td>
-									<td>{x.Cornering}</td>
-									<td>{x.Aerodynamics}</td>
-								</tr>)}
-							</table></>}
+					
+						
+						
 					</div>
 				</div>
 			</section>
