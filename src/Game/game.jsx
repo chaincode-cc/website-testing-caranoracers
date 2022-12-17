@@ -97,10 +97,10 @@ console.log('DRIVERS==>',driversCount,'CARS==>',carsCount);
 
 const { RaceWeather, raceMap, lapTime } = raceEnvironment;
 
-export let weatherMultiplier = (weatherArr.indexOf(RaceWeather) +1 );
-export let straightawayVar = (Object.values(raceMap.straightawayLengths).reduce((total, value) => total + value, 0) * raceMap.straigthaways)/10000;
-export let turnVar = (Object.values(raceMap.turnLengths).reduce((total, value) => total + value, 0) * raceMap.turns)/10000;
-export let AvegSpeed = raceMap.lapLength / lapTime;
+let weatherMultiplier = (weatherArr.indexOf(RaceWeather) +1 );
+let straightawayVar = (Object.values(raceMap.straightawayLengths).reduce((total, value) => total + value, 0) * raceMap.straigthaways)/10000;
+let turnVar = (Object.values(raceMap.turnLengths).reduce((total, value) => total + value, 0) * raceMap.turns)/10000;
+let AvegSpeed = raceMap.lapLength / lapTime;
 
 const driver1 = Object.values(driversCount)[0];
 const driver2 = Object.values(driversCount)[1];
