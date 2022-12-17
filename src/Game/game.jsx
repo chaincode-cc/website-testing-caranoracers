@@ -118,7 +118,7 @@ export function combineDriCarAttr (driver, car){
 	};
 }
 
-export function startRace (driver, car) {
+export function racerTotal (driver, car) {
 	let player = combineDriCarAttr(driver,car);
 	let accTotal = byThousand(player.ExpAcc + player.AggAcc + player.RefAcc + straightawayVar + turnVar + ((driver.Luck/100000000)*raceEnvironment.RaceLuck)) / weatherMultiplier;
 	let corTotal = byThousand(player.ExpCor+  player.AggCor + player.RefCor + turnVar + ((driver.Luck/100000000)*raceEnvironment.RaceLuck)) / weatherMultiplier;
@@ -136,8 +136,8 @@ export function startRace (driver, car) {
 	};
 }
 
-let player1 = startRace(driver1,car1);
-let player2 = startRace(driver2,car2);
+let player1 = racerTotal(driver1,car1);
+let player2 = racerTotal(driver2,car2);
 
 function showingWinner(p1, p2) {
 	let winner = [];
@@ -145,6 +145,6 @@ function showingWinner(p1, p2) {
 	return winner[0][0];
 }
 
-console.log('Player', driver1.Name[0],'statistics',combineDriCarAttr(driver1,car1),startRace(driver1,car1));
-console.log('Player', driver2.Name[0],'statistics',combineDriCarAttr(driver2,car2),startRace(driver2,car2));
+console.log('Player', driver1.Name[0],'statistics',combineDriCarAttr(driver1,car1),racerTotal(driver1,car1));
+console.log('Player', driver2.Name[0],'statistics',combineDriCarAttr(driver2,car2),racerTotal(driver2,car2));
 console.log('AND THE WINNER IS...... PLAYER ',showingWinner(player1, player2),'!!!!');

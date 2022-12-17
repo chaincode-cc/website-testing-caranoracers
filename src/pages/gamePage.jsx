@@ -1,24 +1,44 @@
 import React, {useEffect, useState} from 'react';
-import { setInvironment, randomFloorMath, combineDriCarAttr, startRace} from '../Game/game';
+import { setInvironment, randomFloorMath, racerTotal} from '../Game/game';
 
 const GamePage = () => {
 	const [playersInput, setPlayersInput] = useState(0);
 	const [playersNum, setPlayersNum] = useState(0);
+	const [playerSelect, setPlayerSelect] = useState(0);
+	const [playerSelected, setPlayerSelected] = useState(0);
 	const [mapStats, setMap] = useState({});
 	const [carStats, setCarStats] = useState({});
 	const [driverStats, setDriverStats] = useState({});
-	const [raceStats, setRaceStats] = useState({});
+	const [cobAttrs, setCombAtt] = useState({});
+	const [winnerTable, setWinners] = useState({});
 
 
-	useEffect(()=>{
+	function settingUpAll (){
 		setMap(setInvironment());
 		setPlayersNum(0);
+		setPlayerSelected(0);
 		setCarStats({});
 		setDriverStats({});
+		setCombAtt({});
+		setWinners({});
+	}
+	useEffect(()=>{
+		settingUpAll();
 	},[]);
+
+	useEffect(()=>{
+		let list = Object.values(cobAttrs).slice(0);
+		list.sort(function(a,b) {
+			return b.LapTime - a.LapTime;
+		});
+		setWinners(list);
+	},[cobAttrs]);
 	
 	const handlePlayerNumInput = event => {
 		setPlayersInput(event.target.value);
+	};
+	const handlePlayerSelect = event => {
+		setPlayerSelect(event.target.value);
 	};
 
 	const settingDrivers = (e) =>{
@@ -49,18 +69,28 @@ const GamePage = () => {
 		setCarStats(carStats);
 	};
 	
-	console.log('MAP', mapStats);
-	console.log('RACE',raceStats);
-
-
-	const setRace = () =>{
-
-		
-		combineDriCarAttr(driverStats[0],carStats[0]);
-		setRaceStats(startRace(driverStats[0],carStats[0]));
-	
+	const setSelectedRacer = (e) =>{
+		e.preventDefault();
+		setPlayerSelected(playerSelect);
 	};
-	console.log('RACE',setRace);
+	function getObjKey(obj, value) {
+		return Object.keys(obj).find(key => obj[key].Name === value);
+	}
+	const setRace = (e) =>{
+		e.preventDefault();
+		let combineDriCarAttrs= [];
+		for (let i = 1; i <= playersInput; i++)
+		{ 
+			let newSet = racerTotal(driverStats[i-1],carStats[i-1]);
+			combineDriCarAttrs.push(newSet);
+		}
+		setCombAtt(combineDriCarAttrs);	
+		
+	};
+
+	console.log('WINER', winnerTable);
+	console.log('YOUR WINNER', getObjKey(winnerTable, playerSelected));
+	
 
 	
 
@@ -77,20 +107,22 @@ const GamePage = () => {
 						<p>Lap length: {mapStats.raceMap.lapLength.toFixed(2)} km</p>
 					</>
 					)}
-					<form className='d-flex justify-content-center align-items-center flex-column' onSubmit={settingDrivers}>
-						<div className="input-group input-group-sm ">
-							<div className="input-group-prepend">
-								<span className="input-group-text" id="inputGroup-sizing-sm">Number of players</span>
+					{driverStats.length > 0 ? <button className='btn btn-secondary mt-2' onClick={settingUpAll}>START AGAIN</button> : 
+						<form className='d-flex justify-content-center align-items-center flex-column' onSubmit={settingDrivers}>
+							<div className="input-group input-group-sm ">
+								<div className="input-group-prepend">
+									<span className="input-group-text" id="inputGroup-sizing-sm">Number of racers</span>
+								</div>
+								<input type="number" min="2" placeholder='Min of 2...' onChange={handlePlayerNumInput} className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
 							</div>
-							<input type="number" min="2" placeholder='Min of 2...' onChange={handlePlayerNumInput} className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
-						</div>
-						<button className='btn btn-secondary mt-2'>{driverStats.length > 0 ? 'SET NEW PLAYERS': 'SET PLAYERS'}</button>
-					</form>
+							<button className='btn btn-secondary mt-2'>SET RACERS</button>
+						</form>
+					}
 					<div>
 						
 						{driverStats.length > 0 &&
-							<>
-								<h3>Number of players: {driverStats.length > 0 && playersNum}</h3>
+							<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
+								<h3>Number of racers: {driverStats.length > 0 && playersNum}</h3>
 								<table >
 									<thead >
 										<tr>
@@ -178,23 +210,54 @@ const GamePage = () => {
 										</tr>
 									</tbody>
 								</table>
+								<h3 className='mt-3'>{playerSelected > 0 ? `You selected racer: ${playerSelected}`  : <></>}</h3>
+								{playerSelected > 0 ? <>
+									{winnerTable.length > 0 ? <>
+										<h2 className='mt-3'>RESULTS:</h2>
 
-								<form className=" mt-3">
-									<div className="input-group mb-3">
-										<div className="input-group-prepend">
-											<label className="input-group-text" htmlFor="inputGroupSelect01">Select your Racer</label>
+										<table>
+											<thead>
+												<tr>
+													<th></th>
+													<th>Racer #</th>
+													<th>Lap Time</th>
+												</tr>
+											</thead>
+											<tbody>
+												{Object.values(winnerTable).map((x,i) =>
+													<tr key={x.Name}> 
+														<th></th>
+														<th>{x.Name}</th>
+														<th>{x.LapTime.toFixed(2)} s</th>
+														<th>Position {i+1}</th>
+													</tr>												
+												)}	
+											
+											</tbody>
+										</table>
+									</>:
+										<button className='btn btn-secondary' onClick={setRace}>START RACE!</button>
+									}</> :
+									<form className='d-flex justify-content-center align-items-center flex-column mt-3' onSubmit={setSelectedRacer}>
+										<div className="input-group mb-1">
+											<div className="input-group-prepend">
+												<label className="input-group-text" htmlFor="inputGroupSelect01">Select your Racer</label>
+											</div>
+											<select onChange={handlePlayerSelect} className="custom-select" id="inputGroupSelect01">
+												<option>Racer #</option>
+												{Object.values(carStats).map(x => 
+													<option key={x.Name} value={x.Name}>{x.Name}</option>
+												)}
+											</select>
 										</div>
-										<select className="custom-select" id="inputGroupSelect01">
-											<option selected>Racer #</option>
-											{Object.values(carStats).map(x => 
-												<option key={x.Name} value={x.Name}>{x.Name}</option>
-											)}
-										</select>
-										<button>Select</button>
-									</div>
-								</form>
-							</>
-							
+										<button className='btn btn-secondary'>SELECT</button>
+									</form> 
+								}
+								
+								
+								
+								
+							</div>
 						}
 						
 					
