@@ -31,7 +31,7 @@ const GamePage = () => {
 	useEffect(()=>{
 		let list = Object.values(cobAttrs).slice(0);
 		list.sort(function(a,b) {
-			return b.LapTime - a.LapTime;
+			return a.LapTime - b.LapTime;
 		});
 		setWinners(list);
 	},[cobAttrs]);
@@ -94,7 +94,6 @@ const GamePage = () => {
 		
 	};
 
-	console.log('WINER', winnerTable);
 
 	
 
@@ -233,7 +232,7 @@ const GamePage = () => {
 													<tr key={x.Name}> 
 														<th></th>
 														<th>{x.Name}</th>
-														<th>{x.LapTime.toFixed(4)}s</th>
+														<th>{x.LapTime.toFixed(6)}s</th>
 														<th>Position {i+1}</th>
 													</tr>												
 												)}	

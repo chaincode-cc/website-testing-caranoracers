@@ -62,7 +62,6 @@ export function setInvironment() {
 
 let raceEnvironment = setInvironment();
 
-console.log('ENVIROMENT==>',raceEnvironment);
 
 // STEP 2 => Drivers and Cars
 export let driversCount = {};
@@ -91,7 +90,6 @@ export function setDriversAndCars(type, num) {
 setDriversAndCars('cars',2);
 setDriversAndCars('drivers',2);
 
-console.log('DRIVERS==>',driversCount,'CARS==>',carsCount);
 
 // STEP 3 => Attribution distribution
 
@@ -102,10 +100,10 @@ let straightawayVar = (Object.values(raceMap.straightawayLengths).reduce((total,
 let turnVar = (Object.values(raceMap.turnLengths).reduce((total, value) => total + value, 0) * raceMap.turns)/10000;
 let AvegSpeed = raceMap.lapLength / lapTime;
 
-const driver1 = Object.values(driversCount)[0];
-const driver2 = Object.values(driversCount)[1];
-const car1 = Object.values(carsCount)[0];
-const car2 = Object.values(carsCount)[1];
+// const driver1 = Object.values(driversCount)[0];
+// const driver2 = Object.values(driversCount)[1];
+// const car1 = Object.values(carsCount)[0];
+// const car2 = Object.values(carsCount)[1];
 
 export function combineDriCarAttr (driver, car){
 	return{
@@ -136,15 +134,15 @@ export function racerTotal (driver, car) {
 	};
 }
 
-let player1 = racerTotal(driver1,car1);
-let player2 = racerTotal(driver2,car2);
+// let player1 = racerTotal(driver1,car1);
+// let player2 = racerTotal(driver2,car2);
 
-function showingWinner(p1, p2) {
-	let winner = [];
-	if (p1.LapTime > p2.LapTime) {winner.push(p1.Name);} else{winner.push(p2.Name);}
-	return winner[0][0];
-}
+// function showingWinner(p1, p2) {
+// 	let winner = [];
+// 	if (p1.LapTime > p2.LapTime) {winner.push(p1.Name);} else{winner.push(p2.Name);}
+// 	return winner[0][0];
+// }
 
-console.log('Player', driver1.Name[0],'statistics',combineDriCarAttr(driver1,car1),racerTotal(driver1,car1));
-console.log('Player', driver2.Name[0],'statistics',combineDriCarAttr(driver2,car2),racerTotal(driver2,car2));
-console.log('AND THE WINNER IS...... PLAYER ',showingWinner(player1, player2),'!!!!');
+// console.log('Player', driver1.Name[0],'statistics',combineDriCarAttr(driver1,car1),racerTotal(driver1,car1));
+// console.log('Player', driver2.Name[0],'statistics',combineDriCarAttr(driver2,car2),racerTotal(driver2,car2));
+// console.log('AND THE WINNER IS...... PLAYER ',showingWinner(player1, player2),'!!!!');
