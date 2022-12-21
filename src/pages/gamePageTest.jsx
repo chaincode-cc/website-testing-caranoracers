@@ -1,26 +1,31 @@
 import React, {useEffect, useState} from 'react';
 import { setInvironment, randomFloorMath, racerTotal} from '../Game/game';
 
-const GamePage = () => {
+const GamePage2 = () => {
 	const [playersInput, setPlayersInput] = useState(0);
 	const [playersNum, setPlayersNum] = useState(0);
-	const [playerSelect, setPlayerSelect] = useState(0);
-	const [playerSelected, setPlayerSelected] = useState(0);
+	const [carSelected, setcarSelect] = useState(0);
+	const [racerSelected, setracerSelect] = useState(0);
+	const [playerSelected, setPlayerSelected] = useState({});
 	const [mapStats, setMap] = useState({});
 	const [carStats, setCarStats] = useState({});
 	const [driverStats, setDriverStats] = useState({});
-	const [cobAttrs, setCombAtt] = useState({});
+	const [rivalRacers, setRivalRacers] = useState({});
+	const [rivalCars, setRivalCars] = useState({});
+	const [rivalComAtt, setRivalsCombAtt] = useState({});
+	const [playerComAtt, setPlayerCombAtt] = useState({});
 	const [winnerTable, setWinners] = useState({});
 	const [racerpos, setRacerPos] = useState({});
-
+	// console.log('show at the end once race is done',rivalCars,rivalRacers);
 
 	function settingUpAll (){
 		setMap(setInvironment());
+		settingRivals(),
 		setPlayersNum(0);
 		setPlayerSelected(0);
 		setCarStats({});
 		setDriverStats({});
-		setCombAtt({});
+		setRivalsCombAtt({});
 		setWinners({});
 	}
 
@@ -29,26 +34,63 @@ const GamePage = () => {
 	},[]);
 
 	useEffect(()=>{
-		let list = Object.values(cobAttrs).slice(0);
+		let list = Object.values(rivalComAtt).slice(0);
+		// list.push(Object.values(playerComAtt).slice(0));
 		list.sort(function(a,b) {
 			return a.LapTime - b.LapTime;
 		});
 		setWinners(list);
-	},[cobAttrs]);
+	},[rivalComAtt]);
 
 	useEffect(()=>{
-		let list = Object.values(winnerTable);
-		var index = list.findIndex(item => item.Name === Number(playerSelected));
+		let list2 = Object.values(winnerTable);
+		let index = list2.findIndex(item => item.Name === Number(playerSelected));
 		setRacerPos(index+1);
 	},[winnerTable]);
-	
+
 	const handlePlayerNumInput = event => {
 		setPlayersInput(event.target.value);
 	};
-	const handlePlayerSelect = event => {
-		setPlayerSelect(event.target.value);
+
+	const handleRacerSelect = event =>{
+		event.preventDefault();
+		setcarSelect(event.target.value);
 	};
 
+	const handleCarSelect = event =>{
+		event.preventDefault();
+		
+		setracerSelect(event.target.value);
+	};
+	const handlePlayerSelect = event => {
+		event.preventDefault();
+		setPlayerSelected({car: carSelected, racer:racerSelected});	
+	};
+	const settingRivals = () =>{
+		let driverStats= [];
+		let carStats = [];
+		for (let i = 1; i <= 10; i++)
+		{ 
+			let newCar = {
+				Name: i,
+				MaximumSpeed: randomFloorMath(1,10000),
+				Acceleration: randomFloorMath(1,10000),
+				Cornering: randomFloorMath(1,10000),
+				Aerodynamics: randomFloorMath(1,10000),
+			};
+			let newDriver = {
+				Name: i,
+				Experience: randomFloorMath(1,10000),
+				Aggressiveness: randomFloorMath(1,10000),
+				Reflexes: randomFloorMath(1,10000),
+				Luck: randomFloorMath(1,10000),
+			};
+			driverStats.push(newDriver);
+			carStats.push(newCar);
+		}
+		setRivalRacers(driverStats);
+		setRivalCars(carStats);
+	};
 	const settingDrivers = (e) =>{
 		e.preventDefault();
 		setPlayersNum(playersInput);
@@ -76,26 +118,26 @@ const GamePage = () => {
 		setDriverStats(driverStats);
 		setCarStats(carStats);
 	};
-	
-	const setSelectedRacer = (e) =>{
-		e.preventDefault();
-		setPlayerSelected(playerSelect);
-	};
 
 	const setRace = (e) =>{
 		e.preventDefault();
-		let combineDriCarAttrs= [];
+		let rivalCombineDriCarAttrs= [];
 		for (let i = 1; i <= playersInput; i++)
-		{ 
-			let newSet = racerTotal(driverStats[i-1],carStats[i-1]);
-			combineDriCarAttrs.push(newSet);
+		{
+			let newSet = racerTotal(rivalRacers[i-1],rivalCars[i-1]);
+			rivalCombineDriCarAttrs.push(newSet);
 		}
-		setCombAtt(combineDriCarAttrs);	
-		
+		setRivalsCombAtt(rivalCombineDriCarAttrs);	
+		setPlayerCombAtt(racerTotal(driverStats[racerSelected-1],carStats[carSelected-1]));
 	};
 
+	console.log('PLA',playerSelected);
+	console.log('COM',playerComAtt);
+	console.log('RIVCOM',rivalComAtt);
+	console.log('WIN',winnerTable);
+	console.log('RACER',racerSelected);
+	console.log('CAR',carSelected && 'WWW');
 
-	
 
 	
 	return (
@@ -137,7 +179,7 @@ const GamePage = () => {
 									</thead>
 									<thead>
 										<tr>
-											<th>Racing Skills</th>
+											<th></th>
 											{Object.values(driverStats).map(x => 
 												<th key={driverStats.Name}>{x.Name}</th>
 											)}
@@ -173,12 +215,20 @@ const GamePage = () => {
 											)}
 										</tr>
 									</tbody>
-								
+									<thead >
+										<tr>
+											<th></th>
+											{Object.values(carStats).map(x => 
+												<th key={x.Name}>Car #</th>
+											)}										
+										</tr>
+									</thead>
 									<thead>
 										<tr>
-											<th>Car Attributes</th>
 											<th></th>
-											<th></th>
+											{Object.values(carStats).map(x => 
+												<th key={driverStats.Name}>{x.Name}</th>
+											)}
 
 										</tr>
 									</thead>
@@ -215,7 +265,7 @@ const GamePage = () => {
 								</table>
 								<h3 className='mt-3'>{playerSelected > 0 ? `You selected racer: ${playerSelected}`  : <></>}</h3>
 								{winnerTable.length > 0 && `Your racer got on the ${racerpos} position`}
-								{playerSelected > 0 ? <>
+								{playerSelected ? <>
 									{winnerTable.length > 0 ? <>
 										<h2 className='mt-3'>RESULTS:</h2>
 
@@ -242,17 +292,32 @@ const GamePage = () => {
 									</>:
 										<button className='btn btn-secondary' onClick={setRace}>START RACE!</button>
 									}</> :
-									<form className='d-flex justify-content-center align-items-center flex-column mt-3' onSubmit={setSelectedRacer}>
+									<form className='d-flex justify-content-center align-items-center flex-column mt-3' onSubmit={handlePlayerSelect}>
 										<div className="input-group mb-1">
-											<div className="input-group-prepend">
-												<label className="input-group-text" htmlFor="inputGroupSelect01">Select your Racer</label>
+											<div className='m-3'>
+												<label htmlFor="validationCustom04"  className="form-label">Select your Racer</label>
+												<select className="form-select" onChange={handleRacerSelect} id="validationCustom04" required>
+													<option selected disabled value="">Choose...</option>
+													{Object.values(driverStats).map(x => 
+														<option key={x.Name} value={x.Name}>Racer # {x.Name}</option>
+													)}
+												</select>
+												<div className="invalid-feedback">
+													Please select a valid racer #.
+												</div>
 											</div>
-											<select onChange={handlePlayerSelect} className="custom-select" id="inputGroupSelect01">
-												<option>Racer #</option>
-												{Object.values(carStats).map(x => 
-													<option key={x.Name} value={x.Name}>{x.Name}</option>
-												)}
-											</select>
+											<div className='m-3'>
+												<label htmlFor="validationCustom04" className="form-label">Select your Car</label>
+												<select className="form-select" onChange={handleCarSelect} id="validationCustom04" required>
+													<option selected disabled value="">Choose...</option>
+													{Object.values(carStats).map(x => 
+														<option key={x.Name} value={x.Name}>Car # {x.Name}</option>
+													)}
+												</select>
+												<div className="invalid-feedback">
+													Please select a valid car #.
+												</div>
+											</div>
 										</div>
 										<button className='btn btn-secondary'>SELECT</button>
 									</form> 
@@ -274,5 +339,5 @@ const GamePage = () => {
 	);
 };
 
-export default GamePage;
+export default GamePage2;
 

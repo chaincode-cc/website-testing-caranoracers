@@ -12,6 +12,8 @@ import FollowUs from './pages/followus';
 import CountDown from './components/countdown';
 import WalletConnector from './wallet-service/connector';
 import GamePage from './pages/gamePage';
+import GamePage2 from './pages/gamePageTest';
+
 
 const THREE_DAYS_IN_MS = 2 * 24 * 60 * 60 * 1000;
 const NOW_IN_MS = new Date().getTime();
@@ -40,6 +42,7 @@ function App() {
 				/>
 				<Route path="/garage" element={<WalletConnector />} />
 				<Route path="/game" element={<GamePage />} />
+				<Route path="/game2" element={<GamePage2 />} />
 
 			</Routes>
 		</Router>
