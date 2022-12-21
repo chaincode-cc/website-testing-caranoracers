@@ -8,11 +8,11 @@ const GamePage2 = () => {
 	//Rivals
 	const [rivalRacers, setRivalRacers] = useState({});
 	const [rivalCars, setRivalCars] = useState({});
-	
 	const numOfRivals = 10;
 
 	//Player
-	const [NFTnum, setNFTnum] = useState(0);
+	const [carNFTnum, setCarNFTnum] = useState(0);
+	const [driverNFTnum, setRacerNFTnum] = useState(0);
 	const [carSelected, setcarSelect] = useState(0);
 	const [racerSelected, setracerSelect] = useState(0);
 	const [playerSelected, setPlayerSelected] = useState({});
@@ -54,8 +54,11 @@ const GamePage2 = () => {
 		setRacerPos(index+1);
 	},[winnerTable]);
 
-	const handlePlayerNumInput = event => {
-		setNFTnum(event.target.value);
+	const handleRacerNFTNumInput = event => {
+		setRacerNFTnum(event.target.value);
+	};
+	const handleCarNFTNumInput = event => {
+		setCarNFTnum(event.target.value);
 	};
 
 	const handleRacerSelect = event =>{
@@ -100,7 +103,7 @@ const GamePage2 = () => {
 		e.preventDefault();
 		let driverStats= [];
 		let carStats = [];
-		for (let i = 1; i <= NFTnum; i++)
+		for (let i = 1; i <= driverNFTnum; i++)
 		{ 
 			let newCar = {
 				Name: i,
@@ -109,6 +112,9 @@ const GamePage2 = () => {
 				Cornering: randomFloorMath(1,10000),
 				Aerodynamics: randomFloorMath(1,10000),
 			};
+			carStats.push(newCar);
+		}
+		for (let i = 1; i <= carNFTnum; i++){
 			let newDriver = {
 				Name: i,
 				Experience: randomFloorMath(1,10000),
@@ -117,7 +123,7 @@ const GamePage2 = () => {
 				Luck: randomFloorMath(1,10000),
 			};
 			driverStats.push(newDriver);
-			carStats.push(newCar);
+			
 		}
 		setDriverStats(driverStats);
 		setCarStats(carStats);
@@ -165,13 +171,19 @@ const GamePage2 = () => {
 					)}
 					{driverStats.length > 0 ? <button className='btn btn-secondary mt-2' onClick={settingUpAll}>START AGAIN</button> : 
 						<form className='d-flex justify-content-center align-items-center flex-column' onSubmit={settingPlayer}>
-							<div className="input-group input-group-sm ">
+							<div className="input-group input-group-sm d-flex mt-2">
 								<div className="input-group-prepend">
-									<span className="input-group-text" id="inputGroup-sizing-sm">How many Racer & Cars do you have?</span>
+									<span className="input-group-text" id="inputGroup-sizing-sm">How many CardanoRacers Racer NTFs do you have?</span>
 								</div>
-								<input type="number" min="2" placeholder='Min of 2...' onChange={handlePlayerNumInput} className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
+								<input type="number" min='1' max="6" placeholder='Select...' onChange={handleRacerNFTNumInput} className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
 							</div>
-							<button className='btn btn-secondary mt-2'>SET YOUR NFTS</button>
+							<div className="input-group input-group-sm d-flex mt-3">
+								<div className="input-group-prepend">
+									<span className="input-group-text" id="inputGroup-sizing-sm">How many CardanoRacers Car NTFs do you have?</span>
+								</div>
+								<input type="number" min='1' max="6" placeholder='Select...' onChange={handleCarNFTNumInput} className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
+							</div>
+							<button className='btn btn-secondary mt-3'>SET YOUR NFTS</button>
 						</form>
 					}
 					<div>
@@ -179,7 +191,7 @@ const GamePage2 = () => {
 						{driverStats.length > 0 &&
 						<>
 							<div className='d-flex justify-content-center align-items-center mt-3'>
-								<table style={borderStyle}>
+								<table  style={borderStyle}>
 									<thead>
 										<tr>
 											<th style={borderRightStyle}>Racer #</th>
@@ -262,37 +274,42 @@ const GamePage2 = () => {
 								</table>
 							</div>
 							
-							{winnerTable.length > 0 && `Your racer got on the ${racerpos} position`}
+							
 							{playerSelected ? <>
-								{winnerTable.length > 0 ? <>
-									<h2 className='mt-3'>RESULTS:</h2>
+								{winnerTable.length > 0 ? 
+									<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
+										{winnerTable.length > 0 && `Your racer got on the ${racerpos} position`}
+										<h2 className='mt-3'>RESULTS:</h2>
 
-									<table>
-										<thead>
-											<tr>
-												<th></th>
-												<th></th>
-												<th>Lap Time</th>
-											</tr>
-										</thead>
-										<tbody>
-											{Object.values(winnerTable).map((x,i) =>
-												<tr key={x.Name}> 
+										<table>
+											<thead>
+												<tr>
 													<th></th>
-													<th>{x.RacerId ? 'YOU' : x.rivalId}</th>
-													<th>{x.LapTime.toFixed(6)}s</th>
-													<th>Position {i+1}</th>
-												</tr>												
-											)}	
+													<th></th>
+													<th>Lap Time</th>
+												</tr>
+											</thead>
+											<tbody>
+												{Object.values(winnerTable).map((x,i) =>
+													<tr key={x.Name}> 
+														<th></th>
+														<th>{x.RacerId ? 'YOU' : x.rivalId}</th>
+														<th>{x.LapTime.toFixed(6)}s</th>
+														<th>Position {i+1}</th>
+													</tr>												
+												)}	
 											
-										</tbody>
-									</table>
-								</>:
-									<button className='btn btn-secondary' onClick={setRace}>START RACE!</button>
+											</tbody>
+										</table>
+									</div>:
+									<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
+										<h4 className='mt-3'>{driverNFTnum > 0 ? `You selected racer ${driverNFTnum} with car ${carNFTnum}`  : <></>}</h4>
+										<button className='btn btn-secondary' onClick={setRace}>START RACE!</button>
+									</div>
 								}</> :
 								<form className='d-flex justify-content-center align-items-center flex-column mt-3' onSubmit={handlePlayerSelect}>
-									<div className="input-group mb-1">
-										<div className='m-3'>
+									<div className="input-group mb-1 d-flex justify-content-center align-items-center flex-row ">
+										<div className='d-flex justify-content-center align-items-center flex-column m-3'>
 											<label htmlFor="validationCustom04"  className="form-label">Select your Racer</label>
 											<select className="form-select" onChange={handleRacerSelect} id="validationCustom04" required>
 												<option selected disabled value="">Choose...</option>
@@ -319,18 +336,9 @@ const GamePage2 = () => {
 									</div>
 									<button className='btn btn-secondary'>SELECT</button>
 								</form> 
-							}
-								
-								
-								
-								
-							
+							}						
 						</>
 						}
-						
-					
-						
-						
 					</div>
 				</div>
 			</section>
