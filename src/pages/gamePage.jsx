@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { setInvironment, randomFloorMath, racerTotal} from '../Game/game';
+import { setInvironment, randomFloorMath,  rivalTotal,} from '../Game/game';
 
 const GamePage = () => {
 	const [playersInput, setPlayersInput] = useState(0);
@@ -87,7 +87,7 @@ const GamePage = () => {
 		let combineDriCarAttrs= [];
 		for (let i = 1; i <= playersInput; i++)
 		{ 
-			let newSet = racerTotal(driverStats[i-1],carStats[i-1]);
+			let newSet = rivalTotal(driverStats[i-1],carStats[i-1]);
 			combineDriCarAttrs.push(newSet);
 		}
 		setCombAtt(combineDriCarAttrs);	
