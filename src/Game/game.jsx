@@ -116,7 +116,7 @@ export function combineDriCarAttr (driver, car){
 	};
 }
 
-export function racerTotal (driver, car) {
+export function playerTotal (driver, car) {
 	let player = combineDriCarAttr(driver,car);
 	let accTotal = byThousand(player.ExpAcc + player.AggAcc + player.RefAcc + straightawayVar + turnVar + ((driver.Luck/100000000)*raceEnvironment.RaceLuck)) / weatherMultiplier;
 	let corTotal = byThousand(player.ExpCor+  player.AggCor + player.RefCor + turnVar + ((driver.Luck/100000000)*raceEnvironment.RaceLuck)) / weatherMultiplier;
@@ -124,7 +124,26 @@ export function racerTotal (driver, car) {
 	let aerTotal = byThousand(byTenThousand(car.Aerodynamics) + straightawayVar + ((driver.Luck/100000000)*raceEnvironment.RaceLuck)) / weatherMultiplier;	
 	let lapSpeed = accTotal+corTotal+speTotal+aerTotal+AvegSpeed;
 	return {
-		Name: driver.Name,
+		RacerId: `Racer${driver.Name}`,
+		CarId: `Car${car.Name}`,
+		AccTotal: accTotal,
+		CorTotal: corTotal,
+		SpeTotal: speTotal,
+		AerTotal: aerTotal,
+		LapSpeed: lapSpeed,
+		LapTime: (1/lapSpeed*raceMap.lapLength)
+	};
+}
+
+export function rivalTotal (driver, car) {
+	let player = combineDriCarAttr(driver,car);
+	let accTotal = byThousand(player.ExpAcc + player.AggAcc + player.RefAcc + straightawayVar + turnVar + ((driver.Luck/100000000)*raceEnvironment.RaceLuck)) / weatherMultiplier;
+	let corTotal = byThousand(player.ExpCor+  player.AggCor + player.RefCor + turnVar + ((driver.Luck/100000000)*raceEnvironment.RaceLuck)) / weatherMultiplier;
+	let speTotal = byThousand(byTenThousand(car.MaximumSpeed) + straightawayVar + ((driver.Luck/100000000)*raceEnvironment.RaceLuck)) / weatherMultiplier;
+	let aerTotal = byThousand(byTenThousand(car.Aerodynamics) + straightawayVar + ((driver.Luck/100000000)*raceEnvironment.RaceLuck)) / weatherMultiplier;	
+	let lapSpeed = accTotal+corTotal+speTotal+aerTotal+AvegSpeed;
+	return {
+		rivalId: `Rival #${driver.Name}`,
 		AccTotal: accTotal,
 		CorTotal: corTotal,
 		SpeTotal: speTotal,
