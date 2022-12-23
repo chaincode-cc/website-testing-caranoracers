@@ -1,5 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { setInvironment, randomFloorMath, racerTotal} from '../Game/game';
+import {NFTCard} from '../Game/nftGameCard';
+
 
 const GamePage = () => {
 	const [playersInput, setPlayersInput] = useState(0);
@@ -94,6 +96,7 @@ const GamePage = () => {
 		
 	};
 
+	console.log('HERE',carStats	);
 
 	
 
@@ -213,6 +216,7 @@ const GamePage = () => {
 										</tr>
 									</tbody>
 								</table>
+								{NFTCard(carStats)}
 								<h3 className='mt-3'>{playerSelected > 0 ? `You selected racer: ${playerSelected}`  : <></>}</h3>
 								{winnerTable.length > 0 && `Your racer got on the ${racerpos} position`}
 								{playerSelected > 0 ? <>
