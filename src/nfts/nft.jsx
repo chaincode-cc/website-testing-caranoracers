@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../styles/nft.css';
+import CountDown from '../components/countdown';
 import nft1 from '../assets/videos/Car1.mp4';
 import nft2 from '../assets/videos/Racer1.MP4';
 
@@ -65,20 +66,24 @@ const NFTS = () => {
 		} else return { backgroundColor: '#e1ad21' };
 	}
 
+	const THREE_DAYS_IN_MS = 2 * 24 * 60 * 60 * 1000;
+	const NOW_IN_MS = new Date().getTime();
+	const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
+
 	// JSX
 
 	return (
 		<>
-			<div className="mt-4 text-center card-container ">
-				<h3 className="mt-5">CARS</h3>
-
+			<h1 className='mt-5'>Have a look at our latest collection!</h1>
+			<div className="d-flex justify-content-center align-items-center flex-row text-center card-container ">
 				{carsList && (
 					<div
 						id="carouselCarControl"
-						className="carousel slide"
+						className="carousel slide me-5"
 						data-bs-touch="true"
 						data-bs-ride="true"
 					>
+						<h3 className="mt-5">CARS</h3>	
 						<div className="carousel-indicators">
 							<button
 								type="button"
@@ -179,7 +184,7 @@ const NFTS = () => {
 											muted
 											loop
 											autoPlay
-											className="nft1"
+											className="nftvideo"
 										>
                       Your browser does not support the video tag.
 										</video>
@@ -215,17 +220,26 @@ const NFTS = () => {
 							<span className="visually-hidden">Next</span>
 						</button>
 					</div>
+
+
+
+
+
+
+
+
 				)}
 
-				<h3 className="mt-5">DRIVERS</h3>
+			
 
 				{racersList && (
 					<div
 						id="carouselRacerControl"
-						className="carousel slide"
+						className="carousel slide ms-5"
 						data-bs-touch="true"
 						data-bs-ride="true"
 					>
+						<h3 className="mt-5">DRIVERS</h3>
 						<div className="carousel-indicators">
 							<button
 								type="button"
@@ -364,41 +378,7 @@ const NFTS = () => {
 					</div>
 				)}
 			</div>
-
-			{/* CARS */}
-			{/* 
-  <h3 className="mt-5">CARS</h3>
-  <div className="d-flex align-content-around  justify-content-around flex-wrap">
-      {cars.map((car,y) =>
-        <div key={y} className="card bg-secondary d-flex justify-content-center align-items-center">
-        <div className="card-body bg-secondary">
-        <div className="ribbon ribbon-top-right" ><span style={styling(car.ribon)}>{car.ribon}</span></div>
-          <h5 className="card-title fontAutoSized">{car.title}</h5>
-          <video src={car.image} muted loop autoPlay className="nft1">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-          <button className="btn m-2 fontAutoSized btn-dark "><span>Buy</span></button>
-      </div>
-    )}
-</div>    */}
-
-			{/* DRIVERS */}
-			{/* <h3 className="mt-4">RACERS</h3>
-<div className="d-flex align-content-around justify-content-around flex-wrap">
-      {racers.map((car,y) =>
-        <div key={y} className="card bg-secondary d-flex justify-content-center align-items-center">
-        <div className="card-body bg-secondary">
-        <div className="ribbon ribbon-top-right" ><span style={styling(car.ribon)}>{car.ribon}</span></div>
-          <h5 className="card-title fontAutoSized">{car.title}</h5>
-          <video src={car.image} muted loop autoPlay className="nft1">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-          <button href="#" className="btn btn-dark m-2  fontAutoSized"><span>Buy</span></button>
-      </div>
-    )}
-</div>   */}
+			<CountDown targetDate={dateTimeAfterThreeDays} />
 			<button
 				type="button"
 				className="btn mt-3 btn-secondary"
@@ -408,6 +388,8 @@ const NFTS = () => {
 			>
         WHOLE COLLECTION
 			</button>
+			
+		
 		</>
 	);
 };

@@ -1,9 +1,6 @@
+
 .card-container {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 50%; 
 }
 
 .carousel {
@@ -31,7 +28,21 @@
 .nft1,
 .nft2 {
   width: 100%;
-  height: 100%;
+}
+
+.cardNft {
+  width: 25%;
+  margin-left: 5px;
+}
+
+.cardNft video {
+  width: 85%;
+}
+
+.bar-progress{
+  width: 100%;
+  transition-property: width;
+  transition-duration: 2s;
 }
 
 .ribbon {
@@ -47,8 +58,8 @@
   z-index: -1;
   content: "";
   display: block;
-  /* border: 5px solid #2980b9; */
 }
+
 .ribbon span {
   position: absolute;
   display: block;
@@ -56,7 +67,6 @@
   width: 200%;
   height: 25%;
   padding: 0;
-  /* background-color: #3498db; */
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
   color: #fff;
   font-size: 40%;
@@ -90,6 +100,14 @@
 @media (max-width: 1200px) {
   .card-container {
     width: 100%;
+  }
+
+  .cardNft {
+    width: 70%;
+  }
+
+  .cardNft video {
+    width: 80%; 
   }
 
   .ribbon span {

@@ -1,75 +1,87 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
-import gif from '../assets/videos/Car1.mp4';
+import car from '../assets/videos/Car1.mp4';
+import racer from '../assets/videos/Racer1.MP4';
 import '../styles/nft.css';
-
-export const NFTCard = (nft) =>{
-   
-	return(
-		<div>					
-			{nft.map( nft => 
-				<div key={nft.Name} className="card bg-secondary d-flex justify-content-center align-items-center flex-column">
-					<div className="card-body bg-secondary d-flex justify-content-center align-items-center flex-column">
-						<div className="card-title fontAutoSized d-flex justify-content-center align-items-center flex-column">
-							<h3>{nft.Name}</h3>
-						</div>
-						<video
-							src={gif}
-							muted
-							loop
-							autoPlay
-							className="nft1"
-						>
-                      Your browser does not support the video tag.
-						</video>
-					</div>
-					{
-						<div className='d-flex justify-content-start align-items-left flex-column m-3' style={{margin:'0'}}>
-							<span>MaximumSpeed: {nft.MaximumSpeed}</span>
-							<span>Acceleration: {nft.Acceleration}</span>
-							<span>Cornering: {nft.Cornering}</span>
-							<span>Aerodynamics: {nft.Aerodynamics} km</span>
-						</div>
-					}
-					<button className="btn btn-dark buy-btn mb-3">
-						<h6>SELECT</h6>
-					</button>
-				</div>)}
-		</div>
-	);
-};
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
-export const circuitNFTCard = (nft) =>{
-	return(
-		<div>					
-			{<div className="card bg-secondary d-flex justify-content-center align-items-center flex-column">
-				<div className="card-body bg-secondary d-flex justify-content-center align-items-center flex-column">
-					<div className="card-title fontAutoSized d-flex justify-content-center align-items-center flex-column">
-						<h1>Racing circuit</h1>
-						<div>Name</div>
-					</div>
+import { selectRacer, selectCar } from './nftSlice';
+
+
+const NFTCard = ({type, nft}) =>{
+	
+	const carNum = useSelector(state => state.nftSelector.carSelected);
+	const racerNum = useSelector(state => state.nftSelector.racerSelected);
+	const dispatching = useDispatch();
+	const selectedCar = type === 0 && carNum == nft.Name && carNum > 0;
+	const selectedRacer = type === 1 && racerNum == nft.Name && racerNum > 0;
+
+
+	const barPerc = (per) => {
+		return ((per * 100)/10000);
+	};
+	
+	return(	
+		<>
+			<div
+				key={nft.Name}
+				className="card bg-secondary d-flex justify-content-center align-items-center"
+			>
+				<div className="card-body bg-secondary">
+					<h5 className="card-title text-center mb-3 fontAutoSized">
+						{nft.Name}
+					</h5>
 					<video
-						src={gif}
+						src={type === 0 ? car : racer}
 						muted
 						loop
 						autoPlay
 						className="nft1"
-						style={{ width: '100px',
-							height: '100px'}}
 					>
                       Your browser does not support the video tag.
 					</video>
+					{
+						<div className='d-flex justify-content-start flex-column m-3'>
+							<div className='d-flex align-items-center justify-content-start flex-column'>
+								<span>{type === 0 ? 'MaximumSpeed:' : 'Experience'}</span> 	
+								<div className="progress ms-1 w-100" style={{height: '2.3vh'}}>
+									<div className="progress-bar bar-progress progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Example with label" style={{width:`${barPerc(type === 0 ? nft.MaximumSpeed : nft.Experience)}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span>{type === 0 ? nft.MaximumSpeed : nft.Experience}</span></div>
+								</div>
+							</div>
+							<div className='d-flex align-items-center justify-content-start flex-column'>
+								<span>{type === 0 ? 'Acceleration:' : 'Aggressiveness'}</span> 
+								<div className="progress ms-1 w-100" style={{height: '2.3vh'}}>
+									<div className="progress-bar bar-progress progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Example with label" style={{width:`${barPerc(type === 0 ? nft.Acceleration : nft.Aggressiveness)}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span>{type === 0 ? nft.Acceleration : nft.Aggressiveness}</span></div>
+								</div>
+							</div>
+							<div className='d-flex align-items-center justify-content-start flex-column'>
+								<span>{type === 0 ? 'Cornering:' : 'Reflexes'}</span> 
+								<div className="progress ms-1 w-100" style={{height: '2.3vh'}}>
+									<div className="progress-bar bar-progress progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Example with label" style={{width:`${barPerc(type === 0 ? nft.Cornering : nft.Reflexes)}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span>{type === 0 ? nft.Cornering : nft.Reflexes}</span></div>
+								</div>
+							</div>
+							<div className='d-flex align-items-center justify-content-start flex-column'>
+								<span>{type === 0 ? 'Aerodynamics:' : 'Luck'}</span> 
+								<div className="progress ms-1 w-100" style={{height: '2.3vh'}}>
+									<div className="progress-bar bar-progress progress-bar-striped progress-bar-animated" role="progressbar" aria-label="Example with label" style={{width:`${barPerc(type === 0 ? nft.Aerodynamics : nft.Luck)}%`}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span>{type === 0 ? nft.Aerodynamics : nft.Luck}</span></div>
+								</div>
+							</div>
+						</div>
+					}
 				</div>
-				{nft.raceMap && (
-					<div className='d-flex justify-content-start align-items-left flex-column m-3' style={{margin:'0'}}>
-						<span>Weather: {nft.RaceWeather}</span  >
-						<span>Straigthaways: {nft.raceMap.straigthaways}</span>
-						<span>Turns: {nft.raceMap.turns}</span>
-						<span>Lap length: {nft.raceMap.lapLength.toFixed(2)} km</span>
-					</div>
-				)}
-			</div>}
-		</div>
+				<button data-bs-target={type===0 ? '#exampleModalToggle3':'#exampleModalToggle2' } disabled={selectedCar || selectedRacer ? true : false} data-bs-toggle="modal" data-bs-dismiss="modal" onClick={() => dispatching(type === 0 ? selectCar(nft.Name) : selectRacer(nft.Name))} className="btn btn-dark buy-btn mb-3">
+					<h6>{selectedCar || selectedRacer ? 'Selected' : 'Select'}</h6>
+				</button>
+			</div>
+		
+				
+
+		</>
 
 	);
 };
+
+export default NFTCard;
+
