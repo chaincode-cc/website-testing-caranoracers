@@ -9,16 +9,14 @@ import NFTS from './nfts/nft';
 import HowTo from './pages/howto';
 import Contact from './pages/contact';
 import FollowUs from './pages/followus';
-import CountDown from './components/countdown';
 import WalletConnector from './wallet-service/connector';
-import GamePage from './pages/gamePage';
-import GamePage2 from './pages/gamePageTest';
+import GamePage from './Game/gamePage';
 
 
-const THREE_DAYS_IN_MS = 2 * 24 * 60 * 60 * 1000;
-const NOW_IN_MS = new Date().getTime();
 
-const dateTimeAfterThreeDays = NOW_IN_MS + THREE_DAYS_IN_MS;
+
+
+
 
 function App() {
 	return (
@@ -30,7 +28,6 @@ function App() {
 						<>
 							<Banner />
 							<div className="main-wrapper">
-								<CountDown targetDate={dateTimeAfterThreeDays} />
 								<NFTS />
 								<Intro />
 								<HowTo />
@@ -42,7 +39,6 @@ function App() {
 				/>
 				<Route path="/garage" element={<WalletConnector />} />
 				<Route path="/game" element={<GamePage />} />
-				<Route path="/game2" element={<GamePage2 />} />
 
 			</Routes>
 		</Router>
