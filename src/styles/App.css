@@ -40,6 +40,10 @@ section {
   background-color: rgb(61, 61, 61);
 }
 
+.startBtn{
+  margin-top: 40vh;
+}
+
 @media (max-width: 1200px) {
   #garage {
     margin-left: 0;

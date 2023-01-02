@@ -11,6 +11,7 @@ import Contact from './pages/contact';
 import FollowUs from './pages/followus';
 import WalletConnector from './wallet-service/connector';
 import GamePage from './Game/gamePage';
+import StartBtn from './Game/startBtn';
 
 
 
@@ -39,6 +40,11 @@ function App() {
 				/>
 				<Route path="/garage" element={<WalletConnector />} />
 				<Route path="/game" element={<GamePage />} />
+				<Route path="/ready" element={
+					<div className='d-flex justify-content-center mainBg'>
+						<StartBtn />
+					</div>
+				} />
 
 			</Routes>
 		</Router>

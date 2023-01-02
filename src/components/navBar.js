@@ -44,7 +44,7 @@ function TopNavBar() {
 								<a
 									className="nav-link f1font"
 									onClick={collapseItem}
-									href="/game"
+									href="/ready"
 								>
                   Game Test
 								</a>
