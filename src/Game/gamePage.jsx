@@ -21,7 +21,7 @@ const GamePage = () => {
 	const [driverNFTnum, setRacerNFTnum] = useState(0);
 	const carNum = useSelector(state => state.nftSelector.carSelected);
 	const racerNum = useSelector(state => state.nftSelector.racerSelected);
-	const playerSelected = useSelector(state => state.nftSelector.racerSelected);
+	const playerSelected = useSelector(state => state.nftSelector.playerSelected);
 
 
 
@@ -135,18 +135,14 @@ const GamePage = () => {
 		rivalCombineDriCarAttrs.push(newPlayer);
 		setRaceResults(rivalCombineDriCarAttrs);	
 	};
-	// console.log('PLA',playerSelected);
-	// console.log('CAR',carSelected);
 
 
 	
 	return (
 		<>
 			{/* MAP */}
-			<div className='d-flex justify-content-center align-items-center flex-column'>
+			<div className='d-flex mainBg justify-content-center align-items-center flex-column'>
 				<button className='btn btn-secondary m-5' onClick={settingUpAll}>START AGAIN</button>
-					Racer: {racerNum}
-					Car: {carNum}
 				{mapStats.raceMap && (
 					<div>
 						<h2>Racing circuit</h2>
@@ -187,22 +183,16 @@ const GamePage = () => {
 				{driverStats.length > 0 &&
 						<>
 							{/* MODAL */}
-							<NFTModal driverStats={driverStats} carStats={carStats} />
-
-
-
-
-
+							{raceTotals.length > 0 ? <></> : <NFTModal driverStats={driverStats} carStats={carStats} />}
 
 
 							{/* RESULTS */}
-							{playerSelected ? 
+							{(racerNum && carNum) ? 
 								<>
 									{winnerTable.length > 0 ? 
 										<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
 											{winnerTable.length > 0 && `Your racer got on the ${racerpos} position`}
 											<h2 className='mt-3'>RESULTS:</h2>
-
 											<table>
 												<thead>
 													<tr>
@@ -223,23 +213,25 @@ const GamePage = () => {
 											
 												</tbody>
 											</table>
-										</div>:
-										<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
-											<div className="d-flex flex-wrap justify-content-center">						
-												{(racerNum > 0 && carNum > 0 ) ? 
-													<><div style={{width:'30%'}} className='m-2 d-flex justify-content-center align-items-center'>
-														<NFTCard  key={racerNum} type={1} nft={driverStats[racerNum-1]}/>
-													</div>
-													<div style={{width:'30%'}} className='m-2 d-flex justify-content-center align-items-center'>
-														<NFTCard key={carNum} type={0} nft={carStats[carNum-1]}/>
-													</div>
-													</>
-													:<></>
-												}
-											</div>
-											<h4 className='mt-3'>{carNum || racerNum > 0 ? `You selected racer ${racerNum} with car ${carNum}`  : <></>}</h4>
-											<button className='btn btn-secondary' onClick={setRace}>START RACE!</button>
 										</div>
+										:
+										<>{playerSelected && 
+											<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
+												<div style={{width:'50%'}} className="d-flex flex-wrap justify-content-center">						
+													{(racerNum > 0 && carNum > 0 ) ? 
+														<><div style={{width:'30%'}} className='m-2 w-25  d-flex justify-content-center align-items-center'>
+															<NFTCard  key={racerNum} type={1} nft={driverStats[racerNum-1]}/>
+														</div>
+														<div style={{width:'30%'}} className='m-2 w-25 d-flex justify-content-center align-items-center'>
+															<NFTCard key={carNum} type={0} nft={carStats[carNum-1]}/>
+														</div>
+														</>
+														:<></>
+													}
+												</div>
+												<button className='btn btn-secondary m-5' onClick={setRace}>START RACE!</button>
+											</div>
+										}</>
 									}
 								</> 
 								: <></>
