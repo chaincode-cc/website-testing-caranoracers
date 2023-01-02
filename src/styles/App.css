@@ -9,6 +9,11 @@
   color: white;
 }
 
+.mainBg{
+  background-color: #282c34;
+  color: white;
+}
+
 .anchor {
   display: block;
   height: 75px;
@@ -20,9 +25,19 @@ section {
   margin: 5%;
 }
 
+
+
 #garage {
   margin-left: 80px;
   font-family: "MyFont";
+}
+
+.customedBg {
+  background-color: rgb(61, 61, 61);
+}
+
+#customedBg{
+  background-color: rgb(61, 61, 61);
 }
 
 @media (max-width: 1200px) {

@@ -3,10 +3,10 @@ import { createSlice } from '@reduxjs/toolkit';
 export const nftSlice = createSlice({
 	name: 'nftSelector',
 	initialState: {
+		playerSelected: false,
 		value:0,
 		carSelected: null,
 		racerSelected: null,
-		playerSelected:false
 	},
 	reducers: {
 		increment: state => {
