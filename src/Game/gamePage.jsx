@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { setInvironment, randomFloorMath, rivalTotal, playerTotal} from './game';
 import NFTModal from './nftmodal';
 import NFTCard from './nftGameCard';
+import StartAnimation from './startAnimation';
 
 
 const GamePage = () => {
@@ -191,6 +192,7 @@ const GamePage = () => {
 								<>
 									{winnerTable.length > 0 ? 
 										<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
+											<StartAnimation />
 											{winnerTable.length > 0 && `Your racer got on the ${racerpos} position`}
 											<h2 className='mt-3'>RESULTS:</h2>
 											<table>
