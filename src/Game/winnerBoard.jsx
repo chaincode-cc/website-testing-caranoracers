@@ -1,42 +1,24 @@
 import React from 'react';
+import video from '../assets/videos/startAnimation.mp4';
 
 const WinnerBoard = () =>{
  
 	return(
 		<>
-			<div className="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabIndex="-1">
-				<div className="modal-dialog modal-dialog-centered">
-					<div className="modal-content">
-						<div className="modal-header">
-							<h5 className="modal-title" id="exampleModalToggleLabel">Modal 1</h5>
-							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			<div className="modal fade" id="winnerModal" aria-hidden="true" aria-labelledby="winnerModalLabel" tabIndex="-1">
+				<div className="modal-dialog modal-lg modal-dialog-centered">
+					<div className="modal-content" style={{backgroundColor:'rgba(49, 49, 49, 0)'}}>
+						<div className="modal-body d-flex flex-column justify-content-center  align-items-center">
+							<video muted autoPlay style={{width:'100%', height:'100%'}}>
+								<source src={video} type="video/mp4" />
+        Your browser does not support the video tag.
+							</video>	
+							<button className="btn btn-dark mt-2" data-bs-target="#winnerModal2" data-bs-toggle="modal" data-bs-dismiss="modal">CHECK RESULTS</button>
 						</div>
-						<div className="modal-body">
-        Show a second modal and hide this one with the button below.
-						</div>
-						<div className="modal-footer">
-							<button className="btn btn-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">Open second modal</button>
-						</div>
+						
 					</div>
 				</div>
 			</div>
-			<div className="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabIndex="-1">
-				<div className="modal-dialog modal-dialog-centered">
-					<div className="modal-content">
-						<div className="modal-header">
-							<h5 className="modal-title" id="exampleModalToggleLabel2">Modal 2</h5>
-							<button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-						</div>
-						<div className="modal-body">
-        Hide this modal and show the first with the button below.
-						</div>
-						<div className="modal-footer">
-							<button className="btn btn-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Back to first</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<a className="btn btn-primary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">Open first modal</a>
 		</>
 	);
 };

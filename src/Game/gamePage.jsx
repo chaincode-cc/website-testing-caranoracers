@@ -4,6 +4,7 @@ import { setInvironment, randomFloorMath, rivalTotal, playerTotal} from './game'
 import NFTModal from './nftmodal';
 import NFTCard from './nftGameCard';
 import StartAnimation from './startAnimation';
+import WinnerBoard from './winnerBoard';
 
 
 const GamePage = () => {
@@ -231,7 +232,8 @@ const GamePage = () => {
 														:<></>
 													}
 												</div>
-												<button className='btn btn-secondary m-5' onClick={setRace}>START RACE!</button>
+												<WinnerBoard />	
+												<a className="btn btn-secondary m-5" data-bs-toggle="modal" href="#winnerModal" onClick={setRace} role="button">START RACE!</a>
 											</div>
 										}</>
 									}
