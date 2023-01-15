@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import car from '../assets/videos/Car1.mp4';
-import racer from '../assets/videos/Racer1.MP4';
+import car from '../assets/videos/Cars/Car1.mp4';
+import racer from '../assets/videos/Drivers/Racer1.MP4';
 import '../styles/nft.css';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';

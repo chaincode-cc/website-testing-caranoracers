@@ -8,7 +8,7 @@ import WinnerBoard from './winnerBoard';
 
 
 const GamePage = () => {
-	//Map
+//Map
 	const [mapStats, setMap] = useState({});
 
 	//Rivals
@@ -32,7 +32,7 @@ const GamePage = () => {
 	const [winnerTable, setWinners] = useState({});
 	const [racerpos, setRacerPos] = useState({});
 
-	
+
 
 	function settingUpAll (){
 		setMap(setInvironment());
@@ -118,7 +118,7 @@ const GamePage = () => {
 				Luck: randomFloorMath(1,10000),
 			};
 			driverStats.push(newDriver);
-			
+
 		}
 		setDriverStats(driverStats);
 		setCarStats(carStats);
@@ -139,7 +139,7 @@ const GamePage = () => {
 	};
 
 
-	
+
 	return (
 		<>
 			{/* MAP */}
@@ -173,79 +173,79 @@ const GamePage = () => {
 						<button className='btn btn-secondary mt-3'>SET YOUR NFTS</button>
 					</form>
 				}
-					
-					
-						
-
-					
 
 
 
-				
+
+
+
+
+
+
 				{driverStats.length > 0 &&
-						<>
-							{/* MODAL */}
-							{raceTotals.length > 0 ? <></> : <NFTModal driverStats={driverStats} carStats={carStats} />}
+<>
+	{/* MODAL */}
+	{raceTotals.length > 0 ? <></> : <NFTModal driverStats={driverStats} carStats={carStats} />}
 
 
-							{/* RESULTS */}
-							{(racerNum && carNum) ? 
-								<>
-									{winnerTable.length > 0 ? 
-										<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
-											<StartAnimation />
-											{winnerTable.length > 0 && `Your racer got on the ${racerpos} position`}
-											<h2 className='mt-3'>RESULTS:</h2>
-											<table>
-												<thead>
-													<tr>
-														<th></th>
-														<th></th>
-														<th>Lap Time</th>
-													</tr>
-												</thead>
-												<tbody>
-													{Object.values(winnerTable).map((x,i) =>
-														<tr key={x.Name}> 
-															<th></th>
-															<th>{x.RacerId ? 'YOU' : x.rivalId}</th>
-															<th>{x.LapTime.toFixed(6)}s</th>
-															<th>Position {i+1}</th>
-														</tr>												
-													)}	
-											
-												</tbody>
-											</table>
-										</div>
-										:
-										<>{playerSelected && 
-											<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
-												<div style={{width:'50%'}} className="d-flex flex-wrap justify-content-center">						
-													{(racerNum > 0 && carNum > 0 ) ? 
-														<><div style={{width:'30%'}} className='m-2 w-25  d-flex justify-content-center align-items-center'>
-															<NFTCard  key={racerNum} type={1} nft={driverStats[racerNum-1]}/>
-														</div>
-														<div style={{width:'30%'}} className='m-2 w-25 d-flex justify-content-center align-items-center'>
-															<NFTCard key={carNum} type={0} nft={carStats[carNum-1]}/>
-														</div>
-														</>
-														:<></>
-													}
-												</div>
-												<WinnerBoard />	
-												<a className="btn btn-secondary m-5" data-bs-toggle="modal" href="#winnerModal" onClick={setRace} role="button">START RACE!</a>
-											</div>
-										}</>
-									}
-								</> 
-								: <></>
+	{/* RESULTS */}
+	{(racerNum && carNum) ? 
+		<>
+			{winnerTable.length > 0 ? 
+				<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
+					<StartAnimation />
+					{winnerTable.length > 0 && `Your racer got on the ${racerpos} position`}
+					<h2 className='mt-3'>RESULTS:</h2>
+					<table>
+						<thead>
+							<tr>
+								<th></th>
+								<th></th>
+								<th>Lap Time</th>
+							</tr>
+						</thead>
+						<tbody>
+							{Object.values(winnerTable).map((x,i) =>
+								<tr key={x.Name}> 
+									<th></th>
+									<th>{x.RacerId ? 'YOU' : x.rivalId}</th>
+									<th>{x.LapTime.toFixed(6)}s</th>
+									<th>Position {i+1}</th>
+								</tr>												
+							)}	
 
-							}
-						</>
+						</tbody>
+					</table>
+				</div>
+				:
+				<>{playerSelected && 
+<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
+	<div style={{width:'50%'}} className="d-flex flex-wrap justify-content-center">						
+		{(racerNum > 0 && carNum > 0 ) ? 
+			<><div style={{width:'30%'}} className='m-2 w-25  d-flex justify-content-center align-items-center'>
+				<NFTCard  key={racerNum} type={1} nft={driverStats[racerNum-1]}/>
+			</div>
+			<div style={{width:'30%'}} className='m-2 w-25 d-flex justify-content-center align-items-center'>
+				<NFTCard key={carNum} type={0} nft={carStats[carNum-1]}/>
+			</div>
+			</>
+			:<></>
+		}
+	</div>
+	<WinnerBoard />	
+	<a className="btn btn-secondary m-5" data-bs-toggle="modal" href="#winnerModal" onClick={setRace} role="button">START RACE!</a>
+</div>
+				}</>
+			}
+		</> 
+		: <></>
+
+	}
+</>
 				}
 
 			</div>
-		
+
 		</>
 	);
 };

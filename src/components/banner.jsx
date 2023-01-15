@@ -1,7 +1,6 @@
 import React from 'react';
 import '../styles/banner.css';
-// import vid1 from '../assets/videos/cool.gif'
-import vid2 from '../assets/videos/banner.mp4';
+import vid2 from '../assets/videos/introVid.mp4';
 
 const Banner = () => {
 	return (

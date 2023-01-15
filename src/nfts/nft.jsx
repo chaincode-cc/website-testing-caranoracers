@@ -2,24 +2,30 @@ import React, { useEffect, useState } from 'react';
 import '../styles/nft.css';
 import CountDown from '../components/countdown';
 // import car1Nft from '../assets/videos/Car1.mp4';
-import car1Nft from '../assets/videos/Mercedes Benz.mp4';
-import car2Nft from '../assets/videos/McLaren.mp4';
-import car3Nft from '../assets/videos/Space-Racecar.mp4';
-import car4Nft from '../assets/videos/Truck.mp4';
-import car5Nft from '../assets/videos/Mazda.mp4';
-import car6Nft from '../assets/videos/NASCAR.mp4';
-import car7Nft from '../assets/videos/Ferrari.mp4';
-import car8Nft from '../assets/videos/SUV.mp4';
-import car9Nft from '../assets/videos/Alfo_Romeo.mp4';
-import car10Nft from '../assets/videos/Porsche_Singer.mp4';
-import car11Nft from '../assets/videos/Nissan_GTR.mp4';
-import car12Nft from '../assets/videos/Mini_Cooper.mp4';
+import car1Nft from '../assets/videos/Cars/Mercedes Benz.mp4';
+import car2Nft from '../assets/videos/Cars/McLaren.mp4';
+import car3Nft from '../assets/videos/Cars/Space-Racecar.mp4';
+import car4Nft from '../assets/videos/Cars/Truck.mp4';
+import car5Nft from '../assets/videos/Cars/Mazda.mp4';
+import car6Nft from '../assets/videos/Cars/NASCAR.mp4';
+import car7Nft from '../assets/videos/Cars/Ferrari.mp4';
+import car8Nft from '../assets/videos/Cars/SUV.mp4';
+import car9Nft from '../assets/videos/Cars/Alfo_Romeo.mp4';
+import car10Nft from '../assets/videos/Cars/Porsche_Singer.mp4';
+import car11Nft from '../assets/videos/Cars/Nissan_GTR.mp4';
+import car12Nft from '../assets/videos/Cars/Mini_Cooper.mp4';
 
 
 
 
 
-import nft2 from '../assets/videos/Racer1.MP4';
+
+import driver1Nft from '../assets/videos/Drivers/Racer1.MP4';
+import driver2Nft from '../assets/videos/Drivers/AverageJoe.mp4';
+import driver3Nft from '../assets/videos/Drivers/Bombshell.mp4';
+import driver4Nft from '../assets/videos/Drivers/Muscles.mp4';
+import driver5Nft from '../assets/videos/Drivers/Doughnut.mp4';
+
 
 let carOne = {
 	id: 0,
@@ -98,24 +104,36 @@ let cars = [carOne, carTwo, carThree, carFour, car5, car6, car7, car8, car9, car
 
 let racerOne = {
 	id: 0,
-	title: 'Normal Racer',
+	title: 'Orange',
 	ribon: 'common',
-	image: nft2,
+	image: driver1Nft,
 };
 let racerTwo = {
 	id: 1,
-	title: 'Cool Racer',
+	title: 'Average',
 	ribon: 'rare',
-	image: nft2,
+	image: driver2Nft,
 };
 let racerThree = {
 	id: 2,
-	title: 'Crazy Racer',
+	title: 'Bombshell',
 	ribon: 'epic',
-	image: nft2,
+	image: driver3Nft,
+};
+let racerFour = {
+	id: 3,
+	title: 'Muscles',
+	ribon: 'common',
+	image: driver4Nft,
+};
+let racerFive = {
+	id: 4,
+	title: 'Doughnut',
+	ribon: 'rare',
+	image: driver5Nft,
 };
 
-let racers = [racerOne, racerTwo, racerThree];
+let racers = [racerOne, racerTwo, racerThree, racerFour, racerFive];
 
 const NFTS = () => {
 	const [carsList, setCars] = useState();
@@ -657,6 +675,18 @@ const NFTS = () => {
 								data-bs-slide-to="2"
 								aria-label="Slide 3"
 							></button>
+							<button
+								type="button"
+								data-bs-target="#carouselRacerControl"
+								data-bs-slide-to="3"
+								aria-label="Slide 4"
+							></button>
+							<button
+								type="button"
+								data-bs-target="#carouselRacerControl"
+								data-bs-slide-to="4"
+								aria-label="Slide 5"
+							></button>
 						</div>
 						<div className="carousel-inner">
 							<div className="carousel-item mb-5 active">
@@ -746,7 +776,70 @@ const NFTS = () => {
 									</button>
 								</div>
 							</div>
+							<div className="carousel-item mb-5 active">
+								<div
+									key={racersList[3].title}
+									className="card bg-secondary d-flex justify-content-center align-items-center"
+								>
+									<div className="card-body bg-secondary">
+										<div className="ribbon ribbon-top-right">
+											<span style={styling(racersList[3].ribon)}>
+												{racersList[3].ribon}
+											</span>
+										</div>
+										<h5 className="card-title fontAutoSized">
+											{racersList[3].title}
+										</h5>
+										<video
+											src={racersList[3].image}
+											muted
+											loop
+											autoPlay
+											className="nft1"
+										>
+                      Your browser does not support the video tag.
+										</video>
+									</div>
+									<button className="btn btn-dark buy-btn">
+										<h6>Buy</h6>
+									</button>
+								</div>
+							</div>
+							<div className="carousel-item mb-5 active">
+								<div
+									key={racersList[4].title}
+									className="card bg-secondary d-flex justify-content-center align-items-center"
+								>
+									<div className="card-body bg-secondary">
+										<div className="ribbon ribbon-top-right">
+											<span style={styling(racersList[4].ribon)}>
+												{racersList[4].ribon}
+											</span>
+										</div>
+										<h5 className="card-title fontAutoSized">
+											{racersList[4].title}
+										</h5>
+										<video
+											src={racersList[4].image}
+											muted
+											loop
+											autoPlay
+											className="nft1"
+										>
+                      Your browser does not support the video tag.
+										</video>
+									</div>
+									<button className="btn btn-dark buy-btn">
+										<h6>Buy</h6>
+									</button>
+								</div>
+							</div>
 						</div>
+
+
+
+
+
 						<button
 							className="carousel-control-prev"
 							type="button"
