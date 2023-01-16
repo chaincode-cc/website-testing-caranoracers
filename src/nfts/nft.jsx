@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../styles/nft.css';
 import CountDown from '../components/countdown';
 import Zoom from 'react-medium-image-zoom';
-import 'react-medium-image-zoom/dist/styles.css';
+import '../styles/zoom.css';
 
 
 import car1Nft from '../assets/videos/Cars/Mercedes Benz.mp4';
@@ -23,12 +23,11 @@ import car12Nft from '../assets/videos/Cars/Mini_Cooper.mp4';
 
 
 
-import driver1Nft from '../assets/videos/Drivers/Racer1.MP4';
-import driver2Nft from '../assets/videos/Drivers/AverageJoe.mp4';
-import driver3Nft from '../assets/videos/Drivers/Bombshell.mp4';
-import driver4Nft from '../assets/videos/Drivers/Muscles.mp4';
-// import driver5Nft from '../assets/videos/Drivers/Doughnut.mp4';
-import driver6Nft from '../assets/videos/Drivers/test.gif';
+import driver1Nft from '../assets/videos/Drivers/Racer1.gif';
+import driver2Nft from '../assets/videos/Drivers/AverageJoe.gif';
+import driver3Nft from '../assets/videos/Drivers/Bombshell.gif';
+import driver4Nft from '../assets/videos/Drivers/Muscles.gif';
+import driver5Nft from '../assets/videos/Drivers/Doughnut.gif';
 
 
 let carOne = {
@@ -134,7 +133,7 @@ let racerFive = {
 	id: 4,
 	title: 'Doughnut',
 	ribon: 'rare',
-	image: driver6Nft,
+	image: driver5Nft,
 };
 
 let racers = [racerOne, racerTwo, racerThree, racerFour, racerFive];
@@ -709,10 +708,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{racersList[0].title}
 										</h5>
-										<img
-											src={racersList[4].image}
-											className="nft1"
-										/>
+										<Zoom>
+											<img
+												src={racersList[0].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -733,10 +734,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{racersList[1].title}
 										</h5>
-										<img
-											src={racersList[4].image}
-											className="nft1"
-										/>
+										<Zoom>
+											<img
+												src={racersList[1].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -757,10 +760,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{racersList[2].title}
 										</h5>
-										<img
-											src={racersList[4].image}
-											className="nft1"
-										/>
+										<Zoom>
+											<img
+												src={racersList[2].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -781,10 +786,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{racersList[3].title}
 										</h5>
-										<img
-											src={racersList[3].image}
-											className="nft1"
-										/>
+										<Zoom>
+											<img
+												src={racersList[3].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -809,6 +816,9 @@ const NFTS = () => {
 											<img
 												src={racersList[4].image}
 												className="nft1"
+												style={{
+													backgroundColor: 'black',
+												}}
 											/>
 										</Zoom>
 									</div>
