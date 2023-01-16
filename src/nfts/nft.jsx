@@ -5,18 +5,18 @@ import Zoom from 'react-medium-image-zoom';
 import '../styles/zoom.css';
 
 
-import car1Nft from '../assets/videos/Cars/Mercedes Benz.mp4';
-import car2Nft from '../assets/videos/Cars/McLaren.mp4';
-import car3Nft from '../assets/videos/Cars/Space-Racecar.mp4';
-import car4Nft from '../assets/videos/Cars/Truck.mp4';
-import car5Nft from '../assets/videos/Cars/Mazda.mp4';
-import car6Nft from '../assets/videos/Cars/NASCAR.mp4';
-import car7Nft from '../assets/videos/Cars/Ferrari.mp4';
-import car8Nft from '../assets/videos/Cars/SUV.mp4';
-import car9Nft from '../assets/videos/Cars/Alfo_Romeo.mp4';
-import car10Nft from '../assets/videos/Cars/Porsche_Singer.mp4';
-import car11Nft from '../assets/videos/Cars/Nissan_GTR.mp4';
-import car12Nft from '../assets/videos/Cars/Mini_Cooper.mp4';
+import car1Nft from '../assets/videos/Cars/Mercedes Benz.gif';
+import car2Nft from '../assets/videos/Cars/McLaren.gif';
+import car3Nft from '../assets/videos/Cars/Space-Racecar.gif';
+import car4Nft from '../assets/videos/Cars/Truck.gif';
+import car5Nft from '../assets/videos/Cars/Mazda.gif';
+import car6Nft from '../assets/videos/Cars/NASCAR.gif';
+import car7Nft from '../assets/videos/Cars/Ferrari.gif';
+import car8Nft from '../assets/videos/Cars/SUV.gif';
+import car9Nft from '../assets/videos/Cars/Alfo_Romeo.gif';
+import car10Nft from '../assets/videos/Cars/Porsche_Singer.gif';
+import car11Nft from '../assets/videos/Cars/Nissan_GTR.gif';
+import car12Nft from '../assets/videos/Cars/Mini_Cooper.gif';
 
 
 
@@ -269,15 +269,10 @@ const NFTS = () => {
 											{carsList[0].title} THIS ONE
 										</h5>
 										<Zoom>
-											<video
+											<img
 												src={carsList[0].image}
-												muted
-												loop
-												autoPlay
 												className="nft1"
-											>
-                      Your browser does not support the video tag.
-											</video>
+											/>
 										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
@@ -299,15 +294,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{carsList[1].title}
 										</h5>
-										<video
-											src={carsList[1].image}
-											muted
-											loop
-											autoPlay
-											className="nft1"
-										>
-                      Your browser does not support the video tag.
-										</video>
+										<Zoom>
+											<img
+												src={carsList[1].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -328,15 +320,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{carsList[2].title}
 										</h5>
-										<video
-											src={carsList[2].image}
-											muted
-											loop
-											autoPlay
-											className="nft1"
-										>
-                      Your browser does not support the video tag.
-										</video>
+										<Zoom>
+											<img
+												src={carsList[2].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -357,15 +346,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{carsList[3].title}
 										</h5>
-										<video
-											src={carsList[3].image}
-											muted
-											loop
-											autoPlay
-											className="nft1"
-										>
-                      Your browser does not support the video tag.
-										</video>
+										<Zoom>
+											<img
+												src={carsList[3].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -386,15 +372,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{carsList[4].title}
 										</h5>
-										<video
-											src={carsList[4].image}
-											muted
-											loop
-											autoPlay
-											className="nft1"
-										>
-                      Your browser does not support the video tag.
-										</video>
+										<Zoom>
+											<img
+												src={carsList[4].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -415,15 +398,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{carsList[5].title}
 										</h5>
-										<video
-											src={carsList[5].image}
-											muted
-											loop
-											autoPlay
-											className="nft1"
-										>
-                      Your browser does not support the video tag.
-										</video>
+										<Zoom>
+											<img
+												src={carsList[5].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -444,15 +424,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{carsList[6].title}
 										</h5>
-										<video
-											src={carsList[6].image}
-											muted
-											loop
-											autoPlay
-											className="nft1"
-										>
-                      Your browser does not support the video tag.
-										</video>
+										<Zoom>
+											<img
+												src={carsList[6].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -473,15 +450,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{carsList[7].title}
 										</h5>
-										<video
-											src={carsList[7].image}
-											muted
-											loop
-											autoPlay
-											className="nft1"
-										>
-                      Your browser does not support the video tag.
-										</video>
+										<Zoom>
+											<img
+												src={carsList[7].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -502,15 +476,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{carsList[8].title}
 										</h5>
-										<video
-											src={carsList[8].image}
-											muted
-											loop
-											autoPlay
-											className="nft1"
-										>
-                      Your browser does not support the video tag.
-										</video>
+										<Zoom>
+											<img
+												src={carsList[8].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -531,15 +502,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{carsList[9].title}
 										</h5>
-										<video
-											src={carsList[9].image}
-											muted
-											loop
-											autoPlay
-											className="nft1"
-										>
-                      Your browser does not support the video tag.
-										</video>
+										<Zoom>
+											<img
+												src={carsList[9].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -560,15 +528,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{carsList[10].title}
 										</h5>
-										<video
-											src={carsList[10].image}
-											muted
-											loop
-											autoPlay
-											className="nft1"
-										>
-                      Your browser does not support the video tag.
-										</video>
+										<Zoom>
+											<img
+												src={carsList[10].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
@@ -589,15 +554,12 @@ const NFTS = () => {
 										<h5 className="card-title fontAutoSized">
 											{carsList[11].title}
 										</h5>
-										<video
-											src={carsList[11].image}
-											muted
-											loop
-											autoPlay
-											className="nft1"
-										>
-                      Your browser does not support the video tag.
-										</video>
+										<Zoom>
+											<img
+												src={carsList[11].image}
+												className="nft1"
+											/>
+										</Zoom>
 									</div>
 									<button className="btn btn-dark buy-btn">
 										<h6>Buy</h6>
