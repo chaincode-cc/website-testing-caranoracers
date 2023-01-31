@@ -16,7 +16,7 @@ const StartBtn = () =>{
 					<p className="card-text text-body">PLACES PAID: 1st PLACE</p>
 					<p className="card-text text-body">PRIZE: 10 ADA</p>
 
-					<a href="/121" className="btn btn-primary">ENTER RACE</a>
+					<a href="/game" className="btn btn-primary">ENTER RACE</a>
 				</div>
 			</div> 
 
@@ -28,7 +28,7 @@ const StartBtn = () =>{
 					<p className="card-text text-body">PLACES PAID: 1st PLACE</p>
 					<p className="card-text text-body">PRIZE: 20 ADA</p>
 
-					<a href="/commonRace" className="btn btn-primary">ENTER RACE</a>
+					<a href="/game" className="btn btn-primary">ENTER RACE</a>
 				</div>
 			</div> 
 
@@ -44,7 +44,7 @@ const StartBtn = () =>{
 					</ul></p>
 					<p className="card-text text-body">PRIZE: 90 ADA</p>
 
-					<a href="/crazyRace" className="btn btn-primary">ENTER RACE</a>
+					<a href="/game" className="btn btn-primary">ENTER RACE</a>
 				</div>
 			</div> 
 			
