@@ -2,105 +2,84 @@ import React, { useEffect, useState } from 'react';
 import '../styles/nft.css';
 import CountDown from '../components/countdown';
 import Zoom from 'react-medium-image-zoom';
+import axios from 'axios';
 import '../styles/zoom.css';
 
 
-import car1Nft from '../assets/videos/Cars/Mercedes Benz.gif';
-import car2Nft from '../assets/videos/Cars/McLaren.gif';
-import car3Nft from '../assets/videos/Cars/Space-Racecar.gif';
-import car4Nft from '../assets/videos/Cars/Truck.gif';
-import car5Nft from '../assets/videos/Cars/Mazda.gif';
-import car6Nft from '../assets/videos/Cars/NASCAR.gif';
-import car7Nft from '../assets/videos/Cars/Ferrari.gif';
-import car8Nft from '../assets/videos/Cars/SUV.gif';
-import car9Nft from '../assets/videos/Cars/Alfo_Romeo.gif';
-import car10Nft from '../assets/videos/Cars/Porsche_Singer.gif';
-import car11Nft from '../assets/videos/Cars/Nissan_GTR.gif';
-import car12Nft from '../assets/videos/Cars/Mini_Cooper.gif';
 
-
-
-
-
-
-import driver1Nft from '../assets/videos/Drivers/Racer1.gif';
-import driver2Nft from '../assets/videos/Drivers/AverageJoe.gif';
-import driver3Nft from '../assets/videos/Drivers/Bombshell.gif';
-import driver4Nft from '../assets/videos/Drivers/Muscles.gif';
-import driver5Nft from '../assets/videos/Drivers/Doughnut.gif';
 
 
 let carOne = {
 	id: 0,
 	title: 'Mercedes Benz',
 	ribon: 'common',
-	image: car1Nft,
+	image: null,
 };
 let carTwo = {
 	id: 1,
 	title: 'McLaren',
 	ribon: 'rare',
-	image: car2Nft,
+	image: null,
 };
 let carThree = {
 	id: 2,
 	title: 'Space Race Car',
 	ribon: 'epic',
-	image: car3Nft,
+	image: null,
 };
 let carFour = {
 	id: 3,
 	title: 'Truck',
 	ribon: 'epic',
-	image: car4Nft,
+	image: null,
 };
 let car5 = {
 	id: 3,
 	title: 'Mazda',
 	ribon: 'rare',
-	image: car5Nft,
+	image: null,
 };	
 let car6 = {
 	id: 3,
 	title: 'NASCAR',
 	ribon: 'epic',
-	image: car6Nft,
+	image: null,
 };	
 let car7 = {
 	id: 3,
-	title: 'Ferrari',
+	title: 'Ferrari',	
 	ribon: 'rare',
-	image: car7Nft,
+	image: null,
 };	
 let car8 = {
 	id: 3,
 	title: 'SUV',
 	ribon: 'common',
-	image: car8Nft,
+	image: null,
 };	
 let car9 = {
 	id: 3,
 	title: 'Alfo Romeo',
 	ribon: 'rare',
-	image: car9Nft,
+	image: null,
 };	
 let car10 = {
 	id: 3,
 	title: 'Porsche Singer',
 	ribon: 'epic',
-	image: car10Nft,
+	image: null,
 };	
 let car11 = {
 	id: 3,
 	title: 'Nissan GTR',
 	ribon: 'epic',
-	image: car11Nft,
+	image: null,
 };	
 let car12 = {
 	id: 3,
 	title: 'Mini Cooper',
 	ribon: 'rare',
-	image: car12Nft,
+	image: null,
 };	
 
 let cars = [carOne, carTwo, carThree, carFour, car5, car6, car7, car8, car9, car10, car11, car12];
@@ -109,31 +88,31 @@ let racerOne = {
 	id: 0,
 	title: 'Orange',
 	ribon: 'common',
-	image: driver1Nft,
+	image: null,
 };
 let racerTwo = {
 	id: 1,
 	title: 'Average',
 	ribon: 'rare',
-	image: driver2Nft,
+	image: null,
 };
 let racerThree = {
 	id: 2,
 	title: 'Bombshell',
 	ribon: 'epic',
-	image: driver3Nft,
+	image: null,
 };
 let racerFour = {
 	id: 3,
 	title: 'Muscles',
 	ribon: 'common',
-	image: driver4Nft,
+	image: null,
 };
 let racerFive = {
 	id: 4,
 	title: 'Doughnut',
 	ribon: 'rare',
-	image: driver5Nft,
+	image: null,
 };
 
 let racers = [racerOne, racerTwo, racerThree, racerFour, racerFive];
@@ -141,12 +120,51 @@ let racers = [racerOne, racerTwo, racerThree, racerFour, racerFive];
 const NFTS = () => {
 	const [carsList, setCars] = useState();
 	const [racersList, setRacers] = useState();
+	const [ assets, setAsset ] = useState([]);
+	const [ addr, setAddr ] = useState([]);
+
+	useEffect(() => {
+		const getAddr = async () => {
+			try {
+				const { data } = await axios.post('https://preprod.koios.rest/api/v0/address_assets', {
+					'_addresses': [
+						'addr_test1vq2zcwyyl3n7aqfrjrp8kt75w9wz26l706g7femgtkhtcggcxxr84'
+					]
+				});
+				setAddr(data);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		getAddr(); 
+	}, []);
+	useEffect(() => {
+		const getMetaData = async () => {
+			try { 
+				{
+					const { data: {minting_tx_metadata:{721:ss} }} = await axios('https://preprod.koios.rest/api/v0/asset_info?_asset_policy=63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372&_asset_name=446f7567686e7574205261636572');
+					setAsset(ss);
+				}
+				
+				
+				
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		getMetaData(); 
+	}, [addr]);
+
+	console.log('THIS',assets.length > 0 && assets);
+	// console.log('THIS151515',assets.length > 0 && Object.values(assets.flatMap(x=>x.minting_tx_metadata[721])[0])[0].Doughnut.name);
+
+
+	console.log(addr);
 
 	useEffect(() => {
 		setCars(cars);
 		setRacers(racers);
 	}, []);
-	console.log('List ALL', carsList);
 
 	function styling(ribbon) {
 		if (ribbon === 'rare') {

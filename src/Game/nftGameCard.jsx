@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import car from '../assets/videos/Cars/Car1.mp4';
-import racer from '../assets/videos/Drivers/Racer1.gif';
+
 import '../styles/nft.css';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
@@ -33,15 +32,7 @@ const NFTCard = ({type, nft}) =>{
 					<h5 className="card-title text-center mb-3 fontAutoSized">
 						{nft.Name}
 					</h5>
-					<video
-						src={type === 0 ? car : racer}
-						muted
-						loop
-						autoPlay
-						className="nft1"
-					>
-                      Your browser does not support the video tag.
-					</video>
+				
 					{
 						<div className='d-flex justify-content-start flex-column m-3'>
 							<div className='d-flex align-items-center justify-content-start flex-column'>

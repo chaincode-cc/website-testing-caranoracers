@@ -11,6 +11,9 @@ html{
   background-color: #282c34;
 }
 
+.noLink{
+  text-decoration: none;
+}
 code {
   font-family: source-code-pro, TitilliumWeb, Monaco, Consolas, "Courier New",
     monospace;

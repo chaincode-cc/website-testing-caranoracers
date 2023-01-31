@@ -3,6 +3,7 @@ import './styles/App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+
 import Banner from './components/banner';
 import Intro from './pages/intro';
 import NFTS from './nfts/nft';
@@ -12,9 +13,6 @@ import FollowUs from './pages/followus';
 import WalletConnector from './wallet-service/connector';
 import GamePage from './Game/gamePage';
 import StartBtn from './Game/startBtn';
-
-
-
 
 
 
