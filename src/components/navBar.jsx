@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import WalletConnector from '../wallet-service/connector';
+// import WalletConnector from '../wallet-service/connector';
 
 function TopNavBar() {
 	function collapseItem() {
@@ -114,7 +114,7 @@ function TopNavBar() {
 							></button>
 						</div>
 						<div className="modal-body">
-							<WalletConnector />
+							{/* <WalletConnector /> */}
 						</div>
 					</div>
 				</div>
