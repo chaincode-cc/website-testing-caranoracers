@@ -116,12 +116,14 @@ let racerFive = {
 };
 
 let racers = [racerOne, racerTwo, racerThree, racerFour, racerFive];
-
+const policy = '63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372';
 const NFTS = () => {
 	const [carsList, setCars] = useState();
 	const [racersList, setRacers] = useState();
 	const [ assets, setAsset ] = useState([]);
-	const [ addr, setAddr ] = useState([]);
+	const [ assetNames, setAddr ] = useState([]);
+	
+
 
 	useEffect(() => {
 		const getAddr = async () => {
@@ -131,35 +133,53 @@ const NFTS = () => {
 						'addr_test1vq2zcwyyl3n7aqfrjrp8kt75w9wz26l706g7femgtkhtcggcxxr84'
 					]
 				});
-				setAddr(data);
+				let names = data.map(x => x.asset_list).map(x=>x.filter((x)=> {return x.policy_id === policy;})).map(x=>x.map(x=>x.asset_name));
+				setAddr(names);
+				console.log(names);
+				for (let i = 0; i< names.length; i++){
+					try { 
+						{
+							const { data } = await axios.get(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372&_asset_name=${names[0]}`);
+							setAsset(oldArray => [...oldArray, data]);
+						}
+					
+					} catch (err) {
+						console.log(err);
+					}
+				}
 			} catch (err) {
 				console.log(err);
 			}
 		};
 		getAddr(); 
 	}, []);
-	useEffect(() => {
-		const getMetaData = async () => {
-			try { 
-				{
-					const { data: {minting_tx_metadata:{721:ss} }} = await axios('https://preprod.koios.rest/api/v0/asset_info?_asset_policy=63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372&_asset_name=446f7567686e7574205261636572');
-					setAsset(ss);
-				}
-				
-				
-				
-			} catch (err) {
-				console.log(err);
-			}
-		};
-		getMetaData(); 
-	}, [addr]);
 
-	console.log('THIS',assets.length > 0 && assets);
-	// console.log('THIS151515',assets.length > 0 && Object.values(assets.flatMap(x=>x.minting_tx_metadata[721])[0])[0].Doughnut.name);
+	// useEffect(() => {
+	
+	
+	// 	const getMetaData = async () => {
+	// 		for (let i = 0; i< assetNames.length; i++){
+	// 			try { 
+	// 				{
+	// 					const { data } = await axios(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372&_asset_name=${assetNames[i]}`);
+	// 					setAsset(oldArray => [...oldArray, data]);
+	// 				}
+				
+	// 			} catch (err) {
+	// 				console.log(err);
+	// 			}
+	// 		}
+	// 	};
+	// 	getMetaData(); 
+	// }, []);
 
+	
+	console.log('adsfsfsefg', assetNames);
+ 
+	console.log('THIS', assets);
+	
 
-	console.log(addr);
+		
 
 	useEffect(() => {
 		setCars(cars);
