@@ -149,7 +149,7 @@ const GamePage = () => {
 					<div>
 						<h2>Racing circuit</h2>
 						<p>Weather: {mapStats.RaceWeather}</p>
-						<p>Straigthaways: {mapStats.raceMap.straigthaways}</p>
+						<p>Straightaways: {mapStats.raceMap.straigthaways}</p>
 						<p>Turns: {mapStats.raceMap.turns}</p>
 						<p>Lap length: {mapStats.raceMap.lapLength.toFixed(2)} km</p>
 					</div>
