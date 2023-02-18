@@ -8,7 +8,7 @@ import { playerSelected } from './nftSlice';
 
 
 
-const NFTModal = ( {carStats, driverStats} ) => {
+const NFTModal = ( {assets} ) => {
 
 	const carNum = useSelector(state => state.nftSelector.carSelected);
 	const racerNum = useSelector(state => state.nftSelector.racerSelected);

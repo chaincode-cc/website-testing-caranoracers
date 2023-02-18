@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import '../styles/nft.css';
 import CountDown from '../components/countdown';
 import Zoom from 'react-medium-image-zoom';
-import axios from 'axios';
 import '../styles/zoom.css';
 
 
@@ -118,80 +117,10 @@ let racerFive = {
 
 
 let racers = [racerOne, racerTwo, racerThree, racerFour, racerFive];
-const policy = '63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372';
+
 const NFTS = () => {
 	const [carsList, setCars] = useState();
 	const [racersList, setRacers] = useState();
-	const [ assets, setAsset ] = useState([]);
-	const [ assetNames, setAddr ] = useState([]);
-	const [ assetNames2, setAddr2 ] = useState([]);
-	
-
-
-	useEffect(() => {
-		const getAddr = async () => {
-			try {
-				const { data } = await axios.post('https://preprod.koios.rest/api/v0/address_assets', {
-					'_addresses': [
-						'addr_test1vq2zcwyyl3n7aqfrjrp8kt75w9wz26l706g7femgtkhtcggcxxr84'
-					]
-				});
-				
-				setAddr(data);
-			} catch (err) {
-				console.log(err);
-			}
-		};
-		getAddr(); 
-	
-	}, []);
-	
-	useEffect(() => {
-		const getAddr = async () => {
-			try {
-				const { data } = await axios.post('https://preprod.koios.rest/api/v0/address_assets', {
-					'_addresses': [
-						'addr_test1vq2zcwyyl3n7aqfrjrp8kt75w9wz26l706g7femgtkhtcggcxxr84'
-					]
-				});
-				
-				setAddr(data);
-		
-			} catch (err) {
-				console.log(err);
-			}
-		};
-		getAddr(); 
-
-	
-	}, []);
-	
-	useEffect( () => {
-		setAddr2(assetNames.map(x => x.asset_list).map(x=>x.filter((x)=> {return x.policy_id === policy;})).map(x=>x.map(x=>x.asset_name)));	
-	}, [assetNames]);
-	
-
-	useEffect( () => {	
-		const getAllInfo = async () => {
-			for (let i = 0; i < 2; i++) {
-				try {
-					const { data } = await axios(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372&_asset_name=${assetNames2[0][i]}`);
-					setAsset( old => [...old, data]);
-				} catch (e){
-					console.log(e);
-				}
-			}
-		};
-		getAllInfo();
-	}, [assetNames]);
-	// const { data } = await axios.get(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372&_asset_name=${names[0][i]}`);
-	// console.log('efwef',assetNames2[0]);
-				
-	console.log('Assetsssss', assetNames2.length);
-	console.log('Assets', assets);
-
-
-	
 
 	
 	

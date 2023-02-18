@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import { useSelector } from 'react-redux';
 import { setInvironment, randomFloorMath, rivalTotal, playerTotal} from './game';
+import axios from 'axios';
+
 import NFTModal from './nftmodal';
 import NFTCard from './nftGameCard';
 import StartAnimation from './startAnimation';
@@ -19,8 +21,8 @@ const GamePage = () => {
 	//Player
 	const [carStats, setCarStats] = useState({});
 	const [driverStats, setDriverStats] = useState({});
-	const [carNFTnum, setCarNFTnum] = useState(0);
-	const [driverNFTnum, setRacerNFTnum] = useState(0);
+	// const [carNFTnum, setCarNFTnum] = useState(0);
+	// const [driverNFTnum, setRacerNFTnum] = useState(0);
 	const carNum = useSelector(state => state.nftSelector.carSelected);
 	const racerNum = useSelector(state => state.nftSelector.racerSelected);
 	const playerSelected = useSelector(state => state.nftSelector.playerSelected);
@@ -32,6 +34,59 @@ const GamePage = () => {
 	const [winnerTable, setWinners] = useState({});
 	const [racerpos, setRacerPos] = useState({});
 
+
+	// NEW
+	const policy = '63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372';
+	const addr = 'addr_test1vq2zcwyyl3n7aqfrjrp8kt75w9wz26l706g7femgtkhtcggcxxr84';
+	
+	const [wallets, setWallets] = useState([]);
+	const [assetName, setAssetName] = useState([]);
+	const [assets, setAssets] = useState([]);
+
+
+	useEffect(() => {
+		const getAddr = async () => {
+			try {
+				const response = await axios.post('https://preprod.koios.rest/api/v0/address_assets', {
+					'_addresses': [
+						addr
+					]
+				});
+				setWallets(response.data);
+			} catch (err) {
+				console.log(err);
+			}
+		};
+		getAddr(); 
+
+	}, []);
+
+	useEffect( () => {
+		setAssetName(wallets
+			.map(x => x.asset_list)
+			.map(x=>x.filter((x)=> 
+			{return x.policy_id === policy;}))
+			.map(x=>x.map(x=>x.asset_name)));	
+	}, [wallets]);
+
+	useEffect( () => {	
+		const fetchAssets = async () => {
+			const assetData = [];
+			for (const innerArray of assetName) {
+				for (const name of innerArray) {
+					const response = await axios.get(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372&_asset_name=${name}`);
+					let mapped = response.data.map(x => x.minting_tx_metadata['721'][policy]);
+					assetData.push(...mapped);
+				}}
+			setAssets(assetData);
+		};
+		if (wallets.length > 0) {
+			fetchAssets();
+		}
+	}, [wallets]);
+
+	console.log('Solution',assets);
+	console.log('Driver',driverStats);
 
 
 	function settingUpAll (){
@@ -61,12 +116,12 @@ const GamePage = () => {
 		setRacerPos(index+1);
 	},[winnerTable]);
 
-	const handleRacerNFTNumInput = event => {
-		setRacerNFTnum(event.target.value);
-	};
-	const handleCarNFTNumInput = event => {
-		setCarNFTnum(event.target.value);
-	};
+	// const handleRacerNFTNumInput = event => {
+	// 	setRacerNFTnum(event.target.value);
+	// };
+	// const handleCarNFTNumInput = event => {
+	// 	setCarNFTnum(event.target.value);
+	// };
 
 
 	const settingRivals = () =>{
@@ -94,35 +149,36 @@ const GamePage = () => {
 		setRivalRacers(driverStats);
 		setRivalCars(carStats);
 	};
-	const settingPlayer = (e) =>{
-		e.preventDefault();
-		let driverStats= [];
-		let carStats = [];
-		for (let i = 1; i <= driverNFTnum; i++)
-		{ 
-			let newCar = {
-				Name: i,
-				MaximumSpeed: randomFloorMath(1,10000),
-				Acceleration: randomFloorMath(1,10000),
-				Cornering: randomFloorMath(1,10000),
-				Aerodynamics: randomFloorMath(1,10000),
-			};
-			carStats.push(newCar);
-		}
-		for (let i = 1; i <= carNFTnum; i++){
-			let newDriver = {
-				Name: i,
-				Experience: randomFloorMath(1,10000),
-				Aggressiveness: randomFloorMath(1,10000),
-				Reflexes: randomFloorMath(1,10000),
-				Luck: randomFloorMath(1,10000),
-			};
-			driverStats.push(newDriver);
 
-		}
-		setDriverStats(driverStats);
-		setCarStats(carStats);
-	};
+	// const settingPlayer = (e) =>{
+	// 	e.preventDefault();
+	// 	let driverStats= [];
+	// 	let carStats = [];
+	// 	for (let i = 1; i <= driverNFTnum; i++)
+	// 	{ 
+	// 		let newCar = {
+	// 			Name: i,
+	// 			MaximumSpeed: randomFloorMath(1,10000),
+	// 			Acceleration: randomFloorMath(1,10000),
+	// 			Cornering: randomFloorMath(1,10000),
+	// 			Aerodynamics: randomFloorMath(1,10000),
+	// 		};
+	// 		carStats.push(newCar);
+	// 	}
+	// 	for (let i = 1; i <= carNFTnum; i++){
+	// 		let newDriver = {
+	// 			Name: i,
+	// 			Experience: randomFloorMath(1,10000),
+	// 			Aggressiveness: randomFloorMath(1,10000),
+	// 			Reflexes: randomFloorMath(1,10000),
+	// 			Luck: randomFloorMath(1,10000),
+	// 		};
+	// 		driverStats.push(newDriver);
+
+	// 	}
+	// 	setDriverStats(driverStats);
+	// 	setCarStats(carStats);
+	// };
 
 	const setRace = (e) =>{
 		e.preventDefault();
@@ -139,7 +195,7 @@ const GamePage = () => {
 	};
 
 
-
+	console.log('ddddddddddddddddddddddddd',driverStats.length );
 	return (
 		<>
 			{/* MAP */}
@@ -149,14 +205,14 @@ const GamePage = () => {
 					<div>
 						<h2>Racing circuit</h2>
 						<p>Weather: {mapStats.RaceWeather}</p>
-						<p>Straightaways: {mapStats.raceMap.straigthaways}</p>
+						<p>Straigthaways: {mapStats.raceMap.straigthaways}</p>
 						<p>Turns: {mapStats.raceMap.turns}</p>
 						<p>Lap length: {mapStats.raceMap.lapLength.toFixed(2)} km</p>
 					</div>
 				)}
 
 				{/* NFT SELECTOR */}
-				{driverStats.length > 0 ? <></> :
+				{/* {driverStats.length > 0 ? <></> :
 					<form className='d-flex justify-content-center align-items-center flex-column' onSubmit={settingPlayer}>
 						<div className="input-group input-group-sm d-flex mt-2">
 							<div className="input-group-prepend">
@@ -172,20 +228,13 @@ const GamePage = () => {
 						</div>
 						<button className='btn btn-secondary mt-3'>SET YOUR NFTS</button>
 					</form>
-				}
+				} */}
 
 
-
-
-
-
-
-
-
-				{driverStats.length > 0 &&
+				{assets.length > 0 &&
 <>
 	{/* MODAL */}
-	{raceTotals.length > 0 ? <></> : <NFTModal driverStats={driverStats} carStats={carStats} />}
+	{raceTotals.length > 0 ? <>✊</> : <NFTModal assets={assets}/>}
 
 
 	{/* RESULTS */}
