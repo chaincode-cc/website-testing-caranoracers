@@ -8,7 +8,7 @@ import { playerSelected } from './nftSlice';
 
 
 
-const NFTModal = ( {assets} ) => {
+const NFTModal = ( {driverStats, carStats} ) => {
 
 	const carNum = useSelector(state => state.nftSelector.carSelected);
 	const racerNum = useSelector(state => state.nftSelector.racerSelected);
@@ -16,10 +16,11 @@ const NFTModal = ( {assets} ) => {
 
 	const dispatching = useDispatch();
 
-
+	console.log('DRIVERS',driverStats);
+	console.log('Cars',carStats);
 	return(
 		<>
-
+			{/* {driverStats}{carStats} */}
 			<div className="modal fade bg-dark" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabIndex="-1">
 				<div className="modal-dialog modal-xl modal-dialog-scrollable">
 					<div className="modal-content ">
@@ -29,7 +30,7 @@ const NFTModal = ( {assets} ) => {
 						</div>
 						<div className="modal-body customedBg">
 							<div className="d-flex flex-wrap justify-content-center">						
-								{driverStats && driverStats.map((driver)=><div style={driver.Name === racerNum ? {width:'30%' , opacity:'0.4'}:{width:'30%'} } className='m-2 d-flex justify-content-center align-items-center' key={driver.Name}><NFTCard  key={driver.Name} type={1} nft={driver}/></div>
+								{driverStats && driverStats.map((driver)=><div style={driver.Name === racerNum ? {width:'30%' , opacity:'0.4'}:{width:'30%'} } className='m-2 d-flex justify-content-center align-items-center' key={driver.id}><NFTCard  key={driver.id} type={1} nft={driver}/></div>
 								)}
 							</div>
 						</div>
@@ -48,7 +49,7 @@ const NFTModal = ( {assets} ) => {
 						</div>
 						<div className="modal-body customedBg">
 							<div className="d-flex flex-wrap justify-content-center">						
-								{carStats && carStats.map((car)=> <div style={car.Name === carNum ? {width:'30%' , opacity:'0.4'}:{width:'30%'} } className='m-2 d-flex justify-content-center align-items-center' key={car.Name}><NFTCard key={car.Name} type={0} nft={car}/></div>)}
+								{carStats && carStats.map((car)=> <div style={car.Name === carNum ? {width:'30%' , opacity:'0.4'}:{width:'30%'} } className='m-2 d-flex justify-content-center align-items-center' key={car.id}><NFTCard key={car.id} type={0} nft={car}/></div>)}
 							</div>
 						</div>
 						<div className="modal-footer"  id='customedBg'>

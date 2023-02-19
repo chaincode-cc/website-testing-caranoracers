@@ -42,6 +42,8 @@ const GamePage = () => {
 	const [wallets, setWallets] = useState([]);
 	const [assetName, setAssetName] = useState([]);
 	const [assets, setAssets] = useState([]);
+	const [carsAssets, setCars] = useState([]);
+	const [driversAssets, setDrivers] = useState([]);
 
 
 	useEffect(() => {
@@ -72,21 +74,25 @@ const GamePage = () => {
 	useEffect( () => {	
 		const fetchAssets = async () => {
 			const assetData = [];
+			const carData = [];
+			const driverData = [];
 			for (const innerArray of assetName) {
 				for (const name of innerArray) {
 					const response = await axios.get(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372&_asset_name=${name}`);
 					let mapped = response.data.map(x => x.minting_tx_metadata['721'][policy]);
 					assetData.push(...mapped);
+					Object.values(mapped[0])[0].type === 'car' ? carData.push(...Object.values(mapped[0])): driverData.push(...Object.values(mapped[0]));
 				}}
 			setAssets(assetData);
+			setCars(carData);
+			setDrivers(driverData);
 		};
 		if (wallets.length > 0) {
 			fetchAssets();
 		}
 	}, [wallets]);
 
-	console.log('Solution',assets);
-	console.log('Driver',driverStats);
+	
 
 
 	function settingUpAll (){
@@ -195,7 +201,6 @@ const GamePage = () => {
 	};
 
 
-	console.log('ddddddddddddddddddddddddd',driverStats.length );
 	return (
 		<>
 			{/* MAP */}
@@ -234,7 +239,7 @@ const GamePage = () => {
 				{assets.length > 0 &&
 <>
 	{/* MODAL */}
-	{raceTotals.length > 0 ? <>✊</> : <NFTModal assets={assets}/>}
+	{raceTotals.length > 0 ? <></> : <NFTModal driverStats={driversAssets} carStats={carsAssets} />}
 
 
 	{/* RESULTS */}
