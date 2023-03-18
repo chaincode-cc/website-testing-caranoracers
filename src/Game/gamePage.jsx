@@ -9,6 +9,8 @@ import StartAnimation from './startAnimation';
 import WinnerBoard from './winnerBoard';
 
 
+// https://docs.cardano.org/native-tokens/getting-started
+
 const GamePage = () => {
 //Map
 	const [mapStats, setMap] = useState({});
