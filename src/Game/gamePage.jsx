@@ -36,8 +36,8 @@ const GamePage = () => {
 
 
 	// NEW
-	const policy = '63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372';
-	const addr = 'addr_test1vq2zcwyyl3n7aqfrjrp8kt75w9wz26l706g7femgtkhtcggcxxr84';
+	const policy = '8a1b05b76eee50197129afa36987ea10e631417fa4a91a6a909b9909';
+	const addr = 'addr_test1vpx7m5s2njg8ydzdr73gufk2jvj0uh2qdctcgc9xzcmgpzsukyek4';
 	
 	const [wallets, setWallets] = useState([]);
 	const [assetName, setAssetName] = useState([]);
@@ -45,7 +45,7 @@ const GamePage = () => {
 	const [carsAssets, setCars] = useState([]);
 	const [driversAssets, setDrivers] = useState([]);
 
-
+	console.log(carsAssets);
 	useEffect(() => {
 		const getAddr = async () => {
 			try {
@@ -78,7 +78,7 @@ const GamePage = () => {
 			const driverData = [];
 			for (const innerArray of assetName) {
 				for (const name of innerArray) {
-					const response = await axios.get(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=63399e872d85c369cebc775611ecd32a834891f907e9e0b25370c372&_asset_name=${name}`);
+					const response = await axios.get(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=${policy}&_asset_name=${name}`);
 					let mapped = response.data.map(x => x.minting_tx_metadata['721'][policy]);
 					assetData.push(...mapped);
 					Object.values(mapped[0])[0].type === 'car' ? carData.push(...Object.values(mapped[0])): driverData.push(...Object.values(mapped[0]));
