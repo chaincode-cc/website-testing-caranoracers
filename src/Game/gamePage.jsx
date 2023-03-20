@@ -47,7 +47,6 @@ const GamePage = () => {
 	const [carsAssets, setCars] = useState([]);
 	const [driversAssets, setDrivers] = useState([]);
 
-	console.log(carsAssets);
 	useEffect(() => {
 		const getAddr = async () => {
 			try {
@@ -241,7 +240,7 @@ const GamePage = () => {
 				{assets.length > 0 &&
 <>
 	{/* MODAL */}
-	{raceTotals.length > 0 ? <></> : <NFTModal driverStats={driversAssets} carStats={carsAssets} />}
+	{raceTotals.length === 0 ? <></> : <NFTModal driverStats={driversAssets} carStats={carsAssets} />}
 
 
 	{/* RESULTS */}

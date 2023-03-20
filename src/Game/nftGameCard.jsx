@@ -14,8 +14,8 @@ const NFTCard = ({type, nft}) =>{
 	const carNum = useSelector(state => state.nftSelector.carSelected);
 	const racerNum = useSelector(state => state.nftSelector.racerSelected);
 	const dispatching = useDispatch();
-	const selectedCar = type === 0 && carNum == nft.name && carNum > 0;
-	const selectedRacer = type === 1 && racerNum == nft.name && racerNum > 0;
+	const selectedCar = type === 0 && carNum == nft.id;
+	const selectedRacer = type === 1 && racerNum == nft.id;
 
 
 	const barPerc = (per) => {
@@ -62,7 +62,7 @@ const NFTCard = ({type, nft}) =>{
 						</div>
 					}
 				</div>
-				<button data-bs-target={type===0 ? '#exampleModalToggle3':'#exampleModalToggle2' } disabled={selectedCar || selectedRacer ? true : false} data-bs-toggle="modal" data-bs-dismiss="modal" onClick={() => dispatching(type === 0 ? selectCar(nft.name) : selectRacer(nft.name))} className="btn btn-dark buy-btn mb-3">
+				<button data-bs-target={type===0 ? '#exampleModalToggle3':'#exampleModalToggle2' } disabled={selectedCar || selectedRacer ? true : false} data-bs-toggle="modal" data-bs-dismiss="modal" onClick={() => dispatching(type === 0 ? selectCar(nft.id) : selectRacer(nft.id))} className="btn btn-dark buy-btn mb-3">
 					<h6>{selectedCar || selectedRacer ? 'Selected' : 'Select'}</h6>
 				</button>
 			</div>

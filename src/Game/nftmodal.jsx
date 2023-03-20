@@ -10,17 +10,16 @@ import { playerSelected } from './nftSlice';
 
 const NFTModal = ( {driverStats, carStats} ) => {
 
-	const carNum = useSelector(state => state.nftSelector.carSelected);
-	const racerNum = useSelector(state => state.nftSelector.racerSelected);
+	const carSelected = useSelector(state => state.nftSelector.carSelected);
+	const racerSelected = useSelector(state => state.nftSelector.racerSelected);
 	const playerSelectedVar = useSelector(state => state.nftSelector.playerSelected);
-
 	const dispatching = useDispatch();
 
-	console.log('DRIVERS',driverStats);
-	console.log('Cars',carStats);
+	console.log('Racer selected', racerSelected);
+	console.log('Car selected', carSelected);
+
 	return(
 		<>
-			{/* {driverStats}{carStats} */}
 			<div className="modal fade bg-dark" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabIndex="-1">
 				<div className="modal-dialog modal-xl modal-dialog-scrollable">
 					<div className="modal-content ">
@@ -30,7 +29,7 @@ const NFTModal = ( {driverStats, carStats} ) => {
 						</div>
 						<div className="modal-body customedBg">
 							<div className="d-flex flex-wrap justify-content-center">						
-								{driverStats && driverStats.map((driver)=><div style={driver.Name === racerNum ? {width:'30%' , opacity:'0.4'}:{width:'30%'} } className='m-2 d-flex justify-content-center align-items-center' key={driver.id}><NFTCard  key={driver.id} type={1} nft={driver}/></div>
+								{driverStats && driverStats.map((driver)=><div style={driver.Name === racerSelected ? {width:'30%' , opacity:'0.4'}:{width:'30%'} } className='m-2 d-flex justify-content-center align-items-center' key={driver.id}><NFTCard  key={driver.id} type={1} nft={driver}/></div>
 								)}
 							</div>
 						</div>
@@ -49,7 +48,7 @@ const NFTModal = ( {driverStats, carStats} ) => {
 						</div>
 						<div className="modal-body customedBg">
 							<div className="d-flex flex-wrap justify-content-center">						
-								{carStats && carStats.map((car)=> <div style={car.Name === carNum ? {width:'30%' , opacity:'0.4'}:{width:'30%'} } className='m-2 d-flex justify-content-center align-items-center' key={car.id}><NFTCard key={car.id} type={0} nft={car}/></div>)}
+								{carStats && carStats.map((car)=> <div style={car.Name === carSelected ? {width:'30%' , opacity:'0.4'}:{width:'30%'} } className='m-2 d-flex justify-content-center align-items-center' key={car.id}><NFTCard key={car.id} type={0} nft={car}/></div>)}
 							</div>
 						</div>
 						<div className="modal-footer"  id='customedBg'>
@@ -67,16 +66,16 @@ const NFTModal = ( {driverStats, carStats} ) => {
 						</div>
 						<div className="modal-body customedBg d-flex justify-content-center align-items-center flex-column">
 							
-							<h2 className='m-2'>{(racerNum > 0 && carNum > 0 ) ? 'YOU HAVE SELECTED:' : ''}</h2>
+							<h2 className='m-2'>{(racerSelected > 0 && carSelected > 0 ) ? 'YOU HAVE SELECTED:' : ''}</h2>
 							<div className="d-flex flex-wrap justify-content-center">
 														
-								{(racerNum > 0 && carNum > 0 ) ? 
+								{(racerSelected && carSelected ) ? 
 									<>
 										<div style={{width:'30%'}} className='m-2 d-flex justify-content-center align-items-center'>
-											<NFTCard  key={racerNum} type={1} nft={driverStats[racerNum-1]}/>
+											<NFTCard  key={racerSelected} type={1} nft={driverStats[racerSelected-1]}/>
 										</div>
 										<div style={{width:'30%'}} className='m-2 d-flex justify-content-center align-items-center'>
-											<NFTCard key={carNum} type={0} nft={carStats[carNum-1]}/>
+											<NFTCard key={carSelected} type={0} nft={carStats[carSelected-1]}/>
 										</div>
 									</>
 									:<><h2 className='m-2'>PEASE SELECT A RACER AND A CAR</h2></>
