@@ -80,23 +80,27 @@ const GamePage = () => {
 	// Get the cars and racers from names that fits in the policy.
 	useEffect( () => {	
 		const fetchAssets = async () => {
-			const assetData = [];
-			const carData = [];
-			const driverData = [];
-			for (const innerArray of assetName) {
-				for (const name of innerArray) {
-					const response = await axios.get(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=${policy}&_asset_name=${name}`);
-					let mapped = response.data.map(x => x.minting_tx_metadata['721'][policy]);
-					assetData.push(...mapped);
-					Object.values(mapped[0])[0].type === 'car' ? carData.push(...Object.values(mapped[0])): driverData.push(...Object.values(mapped[0]));
-				}}
-			setAssets(assetData);
-			setCars(carData);
-			setDrivers(driverData);
+			try{
+				const assetData = [];
+				const carData = [];
+				const driverData = [];
+				for (const innerArray of assetName) {
+					for (const name of innerArray) {
+						const response = await axios.get(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=${policy}&_asset_name=${name}`);
+						let mapped = response.data.map(x => x.minting_tx_metadata['721'][policy]);
+						assetData.push(...mapped);
+						Object.values(mapped[0])[0].type === 'car' ? carData.push(...Object.values(mapped[0])): driverData.push(...Object.values(mapped[0]));
+					}}
+				setAssets(assetData);
+				setCars(carData);
+				setDrivers(driverData);
+			}
+			catch(e){console.log(e);}
 		};
 		if (wallets.length > 0) {
 			fetchAssets();
-		}
+			
+		} 
 	}, [wallets]);
 
 
