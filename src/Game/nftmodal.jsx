@@ -16,8 +16,7 @@ const NFTModal = ( {driverStats, carStats} ) => {
 	const playerSelectedVar = useSelector(state => state.nftSelector.playerSelected);
 	const dispatching = useDispatch();
 
-	console.log('Racer selected', racerSelected);
-	console.log('Car selected', carSelected);
+
 
 	return(
 		<>

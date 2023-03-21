@@ -7,10 +7,10 @@ import { setPlayerSelected } from './nftSlice';
 import NFTModal from './nftmodal';
 import NFTCard from './nftGameCard';
 import StartAnimation from './startAnimation';
-import WinnerBoard from './winnerBoard';
 import { getCarbyId, getRacerbyId } from '../services/helpers';
 
 import spinner from '../assets/images/spinner.gif';
+import Confetti from 'react-confetti';
 
 // https://docs.cardano.org/native-tokens/getting-started
 
@@ -32,7 +32,11 @@ const GamePage = () => {
 	//Results
 	const [raceTotals, setRaceResults] = useState({});
 	const [winnerTable, setWinners] = useState({});
-	const [racerpos, setRacerPos] = useState({});
+	const [racerpos, setRacerPos] = useState(0);
+	const [showAnimation, setShowAnimation] = useState(false);
+	
+	const showResults = useSelector(state => state.nftSelector.results);
+	const showConfetti = useSelector(state => state.nftSelector.confetti);
 
 
 	//Cardano
@@ -45,9 +49,7 @@ const GamePage = () => {
 	const [carsAssets, setCars] = useState([]);
 	const [driversAssets, setDrivers] = useState([]);
 
-	console.log('DRIVER', driversAssets);
-	console.log('CAR', carsAssets);
-
+	console.log(racerpos);
 	// Get assets from wallet
 	useEffect(() => {
 		const getAddr = async () => {
@@ -162,66 +164,48 @@ const GamePage = () => {
 		}
 		let newPlayer = playerTotal(getRacerbyId(driversAssets, racerNum),getCarbyId(carsAssets, carNum));
 		rivalCombineDriCarAttrs.push(newPlayer);
-		setRaceResults(rivalCombineDriCarAttrs);	
+		setRaceResults(rivalCombineDriCarAttrs);
+		setShowAnimation(true);	
 	};
 
-
+	
 	return (
-		<>
-			<div className='d-flex mainBg justify-content-center align-items-center flex-column'>
-				<button className='btn btn-secondary m-5' onClick={settingAllUp}>START AGAIN</button>
+		<div className='d-flex mainBg justify-content-around '>
+			{(showConfetti && racerpos > 0 && racerpos < 4) && <Confetti />}
 
-				{/* MAP */}
-				{mapStats.raceMap && (
-					<div>
-						<h2>Racing circuit</h2>
-						<p>Weather: {mapStats.RaceWeather}</p>
-						<p>Straigthaways: {mapStats.raceMap.straigthaways}</p>
-						<p>Turns: {mapStats.raceMap.turns}</p>
-						<p>Lap length: {mapStats.raceMap.lapLength.toFixed(2)} km</p>
-					</div>
-				)}
+			{/* MAP */}
+			{mapStats.raceMap && (
+				<div style={{paddingTop:'15%'}}>
+					<h2>Racing circuit</h2>
+					<p>Weather: {mapStats.RaceWeather}</p>
+					<p>Straigthaways: {mapStats.raceMap.straigthaways}</p>
+					<p>Turns: {mapStats.raceMap.turns}</p>
+					<p>Lap length: {mapStats.raceMap.lapLength.toFixed(2)} km</p>
+				</div>
+			)}
+			<div>
+				
+			</div>
+			<div className='d-flex justify-content-center align-items-center flex-column' style={{paddingTop:'8%'}}>
 
+				
+
+				{/* Only show if you have assets */}
 				{assets.length > 0 ?
 					<>
 						{/* MODAL */}
-						<NFTModal driverStats={driversAssets} carStats={carsAssets} />
+						{!showResults && <NFTModal driverStats={driversAssets} carStats={carsAssets} />}
 
 
-						{/* RESULTS */}
-						{(racerNum && carNum) ? 
+						{/* AFTER SELECTED PLAYER */}
+						{(racerNum && carNum) && 
 							<>
-								{winnerTable.length > 0 ? 
-									<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
-										<StartAnimation />
-										{winnerTable.length > 0 && `Your racer got on the ${racerpos} position`}
-										<h2 className='mt-3'>RESULTS:</h2>
-										<table>
-											<thead>
-												<tr>
-													<th></th>
-													<th></th>
-													<th>Lap Time</th>
-												</tr>
-											</thead>
-											<tbody>
-												{Object.values(winnerTable).map((x,i) =>
-													<tr key={x.Name}> 
-														<th></th>
-														<th>{x.RacerId ? 'YOU' : x.rivalId}</th>
-														<th>{x.LapTime.toFixed(6)}s</th>
-														<th>Position {i+1}</th>
-													</tr>												
-												)}	
-
-											</tbody>
-										</table>
-									</div>
-									:
-									<>{playerSelected && 
+								{showAnimation && <StartAnimation  position={racerpos}/>}
+								{playerSelected && 
 										<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
+											<h3>You have selected:</h3>
 											<div style={{width:'50%'}} className="d-flex flex-wrap justify-content-center">						
-												{(racerNum > 0 && carNum > 0 ) ? 
+												{(racerNum > 0 && carNum > 0 ) &&
 													<><div style={{width:'30%'}} className='m-2 w-25  d-flex justify-content-center align-items-center'>
 														<NFTCard  key={racerNum} type={1} nft={getRacerbyId(driversAssets, racerNum)}/>
 													</div>
@@ -229,16 +213,38 @@ const GamePage = () => {
 														<NFTCard key={carNum} type={0} nft={getCarbyId(carsAssets, carNum)}/>
 													</div>
 													</>
-													:<></>
 												}
 											</div>
-											<WinnerBoard />	
 											<a className="btn btn-secondary m-5" data-bs-toggle="modal" href="#winnerModal" onClick={setRace} role="button">START RACE!</a>
 										</div>
-									}</>
+								}
+								{showResults &&
+									<div className="d-flex justify-content-center align-items-center flex-column my-5">
+										<h2 className="text-center mb-3 text-light">Race Results</h2>
+										<p className="text-center mb-3 text-light">Your racer finished in {racerpos} position</p>
+										<table className="table table-striped table-bordered table-dark">
+											<thead>
+												<tr>
+													<th scope="col">Racer</th>
+													<th scope="col">Lap Time</th>
+													<th scope="col">Position</th>
+												</tr>
+											</thead>
+											<tbody>
+												{Object.values(winnerTable).map((x, i) => (
+													<tr key={x.Name}>
+														<td>{x.RacerId ? <span style={{fontWeight: 'bold'}}>YOU</span> : x.rivalId}</td>
+														<td>{x.LapTime.toFixed(6)}s</td>
+														<td>{i + 1}</td>
+													</tr>
+												))}
+											</tbody>
+										</table>
+									</div>
+								
+								
 								}
 							</> 
-							: <></>
 
 						}
 					</>
@@ -247,8 +253,9 @@ const GamePage = () => {
 				}
 
 			</div>
+		</div>
 
-		</>
+		
 	);
 };
 
