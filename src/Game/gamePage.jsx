@@ -9,7 +9,7 @@ import NFTCard from './nftGameCard';
 import StartAnimation from './startAnimation';
 import { getCarbyId, getRacerbyId } from '../services/helpers';
 
-import spinner from '../assets/images/spinner.gif';
+// import spinner from '../assets/images/spinner.gif';
 import Confetti from 'react-confetti';
 
 // https://docs.cardano.org/native-tokens/getting-started
@@ -45,7 +45,7 @@ const GamePage = () => {
 	
 	const [wallets, setWallets] = useState([]);
 	const [assetName, setAssetName] = useState([]);
-	const [assets, setAssets] = useState([]);
+	// const [assets, setAssets] = useState([]);
 	const [carsAssets, setCars] = useState([]);
 	const [driversAssets, setDrivers] = useState([]);
 
@@ -91,7 +91,7 @@ const GamePage = () => {
 						assetData.push(...mapped);
 						Object.values(mapped[0])[0].type === 'car' ? carData.push(...Object.values(mapped[0])): driverData.push(...Object.values(mapped[0]));
 					}}
-				setAssets(assetData);
+				// setAssets(assetData);
 				setCars(carData);
 				setDrivers(driverData);
 			}
@@ -194,15 +194,13 @@ const GamePage = () => {
 
 				
 
-				{/* Only show if you have assets */}
-				{assets.length > 0 ?
-					<>
-						{/* MODAL */}
-						{!showResults && <NFTModal driverStats={driversAssets} carStats={carsAssets} />}
+				<>
+					{/* MODAL */}
+					{!showResults && <NFTModal driverStats={driversAssets} carStats={carsAssets} />}
 
 
-						{/* AFTER SELECTED PLAYER */}
-						{(racerNum && carNum) && 
+					{/* AFTER SELECTED PLAYER */}
+					{(racerNum && carNum) && 
 							<>
 								{showAnimation && <StartAnimation  position={racerpos}/>}
 								{playerSelected && 
@@ -250,11 +248,9 @@ const GamePage = () => {
 								}
 							</> 
 
-						}
-					</>
-					:
-					<><img src={spinner}/></>
-				}
+					}
+				</>
+					
 
 			</div>
 		</div>
