@@ -52,8 +52,7 @@ const GamePage = () => {
 
 	console.log('wallets', wallets);
 	console.log('asset names', assetName);
-	console.log('cas', carsAssets);
-	console.log('driver', driversAssets);
+	console.log('***********', wallets.length);
 
 	// Get assets from wallet
 	useEffect(() => {
