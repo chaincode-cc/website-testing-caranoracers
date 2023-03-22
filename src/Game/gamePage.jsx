@@ -94,6 +94,8 @@ const GamePage = () => {
 						const response = await axios.get(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=${policy}&_asset_name=${name}`);
 						console.log('response',response);
 						let mapped = response.data.map(x => x.minting_tx_metadata['721'][policy]);
+						console.log('mapped',mapped);
+						
 						assetData.push(...mapped);
 						Object.values(mapped[0])[0].type === 'car' ? carData.push(...Object.values(mapped[0])): driverData.push(...Object.values(mapped[0]));
 					}}
