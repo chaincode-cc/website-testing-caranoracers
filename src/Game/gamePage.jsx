@@ -50,9 +50,6 @@ const GamePage = () => {
 	const [driversAssets, setDrivers] = useState([]);
 
 
-	console.log('wallets', wallets);
-	console.log('asset names', assetName);
-	console.log('***********', wallets.length);
 
 	// Get assets from wallet
 	useEffect(() => {
@@ -83,23 +80,19 @@ const GamePage = () => {
 
 	// Get the cars and racers from names that fits in the policy.
 	useEffect( () => {	
-		console.log('1 ***');
 
 		const fetchAssets = async () => {
 			try{
-				console.log('inside');
 
 				const assetData = [];
 				const carData = [];
 				const driverData = [];
 				for (const innerArray of assetName) {
-					console.log('innerArray',assetName);
 					for (const name of innerArray) {
-						console.log('name',name);
 						const response = await axios.get(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=${policy}&_asset_name=${name}`);
-						console.log('response',response);
+						
 						let mapped = response.data.map(x => x.minting_tx_metadata['721'][policy]);
-						console.log('mapped',mapped);
+						
 						
 						assetData.push(...mapped);
 						if (mapped.length > 0) {
@@ -113,7 +106,6 @@ const GamePage = () => {
 			catch(e){console.log(e);}
 		};
 		if (wallets.length > 0) {
-			console.log('2 ***');
 			fetchAssets();
 			
 		} 
