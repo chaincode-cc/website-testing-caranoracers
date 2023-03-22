@@ -49,6 +49,9 @@ const GamePage = () => {
 	const [carsAssets, setCars] = useState([]);
 	const [driversAssets, setDrivers] = useState([]);
 
+
+	console.log('wallets', wallets);
+	console.log('asset names', assetName);
 	console.log('cas', carsAssets);
 	console.log('driver', driversAssets);
 
