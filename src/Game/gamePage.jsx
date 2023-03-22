@@ -83,6 +83,8 @@ const GamePage = () => {
 
 	// Get the cars and racers from names that fits in the policy.
 	useEffect( () => {	
+		console.log('1 ***');
+
 		const fetchAssets = async () => {
 			try{
 				const assetData = [];
@@ -106,6 +108,7 @@ const GamePage = () => {
 			catch(e){console.log(e);}
 		};
 		if (wallets.length > 0) {
+			console.log('2 ***');
 			fetchAssets();
 			
 		} 
