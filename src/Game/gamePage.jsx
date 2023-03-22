@@ -1,16 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setInvironment, randomFloorMath, rivalTotal, playerTotal} from './game';
+import Confetti from 'react-confetti';
 import axios from 'axios';
 
+import { setInvironment, randomFloorMath, rivalTotal, playerTotal} from './game';
+import { getCarbyId, getRacerbyId } from '../services/helpers';
 import { setPlayerSelected } from './nftSlice';
+
 import NFTModal from './nftmodal';
 import NFTCard from './nftGameCard';
-import StartAnimation from './startAnimation';
-import { getCarbyId, getRacerbyId } from '../services/helpers';
 
+import StartAnimation from './startAnimation';
 // import spinner from '../assets/images/spinner.gif';
-import Confetti from 'react-confetti';
+
 
 // https://docs.cardano.org/native-tokens/getting-started
 
@@ -180,12 +182,12 @@ const GamePage = () => {
 
 	
 	return (
-		<div className='d-flex mainBg justify-content-around '>
+		<div className='d-flex mainBg justify-content-evenly'>
 			{(showConfetti && racerpos > 0 && racerpos < 4) && <Confetti />}
 
 			{/* MAP */}
 			{mapStats.raceMap && (
-				<div style={{paddingTop:'15%'}}>
+				<div className=' w-100	d-flex flex-column justify-content-center align-items-center' style={{paddingTop:'8%'}}>
 					<h2>Racing circuit</h2>
 					<p>Weather: {mapStats.RaceWeather}</p>
 					<p>Straigthaways: {mapStats.raceMap.straigthaways}</p>
@@ -193,10 +195,13 @@ const GamePage = () => {
 					<p>Lap length: {mapStats.raceMap.lapLength.toFixed(2)} km</p>
 				</div>
 			)}
-			<div>
-				
+			<div className='w-100' style={{paddingLeft:'10%'}}>
+				{playerSelected && 
+				<a className="btn btn-secondary btn-lg" data-bs-toggle="modal" style={{marginTop: '40vh'}} href="#winnerModal" onClick={setRace} role="button">START RACE!</a>
+				}
+
 			</div>
-			<div className='d-flex justify-content-center align-items-center flex-column' style={{paddingTop:'8%'}}>
+			<div className='d-flex justify-content-center align-items-center w-100 flex-column' style={{paddingTop:'8%'}}>
 
 				
 
@@ -210,20 +215,21 @@ const GamePage = () => {
 							<>
 								{showAnimation && <StartAnimation  position={racerpos}/>}
 								{playerSelected && 
-										<div className='d-flex justify-content-center align-items-center flex-column mt-3'>
+										<div className='d-flex align-items-center justify-content-center flex-column mt-5'>
 											<h3>You have selected:</h3>
-											<div style={{width:'50%'}} className="d-flex flex-wrap justify-content-center">						
+											<div style={{width:'75%'}} className="d-flex justify-content-center flex-wrap ">						
 												{(racerNum > 0 && carNum > 0 ) &&
-													<><div style={{width:'30%'}} className='m-2 w-25  d-flex justify-content-center align-items-center'>
-														<NFTCard  key={racerNum} type={1} nft={getRacerbyId(driversAssets, racerNum)}/>
-													</div>
-													<div style={{width:'30%'}} className='m-2 w-25 d-flex justify-content-center align-items-center'>
-														<NFTCard key={carNum} type={0} nft={getCarbyId(carsAssets, carNum)}/>
-													</div>
-													</>
+													<div className="d-flex justify-content-center">
+														<div className='m-2 d-flex justify-content-center align-items-center'>
+															<NFTCard  key={racerNum} type={1} nft={getRacerbyId(driversAssets, racerNum)}/>
+														</div>
+														<div className='m-2 d-flex justify-content-center align-items-center'>
+															<NFTCard key={carNum} type={0} nft={getCarbyId(carsAssets, carNum)}/>
+														</div>
+													</div	>
 												}
 											</div>
-											<a className="btn btn-secondary m-5" data-bs-toggle="modal" href="#winnerModal" onClick={setRace} role="button">START RACE!</a>
+											
 										</div>
 								}
 								{showResults &&
