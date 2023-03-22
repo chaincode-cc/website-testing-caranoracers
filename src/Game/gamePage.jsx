@@ -102,7 +102,9 @@ const GamePage = () => {
 						console.log('mapped',mapped);
 						
 						assetData.push(...mapped);
-						Object.values(mapped[0])[0].type === 'car' ? carData.push(...Object.values(mapped[0])): driverData.push(...Object.values(mapped[0]));
+						if (mapped.length > 0) {
+							Object.values(mapped[0])[0].type === 'car' ? carData.push(...Object.values(mapped[0])) : driverData.push(...Object.values(mapped[0]));
+						}
 					}}
 				// setAssets(assetData);
 				setCars(carData);
@@ -115,7 +117,7 @@ const GamePage = () => {
 			fetchAssets();
 			
 		} 
-	}, [wallets]);
+	}, [wallets, assetName]);
 
 
 	function settingAllUp (){
