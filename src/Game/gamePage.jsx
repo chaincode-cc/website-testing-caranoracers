@@ -47,6 +47,12 @@ const GamePage = () => {
 	const [carsAssets, setCars] = useState([]);
 	const [driversAssets, setDrivers] = useState([]);
 
+
+
+	console.log('Test1', carsAssets);
+	console.log('Test2', driversAssets);
+
+
 	useEffect(() => {
 		const getAddr = async () => {
 			try {

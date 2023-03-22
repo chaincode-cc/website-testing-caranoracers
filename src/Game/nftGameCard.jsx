@@ -16,7 +16,7 @@ const NFTCard = ({type, nft}) =>{
 	const dispatching = useDispatch();
 	const selectedCar = type === 0 && carNum == nft.id;
 	const selectedRacer = type === 1 && racerNum == nft.id;
-
+	
 
 	const barPerc = (per) => {
 		return ((per * 100)/10000);
