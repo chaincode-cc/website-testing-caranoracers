@@ -49,7 +49,9 @@ const GamePage = () => {
 	const [carsAssets, setCars] = useState([]);
 	const [driversAssets, setDrivers] = useState([]);
 
-	console.log(racerpos);
+	console.log('cas', carsAssets);
+	console.log('driver', driversAssets);
+
 	// Get assets from wallet
 	useEffect(() => {
 		const getAddr = async () => {
