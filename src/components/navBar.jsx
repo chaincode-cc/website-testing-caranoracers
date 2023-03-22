@@ -31,61 +31,28 @@ function TopNavBar() {
                   HOME
 								</a>
 							</li>
-							<li className="nav-item">
-								<a
-									className="nav-link f1font"
-									onClick={collapseItem}
-									href="/garage"
-								>
-                  Testing
-								</a>
-							</li>
+							
 							<li className="nav-item">
 								<a
 									className="nav-link f1font"
 									onClick={collapseItem}
 									href="/ready"
 								>
-                  Game Test
+                  RACES
 								</a>
 							</li>
+						
+						
 							<li className="nav-item">
 								<a
 									className="nav-link f1font"
 									onClick={collapseItem}
-									href="/#howtoplay"
-								>
-                  HOW TO PLAY
-								</a>
-							</li>
-							<li className="nav-item">
-								<a
-									className="nav-link f1font"
-									onClick={collapseItem}
-									href="/#nfts"
-								>
-                  NFTS
-								</a>
-							</li>
-							<li className="nav-item">
-								<a
-									className="nav-link f1font"
-									onClick={collapseItem}
-									href="/#contact"
-								>
-                  CONTACT US
-								</a>
-							</li>
-							<li className="nav-item">
-								<button
-									className="f1font btn btn-secondary"
-									onClick={collapseItem}
-									id="garage"
+									
 									data-bs-toggle="modal"
 									data-bs-target="#exampleModal"
 								>
                   GARAGE
-								</button>
+								</a>
 							</li>
 						</ul>
 					</div>

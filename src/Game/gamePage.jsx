@@ -11,6 +11,7 @@ import NFTModal from './nftmodal';
 import NFTCard from './nftGameCard';
 
 import StartAnimation from './startAnimation';
+import WeatherAnimation from './weatherAnimation';
 // import spinner from '../assets/images/spinner.gif';
 
 
@@ -18,7 +19,9 @@ import StartAnimation from './startAnimation';
 
 const GamePage = () => {
 //Map
+	const [weatherAnime, setWeatherAnimation] = useState(false);
 	const [mapStats, setMap] = useState({});
+
 
 	//Rivals
 	const [rivalRacers, setRivalRacers] = useState({});
@@ -50,7 +53,7 @@ const GamePage = () => {
 	const [carsAssets, setCars] = useState([]);
 	const [driversAssets, setDrivers] = useState([]);
 
-
+	console.log(assetName, carsAssets, driversAssets);
 
 	// Get assets from wallet
 	useEffect(() => {
@@ -120,6 +123,7 @@ const GamePage = () => {
 	}
 
 	useEffect(()=>{
+		setWeatherAnimation(true);
 		settingAllUp();
 	},[]);
 
@@ -184,6 +188,7 @@ const GamePage = () => {
 	return (
 		<div className='d-flex mainBg justify-content-evenly'>
 			{(showConfetti && racerpos > 0 && racerpos < 4) && <Confetti />}
+			{weatherAnime && <WeatherAnimation/>}
 
 			{/* MAP */}
 			{mapStats.raceMap && (
@@ -199,6 +204,7 @@ const GamePage = () => {
 				{playerSelected && 
 				<a className="btn btn-secondary btn-lg" data-bs-toggle="modal" style={{marginTop: '40vh'}} href="#winnerModal" onClick={setRace} role="button">START RACE!</a>
 				}
+				{showResults && <p className="text-center mb-3 text-light" style={{marginTop: '50%'}}>Your racer finished in {racerpos} position</p>}
 
 			</div>
 			<div className='d-flex justify-content-center align-items-center w-100 flex-column' style={{paddingTop:'8%'}}>
@@ -213,7 +219,7 @@ const GamePage = () => {
 					{/* AFTER SELECTED PLAYER */}
 					{(racerNum && carNum) && 
 							<>
-								{showAnimation && <StartAnimation  position={racerpos}/>}
+								{showAnimation && <StartAnimation/>}
 								{playerSelected && 
 										<div className='d-flex align-items-center justify-content-center flex-column mt-5'>
 											<h3>You have selected:</h3>
@@ -235,7 +241,7 @@ const GamePage = () => {
 								{showResults &&
 									<div className="d-flex justify-content-center align-items-center flex-column my-5">
 										<h2 className="text-center mb-3 text-light">Race Results</h2>
-										<p className="text-center mb-3 text-light">Your racer finished in {racerpos} position</p>
+									
 										<table className="table table-striped table-bordered table-dark">
 											<thead>
 												<tr>

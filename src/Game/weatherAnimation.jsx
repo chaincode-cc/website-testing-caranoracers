@@ -1,21 +1,16 @@
 import React from 'react';
-import vid from '../assets/videos/start.mp4';
+import vid from '../assets/videos/weather.mp4';
 import { useState, useEffect } from 'react';
-import { setShowResults, setThrowConfetti } from './nftSlice';
-import { useDispatch } from 'react-redux';
 
-function StartAnimation() {
+function WeatherAnimation() {
 	const [showButton, setShowButton] = useState(false);
 	const [showModal, setShowModal] = useState(true);
-	const dispatching = useDispatch();
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
 			setShowButton(true);
-			dispatching(setShowResults(true));
-			dispatching(setThrowConfetti(true));
 			setShowModal(false);
-		}, 5000 );
+		}, 9000);
 
 		return () => {
 			clearTimeout(timeout);
@@ -53,4 +48,4 @@ function StartAnimation() {
 	);
 }
 
-export default StartAnimation;
+export default WeatherAnimation;
