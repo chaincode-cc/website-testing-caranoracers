@@ -45,7 +45,6 @@ const GamePage = () => {
 	
 	const [wallets, setWallets] = useState([]);
 	const [assetName, setAssetName] = useState([]);
-	// const [assets, setAssets] = useState([]);
 	const [carsAssets, setCars] = useState([]);
 	const [driversAssets, setDrivers] = useState([]);
 
@@ -99,7 +98,6 @@ const GamePage = () => {
 							Object.values(mapped[0])[0].type === 'car' ? carData.push(...Object.values(mapped[0])) : driverData.push(...Object.values(mapped[0]));
 						}
 					}}
-				// setAssets(assetData);
 				setCars(carData);
 				setDrivers(driverData);
 			}
