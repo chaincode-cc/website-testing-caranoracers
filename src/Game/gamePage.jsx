@@ -87,10 +87,13 @@ const GamePage = () => {
 
 		const fetchAssets = async () => {
 			try{
+				console.log('inside');
+
 				const assetData = [];
 				const carData = [];
 				const driverData = [];
 				for (const innerArray of assetName) {
+					console.log('innerArray',assetName);
 					for (const name of innerArray) {
 						console.log('name',name);
 						const response = await axios.get(`https://preprod.koios.rest/api/v0/asset_info?_asset_policy=${policy}&_asset_name=${name}`);
