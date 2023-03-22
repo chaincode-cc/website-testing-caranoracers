@@ -4,8 +4,9 @@ import NFTCard  from './nftGameCard';
 
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { playerSelected } from './nftSlice';
-
+import { setPlayerSelected } from './nftSlice';
+import spinner from '../assets/videos/start.mp4';
+import { getRacerbyId, getCarbyId } from '../services/helpers';
 
 
 const NFTModal = ( {driverStats, carStats} ) => {
@@ -15,8 +16,7 @@ const NFTModal = ( {driverStats, carStats} ) => {
 	const playerSelectedVar = useSelector(state => state.nftSelector.playerSelected);
 	const dispatching = useDispatch();
 
-	console.log('Racer selected', racerSelected);
-	console.log('Car selected', carSelected);
+
 
 	return(
 		<>
@@ -29,8 +29,8 @@ const NFTModal = ( {driverStats, carStats} ) => {
 						</div>
 						<div className="modal-body customedBg">
 							<div className="d-flex flex-wrap justify-content-center">						
-								{driverStats && driverStats.map((driver)=><div style={driver.Name === racerSelected ? {width:'30%' , opacity:'0.4'}:{width:'30%'} } className='m-2 d-flex justify-content-center align-items-center' key={driver.id}><NFTCard  key={driver.id} type={1} nft={driver}/></div>
-								)}
+								{driverStats ? driverStats.map((driver)=><div style={driver.Name === racerSelected ? {width:'30%' , opacity:'0.4'}:{width:'30%'} } className='m-2 d-flex justify-content-center align-items-center' key={driver.id}><NFTCard  key={driver.id} type={1} nft={driver} /></div>
+								) : <img src={spinner}/>}
 							</div>
 						</div>
 						<div className="modal-footer" id='customedBg'>
@@ -48,7 +48,7 @@ const NFTModal = ( {driverStats, carStats} ) => {
 						</div>
 						<div className="modal-body customedBg">
 							<div className="d-flex flex-wrap justify-content-center">						
-								{carStats && carStats.map((car)=> <div style={car.Name === carSelected ? {width:'30%' , opacity:'0.4'}:{width:'30%'} } className='m-2 d-flex justify-content-center align-items-center' key={car.id}><NFTCard key={car.id} type={0} nft={car}/></div>)}
+								{carStats ? carStats.map((car)=> <div style={car.Name === carSelected ? {width:'30%' , opacity:'0.4'}:{width:'30%'} } className='m-2 d-flex justify-content-center align-items-center' key={car.id}><NFTCard key={car.id} type={0} nft={car}/></div>): <img src={spinner}/>}
 							</div>
 						</div>
 						<div className="modal-footer"  id='customedBg'>
@@ -72,10 +72,10 @@ const NFTModal = ( {driverStats, carStats} ) => {
 								{(racerSelected && carSelected ) ? 
 									<>
 										<div style={{width:'30%'}} className='m-2 d-flex justify-content-center align-items-center'>
-											<NFTCard  key={racerSelected} type={1} nft={driverStats[racerSelected-1]}/>
+											<NFTCard  key={racerSelected} type={1} nft={getRacerbyId(driverStats, racerSelected)}/>
 										</div>
 										<div style={{width:'30%'}} className='m-2 d-flex justify-content-center align-items-center'>
-											<NFTCard key={carSelected} type={0} nft={carStats[carSelected-1]}/>
+											<NFTCard key={carSelected} type={0} nft={getCarbyId(carStats, carSelected)}/>
 										</div>
 									</>
 									:<><h2 className='m-2'>PEASE SELECT A RACER AND A CAR</h2></>
@@ -84,7 +84,7 @@ const NFTModal = ( {driverStats, carStats} ) => {
 						</div>
 						<div className="modal-footer" id='customedBg'>
 							<button className="btn btn-dark" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal" data-bs-dismiss="modal">BACK</button>
-							<button onClick={() => dispatching(playerSelected())} type="button" data-bs-dismiss="modal" aria-label="Confirm" className="btn btn-primary" >CONFIRM</button>
+							<button onClick={() => dispatching(setPlayerSelected(true))} type="button" data-bs-dismiss="modal" aria-label="Confirm" className="btn btn-primary" >CONFIRM</button>
 						</div>
 					</div>
 				</div>

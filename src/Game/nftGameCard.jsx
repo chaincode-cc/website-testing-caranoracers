@@ -14,9 +14,10 @@ const NFTCard = ({type, nft}) =>{
 	const carNum = useSelector(state => state.nftSelector.carSelected);
 	const racerNum = useSelector(state => state.nftSelector.racerSelected);
 	const dispatching = useDispatch();
-	const selectedCar = type === 0 && carNum == nft.id;
-	const selectedRacer = type === 1 && racerNum == nft.id;
-	
+	const selectedCar = carNum && type === 0 && carNum === nft.id;
+	const selectedRacer = racerNum && type === 1 && racerNum === nft.id;
+
+
 
 	const barPerc = (per) => {
 		return ((per * 100)/10000);
