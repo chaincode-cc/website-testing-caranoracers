@@ -3,7 +3,7 @@ import './styles/App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-
+import TopNavBar from './components/navBar';
 import Banner from './components/banner';
 import Intro from './pages/intro';
 import NFTS from './nfts/nft';
@@ -20,6 +20,7 @@ import StartBtn from './Game/startBtn';
 function App() {
 	return (
 		<Router>
+			<TopNavBar />
 			<Routes>
 				<Route
 					path="/"
@@ -38,11 +39,7 @@ function App() {
 				/>
 				<Route path="/garage" element={<WalletConnector />} />
 				<Route path="/game" element={<GamePage />} />
-				<Route path="/ready" element={
-					<div className='d-flex justify-content-center mainBg'>
-						<StartBtn />
-					</div>
-				} />
+				<Route path="/races" element={<StartBtn />} />
 
 			</Routes>
 		</Router>

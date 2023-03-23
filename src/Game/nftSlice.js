@@ -8,6 +8,7 @@ export const nftSlice = createSlice({
 		racerSelected: null,
 		results: false,
 		confetti: false,
+		players: 0,
 	},
 	reducers: {
 		selectRacer: (state, action) => {
@@ -24,10 +25,13 @@ export const nftSlice = createSlice({
 		},
 		setThrowConfetti: (state, action) => {
 			state.confetti = action.payload;
+		},
+		setPlayers: (state, action) => {
+			state.players = action.payload;
 		}
 	}
 });
 
-export const { selectRacer, selectCar, setPlayerSelected, setShowResults, setThrowConfetti } = nftSlice.actions;
+export const { selectRacer, selectCar, setPlayerSelected, setShowResults, setThrowConfetti, setPlayers} = nftSlice.actions;
 
 export default nftSlice.reducer;

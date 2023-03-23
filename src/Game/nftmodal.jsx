@@ -90,7 +90,7 @@ const NFTModal = ( {driverStats, carStats} ) => {
 				</div>
 			</div>
 			
-			<a className="btn btn-secondary" data-bs-toggle="modal" href="#exampleModalToggle" role="button">{playerSelectedVar ? 'CHANGE PLAYER' : 'SELECT PLAYER'}</a>
+			<a className="btn btn-secondary btn-lg" data-bs-toggle="modal" href="#exampleModalToggle" role="button">{playerSelectedVar ? 'CHANGE PLAYER' : 'SELECT PLAYER'}</a>
 
 
 			

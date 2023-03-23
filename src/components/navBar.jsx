@@ -1,9 +1,16 @@
 /* eslint-disable react/react-in-jsx-scope */
 // import WalletConnector from '../wallet-service/connector';
 
+import { useNavigate } from 'react-router-dom';
+
+
 function TopNavBar() {
-	function collapseItem() {
+
+	const navigate = useNavigate();
+
+	function collapseItem(url) {
 		document.getElementById('navbarNav').className = 'collapse navbar-collapse';
+		navigate(url);
 	}
 
 	return (
@@ -21,23 +28,20 @@ function TopNavBar() {
 					>
 						<span className="navbar-toggler-icon"></span>
 					</button>
-					<a className="navbar-brand f1font" href="/#">
+					<span className="navbar-brand f1font" style={{ cursor:'default'}}  >
             CARDANO RACERS
-					</a>
+					</span>
 					<div className="collapse navbar-collapse" id="navbarNav">
 						<ul className="navbar-nav ps-1">
 							<li className="nav-item">
-								<a className="nav-link f1font" onClick={collapseItem} href="/#">
+								<a className="nav-link f1font" style={{ cursor:'pointer	'}} onClick={() => collapseItem('/')}>
                   HOME
 								</a>
 							</li>
 							
 							<li className="nav-item">
-								<a
-									className="nav-link f1font"
-									onClick={collapseItem}
-									href="/ready"
-								>
+								<a className="nav-link f1font" style={{ cursor:'pointer	'}} onClick={() => collapseItem('/races')}>
+
                   RACES
 								</a>
 							</li>
@@ -47,7 +51,7 @@ function TopNavBar() {
 								<a
 									className="nav-link f1font"
 									onClick={collapseItem}
-									
+									style={{ cursor:'pointer'}}
 									data-bs-toggle="modal"
 									data-bs-target="#exampleModal"
 								>
