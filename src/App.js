@@ -12,7 +12,7 @@ import Contact from './pages/contact';
 import FollowUs from './pages/followus';
 import WalletConnector from './wallet-service/connector';
 import GamePage from './Game/gamePage';
-import StartBtn from './Game/startBtn';
+import RacesPage from './Game/racesPage';
 
 
 
@@ -39,7 +39,7 @@ function App() {
 				/>
 				<Route path="/garage" element={<WalletConnector />} />
 				<Route path="/game" element={<GamePage />} />
-				<Route path="/races" element={<StartBtn />} />
+				<Route path="/races" element={<RacesPage />} />
 
 			</Routes>
 		</Router>
