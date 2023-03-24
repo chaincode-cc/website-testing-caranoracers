@@ -46,24 +46,23 @@ const RaceResults = ({ winnerTable }) => {
 				</tbody>
 			</table>
 
-			<nav>
-				<ul className="pagination">
-					{Array.from(Array(totalPages), (_, i) => i + 1).map((page) => (
-						<li
-							key={page}
-							className={`page-item${page === currentPage ? ' active' : ''}`}
-							onClick={() => handlePageChange(page)}
-						>
-							<button className="page-link">{page}</button>
-						</li>
-					))}
-				</ul>
-			</nav>
+			{totalPages > 1 && (
+				<nav>
+					<ul className="pagination">
+						{Array.from(Array(totalPages), (_, i) => i + 1).map((page) => (
+							<li
+								key={page}
+								className={`page-item${page === currentPage ? ' active' : ''}`}
+								onClick={() => handlePageChange(page)}
+							>
+								<button className="page-link">{page}</button>
+							</li>
+						))}
+					</ul>
+				</nav>
+			)}
 		</div>
 	);
 };
 
 export default RaceResults;
-
-
-

@@ -204,21 +204,22 @@ const GamePage = () => {
 		setShowAnimation(true);	
 	};
 
+	const checkRacerPosition = (racerpos, players) => racerpos > 0 && (players === 2 ? racerpos === 1 : players >= 20 && racerpos >= 1 && racerpos <= 3);
+
+
+
 	
 	return (
-		<div className='d-flex mainBg justify-content-evenly'>
+		<div className="d-flex mainBg justify-content-evenly">
 			{/* Confetti */}
-			{(showConfetti && racerpos > 0 && racerpos < 4) && <Confetti />}
-
+			{showConfetti && checkRacerPosition(racerpos, players) && <Confetti />}
 			{/* Weather Animation */}
-			{weatherAnime && <WeatherAnimation/>}
-
-
+			{weatherAnime && <WeatherAnimation />}
 			{/* Left side of the screen */}
 			{mapStats.raceMap && (
-				<div className=' w-100	d-flex flex-column justify-content-center align-items-center' style={{paddingTop:'10vh'}}>
-					<h2 className="text-center text-light" style={{marginTop: '5%'}}>There are {players} players</h2>
-					<br/>
+				<div className="w-100 d-flex flex-column justify-content-center align-items-center" style={{ paddingTop: '10vh' }}>
+					<h2 className="text-center text-light" style={{ marginTop: '5%' }}>There are {players} players</h2>
+					<br />
 					<h2>Racing circuit</h2>
 					<p>Weather: {mapStats.RaceWeather}</p>
 					<p>Straigthaways: {mapStats.raceMap.straigthaways}</p>
@@ -226,61 +227,52 @@ const GamePage = () => {
 					<p>Lap length: {mapStats.raceMap.lapLength.toFixed(2)} km</p>
 				</div>
 			)}
-
 			{/* Center side of screen */}
-			<div className='w-75' style={{paddingLeft:'10%'}}>
-				{playerSelected ?
-					<a className="btn btn-secondary btn-lg" data-bs-toggle="modal" style={{marginTop: '40vh'}} href="#winnerModal" onClick={setRace} role="button">START RACE!</a>
-					: !showResults && <h3 className="text-center mb-3 text-light" style={{marginTop: '70%'}}>Please select your player</h3>
-				}
-				{showResults && <h1 className="text-center mb-3 text-light" style={{marginTop: '50%'}}>Your racer finished in {racerpos} position</h1>}
+			<div className="w-75" style={{ paddingLeft: '10%' }}>
+				{playerSelected ? (
+					<a className="btn btn-secondary btn-lg" data-bs-toggle="modal" style={{ marginTop: '40vh' }} href="#winnerModal" onClick={setRace} role="button">START RACE!</a>
+				) : !showResults && (
+					<h3 className="text-center mb-3 text-light" style={{ marginTop: '70%' }}>Please select your player</h3>
+				)}
+				{showResults && (
+					<h1 className="text-center mb-3 text-light" style={{ marginTop: '50%' }}>Your racer finished in {racerpos} position</h1>
+				)}
 			</div>
-			
-
 			{/* Right side of the screen */}
-			<div className='d-flex justify-content-center align-items-center w-100 flex-column' style={{paddingTop:'10vh'}}>
+			<div className="d-flex justify-content-center align-items-center w-100 flex-column" style={{ paddingTop: '10vh' }}>
 				<>
 					{/* SELECTION MODAL */}
 					{!showResults && <NFTModal driverStats={driversAssets} carStats={carsAssets} />}
-
-
 					{/* AFTER SELECTED PLAYER */}
-					{(racerNum && carNum) && 
-							<>
-								{/* Start animation */}
-								{showAnimation && <StartAnimation/>}
-
-								{/* Results table */}
-								{showResults &&	<RaceResults winnerTable={winnerTable} />}
-
-								{/* Selected player */}
-								{playerSelected && 
-										<div className='d-flex align-items-center justify-content-center flex-column mt-5'>
-											<h3>You have selected:</h3>
-											<div style={{width:'75%'}} className="d-flex justify-content-center flex-wrap ">						
-												{(racerNum > 0 && carNum > 0 ) &&
-													<div className="d-flex justify-content-center">
-														<div className='m-2 d-flex justify-content-center align-items-center'>
-															<NFTCard  key={racerNum} type={1} nft={getRacerbyId(driversAssets, racerNum)}/>
-														</div>
-														<div className='m-2 d-flex justify-content-center align-items-center'>
-															<NFTCard key={carNum} type={0} nft={getCarbyId(carsAssets, carNum)}/>
-														</div>
-													</div	>
-												}
+					{racerNum && carNum && (
+						<>
+							{/* Start animation */}
+							{showAnimation && <StartAnimation />}
+							{/* Results table */}
+							{showResults && <RaceResults winnerTable={winnerTable} />}
+							{/* Selected player */}
+							{playerSelected && (
+								<div className="d-flex align-items-center justify-content-center flex-column mt-5">
+									<h3>You have selected:</h3>
+									<div style={{ width: '75%' }} className="d-flex justify-content-center flex-wrap ">
+										{racerNum > 0 && carNum > 0 && (
+											<div className="d-flex justify-content-center">
+												<div className="m-2 d-flex justify-content-center align-items-center">
+													<NFTCard key={racerNum} type={1} nft={getRacerbyId(driversAssets, racerNum)} />
+												</div>
+												<div className="m-2 d-flex justify-content-center align-items-center">
+													<NFTCard key={carNum} type={0} nft={getCarbyId(carsAssets, carNum)} />
+												</div>
 											</div>
-										</div>
-								}
-							</> 
-
-					}
+										)}
+									</div>
+								</div>
+							)}
+						</>
+					)}
 				</>
-					
-
 			</div>
 		</div>
-
-		
 	);
 };
 
